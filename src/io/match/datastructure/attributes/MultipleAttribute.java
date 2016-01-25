@@ -2,17 +2,18 @@ package io.match.datastructure.attributes;
 
 import java.util.HashSet;
 
-public class MultipleChoices extends Attribute {
+public class MultipleAttribute extends Attribute {
 	
 	private HashSet<String> choices;
 	
-	public MultipleChoices(String name) {
+	public MultipleAttribute(String name) {
 		super(name);
 		choices = new HashSet<>();
+		weight = Weight.WEIGHTED;
 		attributeType = AttributeType.MULTIPLE;
 	}
 
-	public MultipleChoices add(String param) {
+	public MultipleAttribute add(String param) {
 		choices.add(param);
 		return this;
 	}
