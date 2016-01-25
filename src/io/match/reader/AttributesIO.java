@@ -6,13 +6,13 @@ import io.match.datastructure.attributes.Attribute;
 
 public class AttributesIO {
 
-	private String url;
+	private String dir;
 
-	public AttributesIO(String url) {
-		this.url = url;
+	public AttributesIO(String dir) {
+		this.dir = dir;
 	}
 
-	public LinkedList<String> getAllNames(String url) {
+	public LinkedList<String> getAllNames() {
 
 		return null;
 	}

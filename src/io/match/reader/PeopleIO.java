@@ -4,12 +4,16 @@ import java.util.LinkedList;
 
 import io.match.datastructure.Person;
 
-public class PeopleReader {
+public class PeopleIO {
 	
 	LinkedList<Person> people;
 	
-	public PeopleReader() {
+	public PeopleIO() {
 		people = new LinkedList<>();
 	}
 
+	public LinkedList<Person> build(String url) {
+		
+		return people;
+	}
 }
