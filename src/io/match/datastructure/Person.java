@@ -1,16 +1,24 @@
 package io.match.datastructure;
 
-import io.match.datastructure.attributes.Classification;
-import io.match.datastructure.attributes.Date;
+import java.util.HashMap;
 
-public interface Person {
+public class Person {
 	
-	public String getName();
-	public String getEmail();
-	public String getNationality();
-	public String getMajor();
-	public int getPhone();
-	public Date getBirthday();
-	public Classification getClassification();
+	HashMap<String, String> attributes;
+	
+	public Person() {
+		attributes = new HashMap<>();
+	}
+	
+	public String getAttribute(String attributeName) {
+		if (attributes.containsKey(attributeName))
+			return attributes.get(attributeName);
+		else
+			throw new IllegalArgumentException(String.format("Does not contain attribute named %s", attributeName));
+	}
+	
+	public void setAttribute(String attributeName, String choice) {
+		attributes.put(attributeName, choice);
+	}
 	
 }
