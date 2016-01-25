@@ -1,5 +1,5 @@
-timestamp
-name
-email
-classification
-interest
+timestamp,ignore
+name,general,string
+email,general,string
+classification,weighted,multiple,4,freshman,sophomore,junior,senior
+interest,weighted,scale

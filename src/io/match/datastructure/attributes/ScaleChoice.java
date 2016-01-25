@@ -1,7 +1,10 @@
 package io.match.datastructure.attributes;
 
-public class ScaleChoice {
+public class ScaleChoice extends Attribute {
 	
-	public ScaleChoice() { }
+	public ScaleChoice(String name) {
+		super(name);
+		attributeType = AttributeType.SCALE;
+	}
 
 }
