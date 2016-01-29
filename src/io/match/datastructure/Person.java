@@ -1,25 +1,24 @@
 package io.match.datastructure;
 
-import java.util.HashMap;
+import java.util.LinkedList;
+
+import io.match.datastructure.attributes.Attribute;
 
 public class Person {
 	
-	// 
-	HashMap<String, String> attributes;
+	// Name of the attribute and answer to this attribute
+	LinkedList<Attribute> attributes;
 	
 	public Person() {
-		attributes = new HashMap<>();
+		attributes = new LinkedList<>();
 	}
 	
-	public String getAttribute(String attributeName) {
-		if (attributes.containsKey(attributeName))
-			return attributes.get(attributeName);
-		else
-			throw new IllegalArgumentException(String.format("Does not contain attribute named %s", attributeName));
+	public LinkedList<Attribute> getAttributes() {
+		return attributes;
 	}
 	
-	public void setAttribute(String attributeName, String choice) {
-		attributes.put(attributeName, choice);
+	public void setAttribute(Attribute attribute) {
+		attributes.add(attribute);
 	}
 	
 }
