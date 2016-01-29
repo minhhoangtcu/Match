@@ -1,6 +1,6 @@
 package io.match.datastructure;
 
-public class Student {
+public class Student extends Person {
 	
 	private int numberOfMentor;
 	

@@ -18,6 +18,10 @@ public class MultipleAttribute extends Attribute {
 		choices.add(param);
 		return this;
 	}
+	
+	public boolean isSame(MultipleAttribute other) {
+		return getChoice().equals(other.getChoice());
+	}
 
 	public String getChoice() {
 		return choice;
