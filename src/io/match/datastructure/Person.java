@@ -17,7 +17,7 @@ public class Person {
 		return attributes;
 	}
 	
-	public void setAttribute(Attribute attribute) {
+	public void addAttribute(Attribute attribute) {
 		attributes.add(attribute);
 	}
 	

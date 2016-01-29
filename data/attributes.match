@@ -2,4 +2,4 @@ timestamp,ignore
 name,general,string
 email,general,string
 classification,weighted,multiple,4,freshman,sophomore,junior,senior
-interest,weighted,scale
+interest,weighted,scale,1,5

@@ -1,6 +1,5 @@
 package io.match.reader;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import io.match.datastructure.attributes.Attribute;
@@ -8,8 +7,7 @@ import io.match.datastructure.attributes.Attribute;
 public class AttributesIO {
 
 	private String dir;
-	private LinkedList<String> attributeName;
-	private HashMap<String, Attribute> attributes;
+	private LinkedList<Attribute> attributes;
 
 	public AttributesIO(String dir) {
 		this.dir = dir;
@@ -45,19 +43,9 @@ public class AttributesIO {
 
 	}
 
-	public Attribute getAttribute(String name) {
-		if (attributes.containsKey(name))
-			return attributes.get(name);
-		else
-			throw new IllegalArgumentException(String.format("%s is not an attribute", name));
-	}
-
-	public HashMap<String, Attribute> getAllAttributes() {
+	public LinkedList<Attribute> getAttributes() {
 		return attributes;
 	}
 
-	public LinkedList<String> getAllNames() {
-		return attributeName;
-	}
 
 }

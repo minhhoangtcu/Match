@@ -33,7 +33,7 @@ public class Compare {
 			Attribute secondAttr = secondIterator.next();
 			
 			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute) {
-				
+				continue; // We do not have to deal with general attribute, for now
 			}
 			else if (firstAttr instanceof MultipleAttribute && secondAttr instanceof MultipleAttribute) {
 				
@@ -47,6 +47,10 @@ public class Compare {
 		}
 		
 		return 0;
+	}
+	
+	private boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
+		return firstAttr.getAttributeName().equals(secondAttr.getAttributeName());
 	}
 
 }

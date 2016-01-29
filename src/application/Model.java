@@ -28,11 +28,8 @@ public class Model {
 		students = new LinkedList<>();
 		faculties = new LinkedList<>();
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
+		peopleIO = new PeopleIO(peopleDir);
 		
-	}
-	
-	public void initAttributeName() {
-		attributeName = attributeIO.getAllNames();
 	}
 	
 	public LinkedList<Person> getStudents() {
@@ -41,10 +38,7 @@ public class Model {
 	public LinkedList<Person> getFaculties() {
 		return faculties;
 	}
-	public LinkedList<String> getAttributeName() {
-		return attributeName;
-	}
-	public HashMap<String, Attribute> getAttributes() {
-		return attributes;
+	public LinkedList<Attribute> getAttributes() {
+		return attributeIO.getAttributes();
 	}
 }
