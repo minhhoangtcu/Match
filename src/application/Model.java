@@ -13,8 +13,7 @@ public class Model {
 	// Define basic data structure
 	private LinkedList<Person> students;
 	private LinkedList<Person> faculties;
-	private LinkedList<String> attributeName;
-	private HashMap<String, Attribute> attributes;
+	
 	
 	// Link to the files for the IO
 	private final static String ATTRIBUTE_DIR = "tobeornottobe";
