@@ -16,8 +16,9 @@ public class Compare {
 	 * @param first the first person
 	 * @param second the second person
 	 * @return
+	 * @throws Exception 
 	 */
-	public static int getMatch(Person first, Person second) {
+	public static int getMatch(Person first, Person second) throws Exception {
 		
 		if (first.getAttributes().size() != second.getAttributes().size())
 			throw new IllegalArgumentException("Numbers of attributes from 2 arguments do not match!");
@@ -40,6 +41,8 @@ public class Compare {
 			else if (firstAttr instanceof ScaleAttribute && secondAttr instanceof ScaleAttribute) {
 				
 			}
+			else
+				throw new Exception("The attributes of 2 people do not match!");
 			
 		}
 		
