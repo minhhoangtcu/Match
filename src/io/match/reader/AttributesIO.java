@@ -18,6 +18,7 @@ public class AttributesIO {
 
 	public AttributesIO(String dir) throws FileNotFoundException, IOException {
 		this.dir = dir;
+		attributes = new LinkedList<>();
 		initAttribute();
 	}
 
@@ -30,11 +31,12 @@ public class AttributesIO {
 	 * @throws IOException
 	 */
 	private void initAttribute() throws FileNotFoundException, IOException {
-
+		
+		System.out.println("Init list of attributes");
 		BufferedReader bf = new BufferedReader(new FileReader(dir));
 
+		String line = "undefined";
 		try {
-			String line;
 			while ((line = bf.readLine()) != null) {
 				String[] elements = line.split(",");
 				String name = elements[0];
@@ -45,36 +47,43 @@ public class AttributesIO {
 					break;
 					
 				case "general":
-					String data = elements[2];
-					attributes.add(new GeneralAttribute(name, data));
+					// String dataType = elements[2];
+					// TODO: implement a way to handle more data types
+					attributes.add(new GeneralAttribute(name));
+					System.out.printf("Added general attribute %s\n", name);
 					break;
 					
 				case "weighted":
-					switch (elements[3]) {
+					switch (elements[2]) {
 					
 					case "multiple":
-						int numberOfChoices = Integer.parseInt(elements[4]);
+						int numberOfChoices = Integer.parseInt(elements[3]);
 						MultipleAttribute temp = new MultipleAttribute(name);
 						for (int i = 0; i < numberOfChoices; i++) {
-							temp.add(elements[5+i]);
+							temp.add(elements[4+i]);
 						}
 						attributes.add(temp);
+						System.out.printf("Added multiple attribute %s\n", name);
 						break;
 						
 					case "scale":
-						int from = Integer.parseInt(elements[4]);
-						int to = Integer.parseInt(elements[5]);
+						int from = Integer.parseInt(elements[3]);
+						int to = Integer.parseInt(elements[4]);
 						attributes.add(new ScaleAttribute(name).setFrom(from).setTo(to));
+						System.out.printf("Added scale attribute %s\n", name);
 						break;
+						
 					default:
-						throw new Exception();
+						throw new Exception("Case not accepted, must be scale or multiple");
 					}
+					break;
+					
 				default:
-					throw new Exception();
+					throw new Exception("Case not accepted, must be ignore, general, or weighted");
 				}
 			}
 		} catch (Exception e) {
-			throw new IOException(String.format("Attributes in file %s is corrupted", dir));
+			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s", dir, line));
 		} finally {
 			bf.close();
 		}

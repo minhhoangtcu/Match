@@ -1,16 +1,25 @@
 package io.match.reader;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
-
 import io.match.datastructure.Person;
+import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.GeneralAttribute;
+import io.match.datastructure.attributes.MultipleAttribute;
+import io.match.datastructure.attributes.ScaleAttribute;
 
 public class PeopleIO {
 
 	private String dir;
 	private LinkedList<Person> people;
+	private LinkedList<Attribute> attributes;
 
-	public PeopleIO(String dir) {
+	public PeopleIO(String dir, LinkedList<Attribute> attributes) throws FileNotFoundException, IOException {
 		this.dir = dir;
+		this.attributes = attributes;
 		people = new LinkedList<>();
 		initPeople();
 	}
@@ -20,14 +29,54 @@ public class PeopleIO {
 	 * Read all people from the file and put them into the linked list data
 	 * structure
 	 * <p>
+	 * @throws FileNotFoundException, IOException 
 	 */
-	private void initPeople() {
+	private void initPeople() throws FileNotFoundException, IOException {
 
-		// TODO: Read data from a .csv file and put the data here. Refer to
-		// /data/testform1.csv for the structure. Use the LinkedList of
-		// attributes from AttributesIO to construct a person and add attributes
-		// to them dynamically
-
+		BufferedReader bf = new BufferedReader(new FileReader(dir));
+		
+		
+		try {
+			String line;
+			bf.readLine(); // Ignore the first line;
+			while ((line = bf.readLine()) != null) {
+				
+				String[] elements = line.split(",");
+				Person temp = new Person();
+				int index = 0;
+				
+				for (Attribute attribute : attributes) {
+					String name = attribute.getAttributeName();
+					String data = elements[index]; // TODO: implement a way to handle other data types
+					
+					switch (attribute.getAttributeType()) {
+					
+					case GENERAL:
+						temp.addAttribute(new GeneralAttribute(name, data));
+						break;
+						
+					case MULTIPLE:
+						MultipleAttribute tempAttr1 = new MultipleAttribute(name);
+						tempAttr1.setChoice(data);
+						temp.addAttribute(tempAttr1);
+						break;
+						
+					case SCALE:
+						ScaleAttribute tempAttr2 = new ScaleAttribute(name);
+						tempAttr2.setChoice(Integer.parseInt(data));
+						temp.addAttribute(tempAttr2);
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			
+		}
+		finally {
+			bf.close();
+		}
+		
 	}
 
 	public void addPerson(Person person) {
