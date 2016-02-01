@@ -8,6 +8,12 @@ public class GeneralAttribute extends Attribute {
 		super(name);
 		weight = Weight.GENERAL;
 	}
+	
+	public GeneralAttribute(String name, String data) {
+		super(name);
+		this.data = data;
+		weight = Weight.GENERAL;
+	}
 
 	public String getData() {
 		return data;
