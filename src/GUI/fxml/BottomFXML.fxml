@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="35.0" prefWidth="223.0" 
+			xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+			>
+   <children>
+      <GridPane layoutX="-110.0" layoutY="-55.0" prefHeight="35.0" prefWidth="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="button_1" onAction="#changeView1" mnemonicParsing="false" text="View 1" />
+            <Button fx:id="button_2" onAction="#changeView2" mnemonicParsing="false" text="View 2" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
