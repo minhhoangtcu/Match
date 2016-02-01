@@ -40,12 +40,13 @@ public class Attribute {
 		this.interst = interst;
 	}
 
-	enum AttributeType {
+	public enum AttributeType {
+		GENERAL,
 		MULTIPLE,
 		SCALE;
 	}
 	
-	enum Weight {
+	public enum Weight {
 		IGNORE,
 		GENERAL,
 		WEIGHTED;

@@ -1,6 +1,7 @@
 package io.match.reader;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -15,7 +16,7 @@ public class AttributesIO {
 	private String dir;
 	private LinkedList<Attribute> attributes;
 
-	public AttributesIO(String dir) throws IOException {
+	public AttributesIO(String dir) throws FileNotFoundException, IOException {
 		this.dir = dir;
 		initAttribute();
 	}
@@ -28,7 +29,7 @@ public class AttributesIO {
 	 * 
 	 * @throws IOException
 	 */
-	private void initAttribute() throws IOException {
+	private void initAttribute() throws FileNotFoundException, IOException {
 
 		BufferedReader bf = new BufferedReader(new FileReader(dir));
 
@@ -41,12 +42,12 @@ public class AttributesIO {
 				switch (elements[1]) {
 				
 				case "ignore":
-					return;
+					break;
 					
 				case "general":
 					String data = elements[2];
 					attributes.add(new GeneralAttribute(name, data));
-					return;
+					break;
 					
 				case "weighted":
 					switch (elements[3]) {
@@ -58,13 +59,15 @@ public class AttributesIO {
 							temp.add(elements[5+i]);
 						}
 						attributes.add(temp);
-						return;
+						break;
 						
 					case "scale":
 						int from = Integer.parseInt(elements[4]);
 						int to = Integer.parseInt(elements[5]);
 						attributes.add(new ScaleAttribute(name).setFrom(from).setTo(to));
-						return;
+						break;
+					default:
+						throw new Exception();
 					}
 				default:
 					throw new Exception();
@@ -94,7 +97,9 @@ public class AttributesIO {
 
 	}
 
-	public LinkedList<Attribute> getAttributes() {
+	public LinkedList<Attribute> getAttributes() throws IOException {
+		if (attributes.isEmpty())
+			throw new IOException("List of attributes is not initialized");
 		return attributes;
 	}
 }
