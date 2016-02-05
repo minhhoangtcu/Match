@@ -110,7 +110,7 @@ public class PeopleIO {
 		case 2:
 			return Interest.SOMEWHAT_IMPORTANT;
 		case 3:
-			return Interest.NOT_IMPORTANT;
+			return Interest.VERY_IMPORTANT;
 		}
 		throw new Exception(String.format("Importance: %s is not 1, 2 or 3\n", input));
 	}

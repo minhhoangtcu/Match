@@ -21,7 +21,7 @@ public class Compare {
 	 * @return
 	 * @throws Exception 
 	 */
-	public double getMatch(Person first, Person second) throws Exception {
+	public static double getMatch(Person first, Person second) throws Exception {
 		
 		if (first.getAttributes().size() != second.getAttributes().size())
 			throw new IllegalArgumentException("Numbers of attributes from 2 arguments do not match!");
@@ -94,7 +94,7 @@ public class Compare {
 				
 				ScaleAttribute firstAttrConverted = (ScaleAttribute) firstAttr;
 				ScaleAttribute secondAttrConverted = (ScaleAttribute) secondAttr;
-				float pointGainedPercentage = firstAttrConverted.getPoint(secondAttrConverted)/firstAttrConverted.getMaxPoint();
+				float pointGainedPercentage = ScalePointCompute.getPoint(firstAttrConverted, secondAttrConverted)/ScalePointCompute.getMax();
 				
 				// Points (likelihood that A will like B)
 				Interest firstInterest = firstAttrConverted.getInterst(); 
@@ -133,14 +133,14 @@ public class Compare {
 		/**
 		 * After looking through all the point, we need to compute the matching percentage
 		 */
-		float likeProbabilityFirst = (float)gainedPointFirst/(float)posiblePointFirst*100f;
-		float likeProbabilitySecond = (float)gainedPointSecond/(float)posiblePointSecond*100f;
+		float likeProbabilityFirst = (float) gainedPointFirst/(float)posiblePointFirst*100f;
+		float likeProbabilitySecond = (float) gainedPointSecond/(float)posiblePointSecond*100f;
 		double matchingProbability = Math.sqrt(likeProbabilityFirst*likeProbabilitySecond);
 		
 		return matchingProbability;
 	}
 	
-	private boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
+	private static boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
 		return firstAttr.getAttributeName().equals(secondAttr.getAttributeName());
 	}
 	
