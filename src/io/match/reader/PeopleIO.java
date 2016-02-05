@@ -35,43 +35,56 @@ public class PeopleIO {
 
 		BufferedReader bf = new BufferedReader(new FileReader(dir));
 		
-		
+		String line = "undefined";
 		try {
-			String line;
 			bf.readLine(); // Ignore the first line;
 			while ((line = bf.readLine()) != null) {
 				
 				String[] elements = line.split(",");
 				Person temp = new Person();
-				int index = 0;
 				
+				int index = 0;
 				for (Attribute attribute : attributes) {
 					String name = attribute.getAttributeName();
-					String data = elements[index]; // TODO: implement a way to handle other data types
+					String data = elements[index++]; // TODO: implement a way to handle other data types
 					
-					switch (attribute.getAttributeType()) {
+					switch (attribute.getWeight()) {
 					
 					case GENERAL:
 						temp.addAttribute(new GeneralAttribute(name, data));
 						break;
+					
+					case WEIGHTED:
+						switch (attribute.getAttributeType()) {
 						
-					case MULTIPLE:
-						MultipleAttribute tempAttr1 = new MultipleAttribute(name);
-						tempAttr1.setChoice(data);
-						temp.addAttribute(tempAttr1);
+						case MULTIPLE:
+							MultipleAttribute tempAttr1 = new MultipleAttribute(name);
+							tempAttr1.setChoice(data);
+							temp.addAttribute(tempAttr1);
+							break;
+							
+						case SCALE:
+							ScaleAttribute convertedAttribute = (ScaleAttribute) attribute;
+							ScaleAttribute tempAttr2 = new ScaleAttribute(name).setFrom(convertedAttribute.getFrom()).setTo(convertedAttribute.getTo());
+							tempAttr2.setChoice(Integer.parseInt(data));
+							temp.addAttribute(tempAttr2);
+							break;
+							
+						}
 						break;
 						
-					case SCALE:
-						ScaleAttribute tempAttr2 = new ScaleAttribute(name);
-						tempAttr2.setChoice(Integer.parseInt(data));
-						temp.addAttribute(tempAttr2);
+					case IGNORE:
 						break;
+					
 					}
+					
 				}
+				
+				people.add(temp);
 			}
 		}
 		catch (Exception e) {
-			
+			throw new IOException(String.format("Person in file %s is corrupted.\nProgram failed on line: %s", dir, line));
 		}
 		finally {
 			bf.close();

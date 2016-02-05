@@ -41,7 +41,6 @@ public class Attribute {
 	}
 
 	public enum AttributeType {
-		GENERAL,
 		MULTIPLE,
 		SCALE;
 	}

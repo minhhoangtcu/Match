@@ -53,4 +53,12 @@ public class ScaleAttribute extends Attribute {
 		this.to = to;
 		return this;
 	}
+
+	public int getFrom() {
+		return from;
+	}
+
+	public int getTo() {
+		return to;
+	}
 }

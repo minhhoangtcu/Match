@@ -23,10 +23,10 @@ public class TestIO {
 		PeopleIO pIO = new PeopleIO(peopleURL, aIO.getAttributes());
 		
 		for (Person one : pIO.getPeople()) {
-			
 			for (Attribute two : one.getAttributes()) {
-				System.out.println(two.getAttributeName());
+				System.out.printf("%s ", two.getAttributeName());
 			}
+			System.out.println();
 			
 		}
 		
