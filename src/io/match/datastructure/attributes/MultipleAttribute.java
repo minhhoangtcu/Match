@@ -10,8 +10,7 @@ public class MultipleAttribute extends Attribute {
 	public MultipleAttribute(String name) {
 		super(name);
 		choices = new HashSet<>();
-		weight = Weight.WEIGHTED;
-		attributeType = AttributeType.MULTIPLE;
+		attributeType = AttributeType.WEIGHTED_MULTIPLE;
 	}
 
 	public MultipleAttribute add(String param) {

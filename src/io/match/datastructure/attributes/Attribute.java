@@ -4,7 +4,6 @@ public class Attribute {
 	
 	protected String attributeName;
 	protected AttributeType attributeType;
-	protected Weight weight;
 	protected boolean isExpecting;
 	protected Interest interst;
 	
@@ -14,10 +13,6 @@ public class Attribute {
 
 	public String getAttributeName() {
 		return attributeName;
-	}
-	
-	public Weight getWeight() {
-		return weight;
 	}
 	
 	public AttributeType getAttributeType() {
@@ -41,14 +36,10 @@ public class Attribute {
 	}
 
 	public enum AttributeType {
-		MULTIPLE,
-		SCALE;
-	}
-	
-	public enum Weight {
 		IGNORE,
 		GENERAL,
-		WEIGHTED;
+		WEIGHTED_MULTIPLE,
+		WEIGHTED_SCALE;
 	}
 	
 	public enum Interest {

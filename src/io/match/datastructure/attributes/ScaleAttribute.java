@@ -8,8 +8,7 @@ public class ScaleAttribute extends Attribute {
 	
 	public ScaleAttribute(String name) {
 		super(name);
-		weight = Weight.WEIGHTED;
-		attributeType = AttributeType.SCALE;
+		attributeType = AttributeType.WEIGHTED_SCALE;
 	}
 	
 	public void setChoice(int choice) {
