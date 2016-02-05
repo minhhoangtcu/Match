@@ -1,4 +1,4 @@
 Name,Email,Classification,How much are you interested in the program?
-Minh,test,Freshman,2
-Quang,testtest,Senior,5
-To,testTo,Sophomore,4
+Minh,test,Freshman,true,3,2,true,2
+Quang,testtest,Senior,false,3,5,false,1
+To,testTo,Sophomore,true,1,4,true,2

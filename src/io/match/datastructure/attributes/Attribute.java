@@ -34,7 +34,7 @@ public class Attribute {
 	public void setInterst(Interest interst) {
 		this.interst = interst;
 	}
-
+	
 	public enum AttributeType {
 		IGNORE,
 		GENERAL,

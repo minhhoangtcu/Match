@@ -4,9 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import io.match.datastructure.Person;
-import io.match.datastructure.attributes.Attribute;
 import io.match.reader.AttributesIO;
 import io.match.reader.PeopleIO;
+import io.match.reader.PeopleStringReader;
 
 public class TestIO {
 	
@@ -16,20 +16,19 @@ public class TestIO {
 	
 	public TestIO() throws FileNotFoundException, IOException {
 		
+		
 		String attrURL = "data/attributes.match";
 		String peopleURL = "data/testform1.csv";
 		
 		AttributesIO aIO = new AttributesIO(attrURL);
 		PeopleIO pIO = new PeopleIO(peopleURL, aIO.getAttributes());
 		
+		System.out.printf(">> IO TESTING\n");
+		
 		for (Person one : pIO.getPeople()) {
-			for (Attribute two : one.getAttributes()) {
-				System.out.printf("%s ", two.getAttributeName());
-			}
-			System.out.println();
-			
+			PeopleStringReader.print(one);
 		}
 		
+		System.out.printf(">> IO TESTING ENDED\n\n");
 	}
-
 }

@@ -82,6 +82,8 @@ public class AttributesIO {
 					throw new Exception("Case not accepted, must be ignore, general, or weighted");
 				}
 			}
+			
+			System.out.printf("End of file %s\n\n", dir);
 		} catch (Exception e) {
 			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s", dir, line));
 		} finally {

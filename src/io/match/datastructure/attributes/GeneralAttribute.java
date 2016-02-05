@@ -6,11 +6,13 @@ public class GeneralAttribute extends Attribute {
 	
 	public GeneralAttribute(String name) {
 		super(name);
+		attributeType = AttributeType.GENERAL;
 	}
 	
 	public GeneralAttribute(String name, String data) {
 		super(name);
 		this.data = data;
+		attributeType = AttributeType.GENERAL;
 	}
 
 	public String getData() {
