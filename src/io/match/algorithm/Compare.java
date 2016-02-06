@@ -57,32 +57,36 @@ public class Compare {
 				boolean isSame = firstAttrConverted.isSame(secondAttrConverted);
 				
 				// Points (likelihood that A will like B)
-				Interest firstInterest = firstAttrConverted.getInterst(); 
+				Interest firstInterest = firstAttrConverted.getInterst();
+				int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
+				
 				switch(firstInterest) {
 				case NOT_IMPORTANT:
-					posiblePointFirst += firstInterest.getPoint();
-					gainedPointFirst += firstInterest.getPoint();
+					posiblePointFirst += firstPointGained;
+					gainedPointFirst += firstPointGained;
 					break;
 				case SOMEWHAT_IMPORTANT:
 				case VERY_IMPORTANT:
-					posiblePointFirst += firstInterest.getPoint();
+					posiblePointFirst += firstPointGained;
 					if (isSame)
-						gainedPointFirst += firstInterest.getPoint();
+						gainedPointFirst += firstPointGained;
 					break;
 				}
 				
 				// Points (likelihood that B will like A)
-				Interest secondInterest = secondAttrConverted.getInterst(); 
+				Interest secondInterest = secondAttrConverted.getInterst();
+				int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
+				
 				switch(secondInterest) {
 				case NOT_IMPORTANT:
-					posiblePointSecond += secondInterest.getPoint();
-					gainedPointSecond += secondInterest.getPoint();
+					posiblePointSecond += secondPointGained;
+					gainedPointSecond += secondPointGained;
 					break;
 				case SOMEWHAT_IMPORTANT:
 				case VERY_IMPORTANT:
-					posiblePointSecond += secondInterest.getPoint();
+					posiblePointSecond += secondPointGained;
 					if (isSame)
-						gainedPointSecond += secondInterest.getPoint();
+						gainedPointSecond += secondPointGained;
 					break;
 				}
 				
@@ -97,34 +101,25 @@ public class Compare {
 				float pointGainedPercentage = ScalePointCompute.getPoint(firstAttrConverted, secondAttrConverted)/ScalePointCompute.getMax();
 				
 				// Points (likelihood that A will like B)
-				Interest firstInterest = firstAttrConverted.getInterst(); 
-				switch(firstInterest) {
-				case NOT_IMPORTANT:
-					posiblePointFirst += firstInterest.getPoint();
-					gainedPointFirst += firstInterest.getPoint();
-					break;
-				case SOMEWHAT_IMPORTANT:
-				case VERY_IMPORTANT:
-					posiblePointFirst += firstInterest.getPoint();
-					gainedPointFirst += pointGainedPercentage*posiblePointFirst;
-					break;
-				}
+				Interest firstInterest = firstAttrConverted.getInterst();
+				int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
+				
+				posiblePointFirst += firstPointGained;
+				if (firstInterest == Interest.NOT_IMPORTANT)
+					gainedPointFirst += firstPointGained;
+				else
+					gainedPointFirst += pointGainedPercentage*firstPointGained;
+
 				
 				// Points (likelihood that A will like B)
-				Interest secondInterest = secondAttrConverted.getInterst(); 
-				switch(secondInterest) {
-				case NOT_IMPORTANT:
-					posiblePointSecond += secondInterest.getPoint();
-					gainedPointSecond += secondInterest.getPoint();
-					break;
-				case SOMEWHAT_IMPORTANT:
-				case VERY_IMPORTANT:
-					posiblePointSecond += secondInterest.getPoint();
-					gainedPointSecond += pointGainedPercentage*posiblePointSecond;
-					break;
-				}
+				Interest secondInterest = secondAttrConverted.getInterst();
+				int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
 				
-				
+				posiblePointSecond += secondPointGained;
+				if (secondInterest == Interest.NOT_IMPORTANT)
+					gainedPointSecond += secondPointGained;
+				else
+					gainedPointSecond += pointGainedPercentage*secondPointGained;
 			}
 			else
 				throw new Exception("The type of attributes of 2 people do not match!");

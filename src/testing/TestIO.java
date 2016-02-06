@@ -1,6 +1,5 @@
 package testing;
 
-import java.util.ListIterator;
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.reader.AttributesIO;

@@ -43,22 +43,8 @@ public class Attribute {
 	}
 	
 	public enum Interest {
-		VERY_IMPORTANT(100),
-		SOMEWHAT_IMPORTANT(50),
-		NOT_IMPORTANT(70);
-		
-		private int point;
-		
-		Interest(int point) {
-			this.point = point;
-		}
-
-		public int getPoint() {
-			return point;
-		}
-		
-		
+		VERY_IMPORTANT,
+		SOMEWHAT_IMPORTANT,
+		NOT_IMPORTANT;
 	}
-
-	
 }
