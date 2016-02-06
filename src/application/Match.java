@@ -1,18 +1,19 @@
-package gui;
+package application;
 
 import java.io.IOException;
 
+import controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
-public class TestFXML extends Application {
+public class Match extends Application {
 	
 	private Stage primaryStage;
-	private BorderPane rootLayout;
 	
 	
 	public static void main(String args[]) {
@@ -25,7 +26,10 @@ public class TestFXML extends Application {
 		primaryStage.setTitle("Example");
 		
 		
-		rootLayout = (BorderPane) FXMLLoader.load(getClass().getResource("fxml/MainFXML.fxml"));
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainFXML.fxml"));
+		loader.setController(new MainController());
+		BorderPane rootLayout = (BorderPane) loader.load();
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
 

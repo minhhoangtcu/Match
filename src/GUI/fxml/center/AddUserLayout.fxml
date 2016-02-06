@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="505.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label alignment="CENTER" text="Add User" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+               <content>
+               	<GridPane prefHeight="490.0" prefWidth="369.0" BorderPane.alignment="CENTER">
+   	              <columnConstraints>
+   	                <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="52.0" />
+   	                <ColumnConstraints hgrow="SOMETIMES" maxWidth="478.0" minWidth="10.0" prefWidth="475.0" />
+   	              </columnConstraints>
+   	              <rowConstraints>
+   	                <RowConstraints maxHeight="107.0" minHeight="0.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+   	                <RowConstraints maxHeight="226.0" minHeight="5.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+   	                <RowConstraints maxHeight="292.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="292.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="292.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="292.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="292.0" minHeight="10.0" percentHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" percentHeight="0.0" prefHeight="200.0" vgrow="SOMETIMES" />
+   	              </rowConstraints>
+   	               <children>
+   	                  <Label text="Label" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+   	                     <GridPane.margin>
+   	                        <Insets left="20.0" top="10.0" />
+   	                     </GridPane.margin>
+   	                  </Label>
+   	                  <Label prefHeight="4.0" prefWidth="29.0" text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+   	                     <GridPane.margin>
+   	                        <Insets left="20.0" top="10.0" />
+   	                     </GridPane.margin>
+   	                  </Label>
+   	                  <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+   	                     <GridPane.margin>
+   	                        <Insets left="20.0" top="10.0" />
+   	                     </GridPane.margin>
+   	                  </Label>
+                        <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Label" GridPane.rowIndex="6" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField prefWidth="200.0" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <RadioButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Choice 1">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Choice 2">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Choice 3">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                        </HBox>
+                        <ImageView fitHeight="187.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="7" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="CheckBox">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                              <CheckBox mnemonicParsing="false" text="CheckBox">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                              <CheckBox mnemonicParsing="false" text="CheckBox">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="10.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+   	               </children>
+   	            </GridPane>
+               </content>
+            </ScrollPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

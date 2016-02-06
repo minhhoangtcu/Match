@@ -17,9 +17,9 @@ public class MainController {
 	@FXML
 	private void initialize() {
 		try {
-			setLeftLayout();
-			setCenterLayout();
-			setBottomLayout();
+//			setLeftLayout();
+//			setCenterLayout();
+//			setBottomLayout();
 		} catch (Exception e) {}
 	}
 	
@@ -29,16 +29,16 @@ public class MainController {
 		rootLayout.setCenter(layout);
 	}
 
-	private void setBottomLayout() throws Exception{
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/BottomFXML.fxml"));
-		loader.setController(new BottomController(rootLayout));
-		Parent layout = loader.load();
-		rootLayout.setBottom(layout);
-	}
-
-	private void setLeftLayout() throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ListFXML.fxml"));
-		Parent layout = loader.load();
-		rootLayout.setLeft(layout);		
-	}
+//	private void setBottomLayout() throws Exception{
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/BottomFXML.fxml"));
+//		loader.setController(new BottomController(rootLayout));
+//		Parent layout = loader.load();
+//		rootLayout.setBottom(layout);
+//	}
+//
+//	private void setLeftLayout() throws Exception {
+//		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ListFXML.fxml"));
+//		Parent layout = loader.load();
+//		rootLayout.setLeft(layout);		
+//	}
 }

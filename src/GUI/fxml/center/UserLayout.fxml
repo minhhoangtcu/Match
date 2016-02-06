@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="410.0" prefWidth="397.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label text="Name" BorderPane.alignment="CENTER_LEFT">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" top="20.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <GridPane prefHeight="106.0" prefWidth="397.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="63.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="334.0" minWidth="10.0" prefWidth="334.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="107.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="226.0" minHeight="5.0" prefHeight="73.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="292.0" minHeight="10.0" prefHeight="226.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Label" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label prefHeight="4.0" prefWidth="29.0" text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Label" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis molestie purus, ac vestibulum sapien maximus a. Suspendisse sed faucibus augue. Duis vestibulum purus sed nisi bibendum, non vehicula mi bibendum. Suspendisse ac nibh in est consectetur accumsan." wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis molestie purus, ac vestibulum sapien maximus a. " wrapText="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="20.0" top="10.0" />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
