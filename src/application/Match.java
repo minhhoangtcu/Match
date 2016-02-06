@@ -29,7 +29,7 @@ public class Match extends Application {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainFXML.fxml"));
 		loader.setController(new MainController());
-		SplitPane rootLayout = (SplitPane) loader.load();
+		BorderPane rootLayout = (BorderPane) loader.load();
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
 

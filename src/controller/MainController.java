@@ -16,7 +16,8 @@ public class MainController {
 	
 	@FXML
 	private BorderPane rootLayout;
-	private AnchorPane leftLayout;
+	@FXML
+	private BorderPane centerLayout;
 	
 	@FXML
 	private void initialize() {
@@ -27,24 +28,24 @@ public class MainController {
 		} catch (Exception e) {}
 	}
 	
-	private void setCenterLayout() throws Exception {		
+	private void setCenterLayout() throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/CenterLayout.fxml"));
 		loader.setController(new CenterController());
 		Parent layout = loader.load();
-		rootLayout.setCenter(layout);
+		centerLayout.setCenter(layout);
 	}
 
 	private void setBottomLayout() throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/BottomLayout.fxml"));
 		loader.setController(new BottomController());
 		Parent layout = loader.load();
-		rootLayout.setBottom(layout);
+		centerLayout.setBottom(layout);
 	}
 
 	private void setLeftLayout() throws Exception {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/left/LeftLayout.fxml"));
 		loader.setController(new LeftController());
 		Parent layout = loader.load();
-		leftLayout.setLeftAnchor(layout, 0.0);
+		rootLayout.setLeft(layout);
 	}
 }
