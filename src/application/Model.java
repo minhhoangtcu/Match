@@ -15,31 +15,43 @@ public class Model {
 	private LinkedList<Person> faculties;
 	
 	// Link to the files for the IO
-	private final static String ATTRIBUTE_DIR = "tobeornottobe";
-	private String peopleDir = "data/testform1.csv"; // This can still be changed
+	private final static String ATTRIBUTE_DIR = "data/attributes.match";
+	private String studentsDir = "data/testform1.csv";
+	private String falcutyDir = "data/testform1.csv";
 	
 	// Init IO
 	private AttributesIO attributeIO;
-	private PeopleIO peopleIO;
+	private PeopleIO studentsIO, falcutiesIO;
 	
 	public Model() throws FileNotFoundException, IOException {
 		students = new LinkedList<>();
 		faculties = new LinkedList<>();
 		
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
-		peopleIO = new PeopleIO(peopleDir, attributeIO.getAttributes());
-		
-		// TODO: Load from the view
-		students = peopleIO.getPeople();
+		loadStudents(studentsDir);
+		loadFalcuty(falcutyDir);
+	}
+	
+	public void loadStudents(String url) throws FileNotFoundException, IOException {
+		studentsDir = url;
+		studentsIO = new PeopleIO(studentsDir, attributeIO.getAttributes());
+		students = studentsIO.getPeople();
+	}
+	
+	public void loadFalcuty(String url) throws FileNotFoundException, IOException {
+		falcutyDir = url;
+		falcutiesIO = new PeopleIO(falcutyDir, attributeIO.getAttributes());
+		faculties = falcutiesIO.getPeople();
 	}
 	
 	public LinkedList<Person> getStudents() {
 		return students;
 	}
 	
-	private LinkedList<Person> getFaculties() {
+	public LinkedList<Person> getFaculties() {
 		return faculties;
 	}
+	
 	public LinkedList<Attribute> getAttributes() throws IOException {
 		return attributeIO.getAttributes();
 	}
