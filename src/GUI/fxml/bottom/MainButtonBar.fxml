@@ -12,13 +12,15 @@
             <Button fx:id="btnAddUser" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
 		            text="Add User" HBox.hgrow="ALWAYS" 
-		            onAction="#loadAddUser"/>
+		            onAction="#pushUpAddUserBar"/>
             <Button fx:id="btnDeleteUser" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Delete User" HBox.hgrow="ALWAYS" />
+		            text="Delete User" HBox.hgrow="ALWAYS" 
+		            onAction="#pushUpDeleteUserBar"/>
             <Button fx:id="btnModifyUser" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Modify User" HBox.hgrow="ALWAYS" />
+		            text="Modify User" HBox.hgrow="ALWAYS"
+		            onAction="#loadModifyUser" />
             <Button fx:id="btnMatchUser" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
 		            text="Match User" HBox.hgrow="ALWAYS" />
