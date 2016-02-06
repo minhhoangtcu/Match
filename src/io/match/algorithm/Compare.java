@@ -98,7 +98,7 @@ public class Compare {
 				
 				ScaleAttribute firstAttrConverted = (ScaleAttribute) firstAttr;
 				ScaleAttribute secondAttrConverted = (ScaleAttribute) secondAttr;
-				float pointGainedPercentage = ScalePointCompute.getPoint(firstAttrConverted, secondAttrConverted)/ScalePointCompute.getMax();
+				float pointGainedPercentage = ScalePointCompute.getPointPercentage(firstAttrConverted, secondAttrConverted);
 				
 				// Points (likelihood that A will like B)
 				Interest firstInterest = firstAttrConverted.getInterst();

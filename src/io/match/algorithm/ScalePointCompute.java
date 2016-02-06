@@ -6,7 +6,11 @@ public class ScalePointCompute {
 	
 	private static final int DIFF_0 = 100, DIFF_1 = 50, DIFF_2 = 20, DIFF_3 = 10, DIFF_4 = 0;
 
-	public static int getPoint(ScaleAttribute one, ScaleAttribute other) {
+	public static float getPointPercentage(ScaleAttribute one, ScaleAttribute other) {
+		return getPoint(one, other)/DIFF_0;
+	}
+	
+	private static int getPoint(ScaleAttribute one, ScaleAttribute other) {
 		
 		int to = one.getTo();
 		int from = one.getFrom();
@@ -30,7 +34,4 @@ public class ScalePointCompute {
 			return DIFF_4;
 	}
 	
-	public static int getMax() {
-		return DIFF_0;
-	}
 }
