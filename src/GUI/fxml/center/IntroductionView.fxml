@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="381.0" prefWidth="460.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label alignment="CENTER" text="Hello" textAlignment="CENTER" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <center>
+            <Label text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sagittis molestie purus, ac vestibulum sapien maximus a. Suspendisse sed faucibus augue. Duis vestibulum purus sed nisi bibendum, non vehicula mi bibendum. Suspendisse ac nibh in est consectetur accumsan. Sed ultrices venenatis augue, vel maximus arcu semper ac. Ut tempor quam leo, in tempus mauris commodo vestibulum. Duis mattis, libero et imperdiet accumsan, diam ex finibus dui, sagittis commodo enim massa eu enim. Integer consectetur massa ut malesuada fringilla. Cras nec dictum eros, ut dignissim tellus. In hac habitasse in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed gravida ex. Morbi ornare quam a congue hendrerit." wrapText="true" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="40.0" right="40.0" top="10.0" />
+               </BorderPane.margin>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
