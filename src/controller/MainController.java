@@ -37,7 +37,7 @@ public class MainController {
 
 	private void setBottomLayout() throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/BottomLayout.fxml"));
-		loader.setController(new BottomController());
+		loader.setController(new BottomController(rootLayout));
 		Parent layout = loader.load();
 		centerLayout.setBottom(layout);
 	}
