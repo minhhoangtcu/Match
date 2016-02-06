@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="29.0" prefWidth="487.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnDeleteAnUser" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add An User" HBox.hgrow="ALWAYS" />
-            <Button fx:id="btnDeleteMultipleUsers" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Multiple Users" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnDeleteAnUser" maxWidth="1.7976931348623157E308" 
+           			mnemonicParsing="false" text="Add An User" HBox.hgrow="ALWAYS" 
+           			onAction="#loadDeleteUser"/>
+            <Button fx:id="btnDeleteMultipleUsers" maxWidth="1.7976931348623157E308" 
+            		mnemonicParsing="false" text="Add Multiple Users" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
