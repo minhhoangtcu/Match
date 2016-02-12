@@ -2,26 +2,27 @@ package io.match.datastructure.attributes;
 
 import java.util.HashSet;
 
-public class MultipleAttribute extends Attribute implements Weightable<String>, Expectable<HashSet<String>>, Interestable {
+public class OneToMultipleAttribute extends Attribute implements Weightable<String>, Expectable<HashSet<String>>, Interestable {
 	
 	private HashSet<String> choices;
 	private String choice;
 	private HashSet<String> expectingChoices;
 	private Interest interest;
 	
-	public MultipleAttribute(String name) {
+	public OneToMultipleAttribute(String name) {
 		super(name);
 		choices = new HashSet<>();
-		attributeType = AttributeType.WEIGHTED_MULTIPLE;
+		expectingChoices = new HashSet<>();
+		attributeType = AttributeType.WEIGHTED_ONE_TO_MULTIPLE;
 	}
 
-	public MultipleAttribute add(String param) {
+	public OneToMultipleAttribute add(String param) {
 		// TODO: write a case to control the input
 		choices.add(param);
 		return this;
 	}
 	
-	public MultipleAttribute addExpectingChoice(String param) {
+	public OneToMultipleAttribute addExpectingChoice(String param) {
 		// TODO: write a case to control the input
 		expectingChoices.add(param);
 		return this;

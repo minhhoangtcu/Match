@@ -4,9 +4,9 @@ import java.util.Iterator;
 
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.Attribute.Interest;
 import io.match.datastructure.attributes.GeneralAttribute;
-import io.match.datastructure.attributes.MultipleAttribute;
+import io.match.datastructure.attributes.Interest;
+import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
 public class Compare {
@@ -48,17 +48,17 @@ public class Compare {
 			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute) {
 				continue; // We do not have to deal with general attribute, for now
 			}
-			else if (firstAttr instanceof MultipleAttribute && secondAttr instanceof MultipleAttribute) {
+			else if (firstAttr instanceof OneToMultipleAttribute && secondAttr instanceof OneToMultipleAttribute) {
 				
 				// TODO: Clean up duplicate codes
 				
-				MultipleAttribute firstAttrConverted = (MultipleAttribute) firstAttr;
-				MultipleAttribute secondAttrConverted = (MultipleAttribute) secondAttr;
-				boolean isSame = firstAttrConverted.isSame(secondAttrConverted);
+				OneToMultipleAttribute firstAttrConverted = (OneToMultipleAttribute) firstAttr;
+				OneToMultipleAttribute secondAttrConverted = (OneToMultipleAttribute) secondAttr;
 				
 				// Points (likelihood that A will like B)
 				Interest firstInterest = firstAttrConverted.getInterst();
 				int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
+				boolean isMatchExpectationFirst = isMatchAttribute(firstAttrConverted, secondAttrConverted);
 				
 				switch(firstInterest) {
 				case NOT_IMPORTANT:
@@ -68,7 +68,7 @@ public class Compare {
 				case SOMEWHAT_IMPORTANT:
 				case VERY_IMPORTANT:
 					posiblePointFirst += firstPointGained;
-					if (isSame)
+					if (isMatchExpectationFirst)
 						gainedPointFirst += firstPointGained;
 					break;
 				}
@@ -76,6 +76,7 @@ public class Compare {
 				// Points (likelihood that B will like A)
 				Interest secondInterest = secondAttrConverted.getInterst();
 				int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
+				boolean isMatchExpectationSecond = isMatchAttribute(secondAttrConverted, firstAttrConverted);
 				
 				switch(secondInterest) {
 				case NOT_IMPORTANT:
@@ -85,7 +86,7 @@ public class Compare {
 				case SOMEWHAT_IMPORTANT:
 				case VERY_IMPORTANT:
 					posiblePointSecond += secondPointGained;
-					if (isSame)
+					if (isMatchExpectationSecond)
 						gainedPointSecond += secondPointGained;
 					break;
 				}
@@ -133,6 +134,10 @@ public class Compare {
 		double matchingProbability = Math.sqrt(likeProbabilityFirst*likeProbabilitySecond);
 		
 		return matchingProbability;
+	}
+	
+	private static boolean isMatchAttribute(OneToMultipleAttribute firstAttr, OneToMultipleAttribute secondAttr) {
+		return firstAttr.getExpectingChoice().contains(secondAttr.getChoice());
 	}
 	
 	private static boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {

@@ -1,6 +1,6 @@
 package io.match.algorithm;
 
-import io.match.datastructure.attributes.Attribute.Interest;
+import io.match.datastructure.attributes.Interest;
 
 public class MultiplePointCompute {
 	
