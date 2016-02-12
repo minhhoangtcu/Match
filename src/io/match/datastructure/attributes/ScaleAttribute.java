@@ -1,10 +1,10 @@
 package io.match.datastructure.attributes;
 
-public class ScaleAttribute extends Attribute implements Weightable<Integer>, Expectable<Integer> {
+public class ScaleAttribute extends Attribute implements Weightable<Integer>, Expectable<Integer>, Interestable {
 	
 	private int from, to;
-	private int choice;
-	private int expectingChoice;
+	private int choice, expectingChoice;
+	private Interest interest;
 	
 	public ScaleAttribute(String name) {
 		super(name);
@@ -50,5 +50,13 @@ public class ScaleAttribute extends Attribute implements Weightable<Integer>, Ex
 		else
 			throw new IllegalArgumentException("The provided choice is out of range");
 
+	}
+
+	public Interest getInterst() {
+		return interest;
+	}
+
+	public void setInterst(Interest interst) {
+		this.interest = interst;
 	}
 }

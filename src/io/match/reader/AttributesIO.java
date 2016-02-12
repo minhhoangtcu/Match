@@ -85,7 +85,7 @@ public class AttributesIO {
 			
 			System.out.printf("End of file %s\n\n", dir);
 		} catch (Exception e) {
-			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s", dir, line));
+			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dir, line, e.getMessage()));
 		} finally {
 			bf.close();
 		}

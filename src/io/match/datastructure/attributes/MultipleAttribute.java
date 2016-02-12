@@ -2,10 +2,11 @@ package io.match.datastructure.attributes;
 
 import java.util.HashSet;
 
-public class MultipleAttribute extends Attribute implements Weightable<String>, Expectable<String>, Interestable {
+public class MultipleAttribute extends Attribute implements Weightable<String>, Expectable<HashSet<String>>, Interestable {
 	
 	private HashSet<String> choices;
-	private String choice, expectingChoice;
+	private String choice;
+	private HashSet<String> expectingChoices;
 	private Interest interest;
 	
 	public MultipleAttribute(String name) {
@@ -15,12 +16,15 @@ public class MultipleAttribute extends Attribute implements Weightable<String>, 
 	}
 
 	public MultipleAttribute add(String param) {
+		// TODO: write a case to control the input
 		choices.add(param);
 		return this;
 	}
 	
-	public boolean isSame(MultipleAttribute other) {
-		return getChoice().equals(other.getChoice());
+	public MultipleAttribute addExpectingChoice(String param) {
+		// TODO: write a case to control the input
+		expectingChoices.add(param);
+		return this;
 	}
 
 	public String getChoice() {
@@ -39,13 +43,13 @@ public class MultipleAttribute extends Attribute implements Weightable<String>, 
 		this.interest = interst;
 	}
 
-	public String getExpectingChoice() {
-		return expectingChoice;
+	public HashSet<String> getExpectingChoice() {
+		return expectingChoices;
 	}
 
-	@Override
-	public void setExpectingChoice(String expecting) throws IllegalArgumentException {
-		// TODO: write a case to control the input
-		this.expectingChoice = expecting;
+	public void setExpectingChoice(HashSet<String> expecting) throws IllegalArgumentException {
+		for (String expectation : expecting) {
+			addExpectingChoice(expectation);
+		}
 	}
 }

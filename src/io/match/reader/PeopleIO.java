@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.Attribute.Interest;
 import io.match.datastructure.attributes.GeneralAttribute;
+import io.match.datastructure.attributes.Interest;
 import io.match.datastructure.attributes.MultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
@@ -68,7 +68,7 @@ public class PeopleIO {
 
 						MultipleAttribute tempAttr1 = new MultipleAttribute(name);
 						tempAttr1.setChoice(data);
-						tempAttr1.setExpecting(readExpecting(elements[index++]));
+						tempAttr1.addExpectingChoice(elements[index++]);
 						tempAttr1.setInterst(readInterest(elements[index++]));
 						temp.addAttribute(tempAttr1);
 						break;
@@ -78,7 +78,7 @@ public class PeopleIO {
 						ScaleAttribute tempAttr2 = new ScaleAttribute(name).setFrom(convertedAttribute.getFrom())
 								.setTo(convertedAttribute.getTo());
 						tempAttr2.setChoice(Integer.parseInt(data));
-						tempAttr2.setExpecting(readExpecting(elements[index++]));
+						tempAttr2.setExpectingChoice(Integer.parseInt(elements[index++]));
 						tempAttr2.setInterst(readInterest(elements[index++]));
 						temp.addAttribute(tempAttr2);
 						break;
@@ -86,11 +86,9 @@ public class PeopleIO {
 						break;
 					default:
 						throw new Exception("Attribute is not initialized");
-
 					}
 				}
 			}
-			
 			System.out.printf("End of file %s\n\n", dir);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,15 +111,6 @@ public class PeopleIO {
 			return Interest.VERY_IMPORTANT;
 		}
 		throw new Exception(String.format("Importance: %s is not 1, 2 or 3\n", input));
-	}
-
-	private boolean readExpecting(String input) throws Exception {
-		if (input.equals("true"))
-			return true;
-		else if (input.equals("false"))
-			return false;
-		else
-			throw new Exception(String.format("Expecting: %s is not true or false\n", input));
 	}
 
 	public void addPerson(Person person) {
