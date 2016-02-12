@@ -20,7 +20,7 @@ public class Person {
 	
 	public String getGeneralAttribute(String name) {
 		for (Attribute attribute : attributes) {
-			if (attribute.getAttributeName().equals(name))
+			if (attribute.getAttributeName().equals(name) && attribute instanceof GeneralAttribute)
 				return ((GeneralAttribute) attribute).getData();
 		}
 		throw new IllegalArgumentException(String.format("The person does not have attribute named %s", name));

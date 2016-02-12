@@ -4,6 +4,7 @@ import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.reader.AttributesIO;
 import io.match.reader.PeopleIO;
+import io.match.reader.PeopleStringReader;
 
 public class TestIO {
 
@@ -15,11 +16,17 @@ public class TestIO {
 
 		String attrURL = "data/attributes.match";
 		String peopleURL = "data/data.csv";
-
+		
 		AttributesIO aIO = new AttributesIO(attrURL);
 		PeopleIO pIO = new PeopleIO(peopleURL, aIO.getAttributes());
-
-		System.out.printf(">> IO TESTING\n");
+		
+		testMatching(aIO, pIO);
+		testPrintingAllPeople(pIO);
+		
+	}
+	
+	public void testMatching(AttributesIO aIO, PeopleIO pIO) throws Exception {
+		System.out.printf(">> COMPARE TESTING\n");
 
 		for (Person iPerson : pIO.getPeople()) {
 
@@ -37,6 +44,18 @@ public class TestIO {
 
 		}
 
-		System.out.printf(">> IO TESTING ENDED\n\n");
+		System.out.printf(">> COMPARE TESTING ENDED\n\n");
 	}
+
+	public void testPrintingAllPeople(PeopleIO pIO) throws Exception {
+		System.out.printf(">> PRINTING ALL TESTING\n");
+		
+		for (Person person: pIO.getPeople()) {
+			PeopleStringReader.print(person);
+			System.out.println();
+		}
+		
+		System.out.printf(">> PRINTING ALL TESTING ENDED\n\n");
+	}
+	
 }

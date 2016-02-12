@@ -38,15 +38,15 @@ public class PeopleStringReader {
 	}
 	
 	private static void printDataGeneral(Attribute input) {
-		System.out.printf("%s ", ((GeneralAttribute) input ).getData());
+		System.out.printf("%s: %s\n", input.getAttributeName(), ((GeneralAttribute) input ).getData());
 	}
 	
 	private static void printDataOneToMultiple(Attribute input) {
-		System.out.printf("%s ", ((OneToMultipleAttribute) input ).getChoice());
+		System.out.printf("%s: %s\n", input.getAttributeName(), ((OneToMultipleAttribute) input ).getChoice());
 	}
 	
 	private static void printDataScale(Attribute input) {
-		System.out.printf("%s ", ((ScaleAttribute) input ).getChoice());
+		System.out.printf("%s: %s\n", input.getAttributeName(), ((ScaleAttribute) input ).getChoice());
 	}
 
 }

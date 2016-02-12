@@ -55,7 +55,7 @@ public class PeopleIO {
 				int index = 0;
 				for (Attribute attribute : attributes) {
 					String name = attribute.getAttributeName();
-					String data = elements[index++]; // TODO: implement a way to
+					String data = getData(elements[index++]); // TODO: implement a way to
 														// handle other data
 														// types
 
