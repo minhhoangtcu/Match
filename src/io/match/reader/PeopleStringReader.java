@@ -26,7 +26,7 @@ public class PeopleStringReader {
 			case IGNORE:
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				printDataMultiple(attr);
+				printDataOneToMultiple(attr);
 				break;
 			case WEIGHTED_SCALE:
 				printDataScale(attr);
@@ -41,7 +41,7 @@ public class PeopleStringReader {
 		System.out.printf("%s ", ((GeneralAttribute) input ).getData());
 	}
 	
-	private static void printDataMultiple(Attribute input) {
+	private static void printDataOneToMultiple(Attribute input) {
 		System.out.printf("%s ", ((OneToMultipleAttribute) input ).getChoice());
 	}
 	

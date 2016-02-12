@@ -16,8 +16,8 @@ public class Model {
 	
 	// Link to the files for the IO
 	private final static String ATTRIBUTE_DIR = "data/attributes.match";
-	private String studentsDir = "data/testform1.csv";
-	private String falcutyDir = "data/testform1.csv";
+	private String studentsDir = "data/data.csv";
+	private String falcutyDir = "data/data.csv";
 	
 	// Init IO
 	private AttributesIO attributeIO;
