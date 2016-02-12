@@ -14,7 +14,7 @@ public class TestIO {
 	public TestIO() throws Exception {
 
 		String attrURL = "data/attributes.match";
-		String peopleURL = "data/testform1.csv";
+		String peopleURL = "data/data.csv";
 
 		AttributesIO aIO = new AttributesIO(attrURL);
 		PeopleIO pIO = new PeopleIO(peopleURL, aIO.getAttributes());
@@ -32,7 +32,7 @@ public class TestIO {
 
 				double match = Compare.getMatch(iPerson, jPerson);
 
-				System.out.printf("%s and %s \t\t%.2f\n", nameI, nameJ, match);
+				System.out.printf("%s and %s \t\t\t\t%.2f\n", nameI, nameJ, match);
 			}
 
 		}

@@ -9,7 +9,7 @@ import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.Interest;
-import io.match.datastructure.attributes.MultipleAttribute;
+import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
 public class PeopleIO {
@@ -17,7 +17,11 @@ public class PeopleIO {
 	private String dir;
 	private LinkedList<Person> people;
 	private LinkedList<Attribute> attributes;
-
+	
+	private static final String VERY_IMPORTANT = "Very important";
+	private static final String SOMEWHAT_IMPORTANT = "Somewhat important";
+	private static final String NOT_IMPORTANT = "Not important";
+	
 	public PeopleIO(String dir, LinkedList<Attribute> attributes) throws FileNotFoundException, IOException {
 		this.dir = dir;
 		this.attributes = attributes;
@@ -61,15 +65,15 @@ public class PeopleIO {
 						temp.addAttribute(new GeneralAttribute(name, data));
 						break;
 
-					case WEIGHTED_MULTIPLE:
+					case WEIGHTED_ONE_TO_MULTIPLE:
 						// If we are putting a weighted attribute in, we also
 						// know that the next 2 fields are: 1. expecting same
 						// and 2. importance
 
-						MultipleAttribute tempAttr1 = new MultipleAttribute(name);
-						tempAttr1.setChoice(data);
-						tempAttr1.addExpectingChoice(elements[index++]);
-						tempAttr1.setInterst(readInterest(elements[index++]));
+						OneToMultipleAttribute tempAttr1 = new OneToMultipleAttribute(name);
+						tempAttr1.setChoice(getData(data));
+						addChoices(tempAttr1, getData(elements[index++]));
+						tempAttr1.setInterst(readInterest(getData(elements[index++])));
 						temp.addAttribute(tempAttr1);
 						break;
 
@@ -77,13 +81,14 @@ public class PeopleIO {
 						ScaleAttribute convertedAttribute = (ScaleAttribute) attribute;
 						ScaleAttribute tempAttr2 = new ScaleAttribute(name).setFrom(convertedAttribute.getFrom())
 								.setTo(convertedAttribute.getTo());
-						tempAttr2.setChoice(Integer.parseInt(data));
-						tempAttr2.setExpectingChoice(Integer.parseInt(elements[index++]));
-						tempAttr2.setInterst(readInterest(elements[index++]));
+						tempAttr2.setChoice(Integer.parseInt(getData(data)));
+						tempAttr2.setExpectingChoice(Integer.parseInt(getData(elements[index++])));
+						tempAttr2.setInterst(readInterest(getData(elements[index++])));
 						temp.addAttribute(tempAttr2);
 						break;
 					case IGNORE:
 						break;
+						
 					default:
 						throw new Exception("Attribute is not initialized");
 					}
@@ -100,17 +105,26 @@ public class PeopleIO {
 
 	}
 
+	private void addChoices(OneToMultipleAttribute attribute, String data) {
+		for (String choice: data.split(";")) {
+			attribute.addExpectingChoice(choice);
+		}
+	}
+	
 	private Interest readInterest(String input) throws Exception {
-		int value = Integer.parseInt(input);
-		switch (value) {
-		case 1:
+		switch (input) {
+		case NOT_IMPORTANT:
 			return Interest.NOT_IMPORTANT;
-		case 2:
+		case SOMEWHAT_IMPORTANT:
 			return Interest.SOMEWHAT_IMPORTANT;
-		case 3:
+		case VERY_IMPORTANT:
 			return Interest.VERY_IMPORTANT;
 		}
-		throw new Exception(String.format("Importance: %s is not 1, 2 or 3\n", input));
+		throw new Exception(String.format("Importance: %s is not %s, %s or %s\n", input, NOT_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT));
+	}
+	
+	private String getData(String data) {
+		return data.replaceAll("\"", "");
 	}
 
 	public void addPerson(Person person) {

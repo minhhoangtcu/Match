@@ -3,7 +3,7 @@ package io.match.reader;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
-import io.match.datastructure.attributes.MultipleAttribute;
+import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
 /**
@@ -25,7 +25,7 @@ public class PeopleStringReader {
 				break;
 			case IGNORE:
 				break;
-			case WEIGHTED_MULTIPLE:
+			case WEIGHTED_ONE_TO_MULTIPLE:
 				printDataMultiple(attr);
 				break;
 			case WEIGHTED_SCALE:
@@ -42,7 +42,7 @@ public class PeopleStringReader {
 	}
 	
 	private static void printDataMultiple(Attribute input) {
-		System.out.printf("%s ", ((MultipleAttribute) input ).getChoice());
+		System.out.printf("%s ", ((OneToMultipleAttribute) input ).getChoice());
 	}
 	
 	private static void printDataScale(Attribute input) {

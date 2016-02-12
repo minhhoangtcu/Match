@@ -8,13 +8,19 @@ import java.util.LinkedList;
 
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
-import io.match.datastructure.attributes.MultipleAttribute;
+import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
 public class AttributesIO {
 
 	private String dir;
 	private LinkedList<Attribute> attributes;
+	
+	private static final String IGNORE = "ignore";
+	private static final String GENERAL = "general";
+	private static final String WEIGHTED = "weighted";
+	private static final String MULTIPLE = "multiple";
+	private static final String SCALE = "scale";
 
 	public AttributesIO(String dir) throws FileNotFoundException, IOException {
 		this.dir = dir;
@@ -43,22 +49,24 @@ public class AttributesIO {
 				
 				switch (elements[1]) {
 				
-				case "ignore":
+				case IGNORE:
+					attributes.add(new Attribute(name).setIgnored(true));
+					System.out.printf("Added ignored attribute %s\n", name);
 					break;
 					
-				case "general":
+				case GENERAL:
 					// String dataType = elements[2];
 					// TODO: implement a way to handle more data types
 					attributes.add(new GeneralAttribute(name));
 					System.out.printf("Added general attribute %s\n", name);
 					break;
 					
-				case "weighted":
+				case WEIGHTED:
 					switch (elements[2]) {
 					
-					case "multiple":
+					case MULTIPLE:
 						int numberOfChoices = Integer.parseInt(elements[3]);
-						MultipleAttribute temp = new MultipleAttribute(name);
+						OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
 						for (int i = 0; i < numberOfChoices; i++) {
 							temp.add(elements[4+i]);
 						}
@@ -66,7 +74,7 @@ public class AttributesIO {
 						System.out.printf("Added multiple attribute %s\n", name);
 						break;
 						
-					case "scale":
+					case SCALE:
 						int from = Integer.parseInt(elements[3]);
 						int to = Integer.parseInt(elements[4]);
 						attributes.add(new ScaleAttribute(name).setFrom(from).setTo(to));

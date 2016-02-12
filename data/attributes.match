@@ -6,6 +6,6 @@ nationality,general,string
 classification,general,string
 phoneNumber,general,string
 major,general,string
-gender,weighted,multiple,2,male,female
+gender,weighted,multiple,2,Male,Female
 department,weighted,multiple,8,Business,Communication,Education,Fine Arts,Honors College,Liberal Arts,Nursing & Health Sciences,Science & Engineering
 interest,weighted,scale,1,5
