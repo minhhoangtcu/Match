@@ -1,7 +1,7 @@
 package testing;
 
 import io.match.algorithm.Compare;
-import io.match.datastructure.Student;
+import io.match.datastructure.Person;
 import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.Interest;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
@@ -51,13 +51,13 @@ public class TestComparing {
 		interest2.addExpectingChoice("very serious");
 		interest2.setInterst(Interest.VERY_IMPORTANT);
 		
-		Student minh = new Student();
+		Person minh = new Person();
 		minh.addAttribute(name1);
 		minh.addAttribute(email1);
 		minh.addAttribute(major1);
 		minh.addAttribute(interest1);
 		
-		Student quang = new Student();
+		Person quang = new Person();
 		quang.addAttribute(name2);
 		quang.addAttribute(email2);
 		quang.addAttribute(major2);
