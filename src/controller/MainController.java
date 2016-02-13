@@ -3,6 +3,7 @@ package controller;
 import java.awt.Label;
 import java.io.IOException;
 
+import application.Model;
 import controller.bottomController.BottomController;
 import controller.centerController.CenterController;
 import controller.leftController.LeftController;
@@ -14,10 +15,16 @@ import javafx.scene.layout.BorderPane;
 
 public class MainController {
 	
+	private Model model;
+	
 	@FXML
 	private BorderPane rootLayout;
 	@FXML
 	private BorderPane centerLayout;
+	
+	public MainController(Model model) {
+		this.model = model;
+	}
 	
 	@FXML
 	private void initialize() {
@@ -37,7 +44,7 @@ public class MainController {
 
 	private void setBottomLayout() throws Exception{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/BottomLayout.fxml"));
-		loader.setController(new BottomController(rootLayout));
+		loader.setController(new BottomController(rootLayout, model));
 		Parent layout = loader.load();
 		centerLayout.setBottom(layout);
 	}

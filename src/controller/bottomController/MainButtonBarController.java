@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.swing.text.View;
 
+import application.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,13 +14,16 @@ import javafx.scene.layout.BorderPane;
 
 public class MainButtonBarController {
 	
+	private Model model;
+	
 	private BorderPane rootLayout;
 	private boolean addUserUp = false;
 	private boolean deleteUserUp = false;
 	
 	
-	public MainButtonBarController(BorderPane rootLayout) {
+	public MainButtonBarController(BorderPane rootLayout, Model model) {
 		this.rootLayout = rootLayout;
+		this.model = model;
 	}
 	
 	
@@ -44,7 +48,7 @@ public class MainButtonBarController {
 			
 			// load and set center layout
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/AddUserButtonBar.fxml"));
-			loader.setController(new AddUserBarController(rootLayout));
+			loader.setController(new AddUserBarController(rootLayout, model));
 			try {
 				Parent layout = loader.load();
 				view.setTop(layout);
