@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 
 public class Match extends Application {
 	
-	
+	private Model model;
 	
 	private Stage primaryStage;
 	
@@ -23,14 +23,19 @@ public class Match extends Application {
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Match - Basic Layout");
 		
+		model = new Model();
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/MainFXML.fxml"));
-		loader.setController(new MainController());
+		loader.setController(new MainController(model));
 		BorderPane rootLayout = (BorderPane) loader.load();
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
 
 		
 		primaryStage.show();
+	}
+	
+	public Model getModel() {
+		return model;
 	}
 }
