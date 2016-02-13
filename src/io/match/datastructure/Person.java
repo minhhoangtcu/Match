@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.AttributeType;
 import io.match.datastructure.attributes.GeneralAttribute;
+import io.match.datastructure.attributes.Interest;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
@@ -91,6 +92,54 @@ public class Person {
 		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
 	}
 
+	
+
+	/**
+	 * Add a general attribute to this person
+	 * 
+	 * @param name name of the attribute
+	 * @param data contained data of the attribute
+	 */
+	public void addGeneralAttribute(String name, String data) {
+		attributes.add(new GeneralAttribute(name, data));
+	}
+	
+	/**
+	 * Add an one to multiple attribute to this person
+	 * 
+	 * @param name name of the attribute
+	 * @param choice the choice that this person has made
+	 * @param expectingChoices the expected choices that this person want his/her matches to be
+	 * @param interest level of importance of this attribute
+	 */
+	public void addOneToMultipleAttribute(String name, String choice, String[] expectingChoices, Interest interest) {
+		OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
+		temp.setChoice(choice);
+		for (String expectingChoice : expectingChoices) {
+			temp.addExpectingChoice(expectingChoice);
+		}
+		temp.setInterst(interest);
+		attributes.add(temp);
+	}
+	
+	/**
+	 * Add a scale attribute to this person
+	 * 
+	 * @param name name of the attribute
+	 * @param from the lower bound
+	 * @param to the upper bound
+	 * @param choice the choice of this person
+	 * @param expectingChoice the expecting choice that this person want his/her matches to be
+	 * @param interest level of importance of this attribute
+	 */
+	public void addScaleAttribute(String name, int from, int to, int choice, int expectingChoice, Interest interest) {
+		ScaleAttribute temp = new ScaleAttribute(name).setFrom(from).setTo(to);
+		temp.setChoice(choice);
+		temp.setExpectingChoice(expectingChoice);
+		temp.setInterst(interest);
+		attributes.add(temp);
+	}
+	
 	private String getAttribute(AttributeType type, String name) {
 		for (Attribute attribute : attributes) {
 			if (attribute.getAttributeName().equals(name)) {
@@ -109,9 +158,5 @@ public class Person {
 			}
 		}
 		throw new IllegalArgumentException(String.format("The person does not have attribute named %s", name));
-	}
-
-	public void addAttribute(Attribute attribute) {
-		attributes.add(attribute);
 	}
 }

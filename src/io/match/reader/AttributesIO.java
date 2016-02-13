@@ -68,7 +68,7 @@ public class AttributesIO {
 						int numberOfChoices = Integer.parseInt(elements[3]);
 						OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
 						for (int i = 0; i < numberOfChoices; i++) {
-							temp.add(elements[4+i]);
+							temp.addPossibleChoice(elements[4+i]);
 						}
 						attributes.add(temp);
 						System.out.printf("Added multiple attribute %s\n", name);

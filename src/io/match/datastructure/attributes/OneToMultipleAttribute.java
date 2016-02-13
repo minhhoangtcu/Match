@@ -4,21 +4,21 @@ import java.util.HashSet;
 
 public class OneToMultipleAttribute extends Attribute implements Weightable<String>, Expectable<HashSet<String>>, Interestable {
 	
-	private HashSet<String> choices;
 	private String choice;
+	private HashSet<String> possibleChoices;
 	private HashSet<String> expectingChoices;
 	private Interest interest;
 	
 	public OneToMultipleAttribute(String name) {
 		super(name);
-		choices = new HashSet<>();
+		possibleChoices = new HashSet<>();
 		expectingChoices = new HashSet<>();
 		attributeType = AttributeType.WEIGHTED_ONE_TO_MULTIPLE;
 	}
 
-	public OneToMultipleAttribute add(String param) {
+	public OneToMultipleAttribute addPossibleChoice(String param) {
 		// TODO: write a case to control the input
-		choices.add(param);
+		possibleChoices.add(param);
 		return this;
 	}
 	

@@ -56,7 +56,7 @@ public class ScaleAttribute extends Attribute implements Weightable<Integer>, Ex
 		return interest;
 	}
 
-	public void setInterst(Interest interst) {
-		this.interest = interst;
+	public void setInterst(Interest interest) {
+		this.interest = interest;
 	}
 }

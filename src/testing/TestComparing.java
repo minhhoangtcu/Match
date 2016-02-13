@@ -1,3 +1,9 @@
+/**
+ * OLD TESTING CLASS
+ * 
+ * OUT DATED
+ * 
+ */
 package testing;
 
 import io.match.algorithm.Compare;
@@ -52,16 +58,8 @@ public class TestComparing {
 		interest2.setInterst(Interest.VERY_IMPORTANT);
 		
 		Person minh = new Person();
-		minh.addAttribute(name1);
-		minh.addAttribute(email1);
-		minh.addAttribute(major1);
-		minh.addAttribute(interest1);
 		
 		Person quang = new Person();
-		quang.addAttribute(name2);
-		quang.addAttribute(email2);
-		quang.addAttribute(major2);
-		quang.addAttribute(interest2);
 		
 		return Compare.getMatch(minh, quang);
 	}
