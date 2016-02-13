@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.Model;
+import helper.LayoutFetcher;
 import helper.LoadFile;
 import io.match.datastructure.Person;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class AddUserBarController {
 	 */
 	public void addUser() throws Exception {
 		// get center layout
-		BorderPane view = getCenterLayout(rootLayout);
+		BorderPane view = LayoutFetcher.getCenterLayout(rootLayout);
 		
 		// load and set center layout
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/AddUserLayout.fxml"));
@@ -55,22 +56,7 @@ public class AddUserBarController {
 	}
 	
 	
-	/**
-	 * Since the overall layout is a nested layout. This method try to trace through children
-	 * and try to fetch out the correct layout wanted to modify
-	 * 
-	 * The trace is as follow: Main Layout (Border Pane) --> Right Layout (BorderPane) 
-	 * --> Center layout (Anchor) --> The view wants to modify (Border Pane)
-	 * 
-	 * @param rootLayout
-	 * @return
-	 */
-	private BorderPane getCenterLayout(BorderPane rootLayout) {
-		BorderPane rightLayout = (BorderPane) rootLayout.getChildren().get(0);
-		AnchorPane centerLayout = (AnchorPane) rightLayout.getChildren().get(0);
-		BorderPane view = (BorderPane) centerLayout.getChildren().get(0);
-		return view;
-	}
+	
 	
 	
 }

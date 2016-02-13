@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.text.View;
 
 import application.Model;
+import helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +36,7 @@ public class MainButtonBarController {
 	 */
 	public void pushUpAddUserBar() {
 		// get center layout
-		BorderPane view = getBottomLayout(rootLayout);
+		BorderPane view = LayoutFetcher.getBottomLayout(rootLayout);
 		
 		if (addUserUp) {
 			// remove Top view
@@ -70,7 +71,7 @@ public class MainButtonBarController {
 	 */
 	public void pushUpDeleteUserBar() throws Exception{
 		// get center layout
-		BorderPane view = getBottomLayout(rootLayout);
+		BorderPane view = LayoutFetcher.getBottomLayout(rootLayout);
 		
 		if (deleteUserUp) {
 			// remove Top view
@@ -94,7 +95,7 @@ public class MainButtonBarController {
 	
 	public void loadModifyUser() throws Exception{
 		// get center layout
-		BorderPane view = getCenterLayout(rootLayout);
+		BorderPane view = LayoutFetcher.getCenterLayout(rootLayout);
 		
 		// load and set center layout
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/AddUserLayout.fxml"));
@@ -103,38 +104,8 @@ public class MainButtonBarController {
 		view.setCenter(layout);
 	}
 	
-	/**
-	 * Since the overall layout is a nested layout. This method try to trace through children
-	 * and try to fetch out the correct layout wanted to modify
-	 * 
-	 * The trace is as follow: Main Layout (Border Pane) --> Right Layout (BorderPane) 
-	 * --> Bottom layout (Anchor) --> The view wants to modify (Border Pane)
-	 * 
-	 * @param rootLayout
-	 * @return
-	 */
-	private BorderPane getBottomLayout(BorderPane rootLayout) {
-		BorderPane rightLayout = (BorderPane) rootLayout.getChildren().get(0);
-		AnchorPane bottomLayout = (AnchorPane) rightLayout.getChildren().get(1);
-		BorderPane view = (BorderPane) bottomLayout.getChildren().get(0);
-		return view;
-	}
 	
-	/**
-	 * Since the overall layout is a nested layout. This method try to trace through children
-	 * and try to fetch out the correct layout wanted to modify
-	 * 
-	 * The trace is as follow: Main Layout (Border Pane) --> Right Layout (BorderPane) 
-	 * --> Center layout (Anchor) --> The view wants to modify (Border Pane)
-	 * 
-	 * @param rootLayout
-	 * @return
-	 */
-	private BorderPane getCenterLayout(BorderPane rootLayout) {
-		BorderPane rightLayout = (BorderPane) rootLayout.getChildren().get(0);
-		AnchorPane centerLayout = (AnchorPane) rightLayout.getChildren().get(0);
-		BorderPane view = (BorderPane) centerLayout.getChildren().get(0);
-		return view;
-	}
+	
+	
 
 }
