@@ -51,11 +51,8 @@ public class LayoutFetcher {
 	
 	public static TableView getTableInLeftLayout(BorderPane rootLayout) {
 		AnchorPane leftLayout = (AnchorPane) rootLayout.getChildren().get(1);
-		System.out.println(leftLayout);
 		BorderPane borderPane = (BorderPane) leftLayout.getChildren().get(0);
-		System.out.println(borderPane);
 		TableView table = (TableView) borderPane.getCenter();
-		System.out.println(table);
 		return table;
 	}
 }
