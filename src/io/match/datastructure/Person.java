@@ -1,7 +1,6 @@
 package io.match.datastructure;
 
 import java.util.LinkedList;
-
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.AttributeType;
 import io.match.datastructure.attributes.GeneralAttribute;
@@ -15,9 +14,12 @@ public class Person {
 	private LinkedList<Attribute> attributes;
 	private PersonType type;
 	private int numMatchesAvaiable, numMatched;
+	private boolean isMatched;
+	private LinkedList<Person> matches;
 
 	public Person() {
 		attributes = new LinkedList<>();
+		matches = new LinkedList<>();
 	}
 
 	public Person toStudent() {
@@ -92,7 +94,6 @@ public class Person {
 		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
 	}
 
-	
 
 	/**
 	 * Add a general attribute to this person
@@ -158,5 +159,44 @@ public class Person {
 			}
 		}
 		throw new IllegalArgumentException(String.format("The person does not have attribute named %s", name));
+	}
+
+	public PersonType getType() {
+		return type;
+	}
+
+	public void setType(PersonType type) {
+		this.type = type;
+	}
+	public int getNumMatched() {
+		return numMatched;
+	}
+	public void setNumMatched(int numMatched) {
+		this.numMatched = numMatched;
+	}
+	public int getNumMatchesAvaiable() {
+		return numMatchesAvaiable;
+	}
+	public void setNumMatchesAvaiable(int numMatchesAvaiable) {
+		this.numMatchesAvaiable = numMatchesAvaiable;
+	}
+	public boolean isMatched() {
+		return isMatched;
+	}
+	public void setMatched(boolean isMatched) {
+		this.isMatched = isMatched;
+	}
+	public LinkedList<Person> getMatches() {
+		return matches;
+	}
+	public void addMatch(Person match) {
+		matches.add(match);
+	}
+	public void removeMatch(Person match) {
+		if (matches.isEmpty())
+			throw new IllegalArgumentException("No matches to remove");
+		if (!matches.remove(match)) {
+			throw new IllegalArgumentException("Cannout find the provided person to remove");
+		}
 	}
 }
