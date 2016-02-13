@@ -8,5 +8,9 @@ public class LeftController {
 	private void initialize() {
 		
 	}
+	
+	public void something() {
+		System.out.println("PRESSED");
+	}
 
 }

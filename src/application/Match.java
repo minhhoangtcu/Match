@@ -1,7 +1,5 @@
 package application;
 
-import java.io.IOException;
-
 import controller.MainController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
