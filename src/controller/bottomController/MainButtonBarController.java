@@ -1,5 +1,7 @@
 package controller.bottomController;
 
+import java.io.IOException;
+
 import javax.swing.text.View;
 
 import javafx.fxml.FXML;
@@ -27,7 +29,7 @@ public class MainButtonBarController {
 	 * 
 	 * @throws Exception
 	 */
-	public void pushUpAddUserBar() throws Exception{
+	public void pushUpAddUserBar() {
 		// get center layout
 		BorderPane view = getBottomLayout(rootLayout);
 		
@@ -43,8 +45,13 @@ public class MainButtonBarController {
 			// load and set center layout
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/AddUserButtonBar.fxml"));
 			loader.setController(new AddUserBarController(rootLayout));
-			Parent layout = loader.load();
-			view.setTop(layout);
+			try {
+				Parent layout = loader.load();
+				view.setTop(layout);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("In pushUpAddUserBar: class MainButtonBarController");
+			}
 			
 			// prepare for next time
 			addUserUp = true;

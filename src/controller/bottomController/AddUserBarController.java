@@ -1,5 +1,8 @@
 package controller.bottomController;
 
+import java.io.FileNotFoundException;
+
+import helper.LoadFile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
@@ -19,15 +22,25 @@ public class AddUserBarController {
 	 * 
 	 * @throws Exception
 	 */
-	public void loadAddUser() throws Exception {
+	public void addUser() throws Exception {
 		// get center layout
 		BorderPane view = getCenterLayout(rootLayout);
 		
 		// load and set center layout
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/AddUserLayout.fxml"));
-//		loader.setController(new AddUserController());
 		Parent layout = loader.load();
 		view.setCenter(layout);
+	}
+	
+	public void addAllUser() {
+		String URL = "";
+		try {
+			URL = LoadFile.getURL();
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		System.out.println(URL);
 	}
 	
 	

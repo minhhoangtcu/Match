@@ -12,9 +12,10 @@
          <children>
             <Button fx:id="btnAddAnUser" maxWidth="1.7976931348623157E308" 
             		mnemonicParsing="false" text="Add An User" HBox.hgrow="ALWAYS" 
-            		onAction="#loadAddUser"/>
+            		onAction="#addUser"/>
             <Button fx:id="btnAddMultipleUsers" maxWidth="1.7976931348623157E308" 
-            		mnemonicParsing="false" text="Add Multiple Users" HBox.hgrow="ALWAYS" />
+            		mnemonicParsing="false" text="Add Multiple Users" HBox.hgrow="ALWAYS" 
+            		onAction="#addAllUser"/>
          </children>
       </HBox>
    </children>
