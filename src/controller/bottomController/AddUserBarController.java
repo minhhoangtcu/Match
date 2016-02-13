@@ -9,6 +9,7 @@ import helper.LoadFile;
 import io.match.datastructure.Person;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -44,9 +45,7 @@ public class AddUserBarController {
 		try {
 			URL = LoadFile.getURL();
 			model.loadStudents(URL);
-			for (Person person: model.getStudents()) {
-				System.out.println(person.getGeneralAttribute("name"));
-			}
+			TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 			return;

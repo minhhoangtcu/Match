@@ -1,5 +1,6 @@
 package helper;
 
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -12,7 +13,7 @@ public class LayoutFetcher {
 	 * --> Center layout (Anchor) --> The view wants to modify (Border Pane)
 	 * 
 	 * @param rootLayout
-	 * @return
+	 * @return center layout
 	 */
 	public static BorderPane getCenterLayout(BorderPane rootLayout) {
 		BorderPane rightLayout = (BorderPane) rootLayout.getChildren().get(0);
@@ -29,12 +30,32 @@ public class LayoutFetcher {
 	 * --> Bottom layout (Anchor) --> The view wants to modify (Border Pane)
 	 * 
 	 * @param rootLayout
-	 * @return
+	 * @return bottom layout
 	 */
 	public static BorderPane getBottomLayout(BorderPane rootLayout) {
 		BorderPane rightLayout = (BorderPane) rootLayout.getChildren().get(0);
 		AnchorPane bottomLayout = (AnchorPane) rightLayout.getChildren().get(1);
 		BorderPane view = (BorderPane) bottomLayout.getChildren().get(0);
 		return view;
+	}
+	
+	/**
+	 * Since the overall layout is a nested layout. This method try to trace through children
+	 * and try to fetch out the correct layout wanted to modify
+	 * 
+	 * 
+	 * 
+	 * @param rootLayout
+	 * @return leftLayout
+	 */
+	
+	public static TableView getTableInLeftLayout(BorderPane rootLayout) {
+		AnchorPane leftLayout = (AnchorPane) rootLayout.getChildren().get(1);
+		System.out.println(leftLayout);
+		BorderPane borderPane = (BorderPane) leftLayout.getChildren().get(0);
+		System.out.println(borderPane);
+		TableView table = (TableView) borderPane.getCenter();
+		System.out.println(table);
+		return table;
 	}
 }
