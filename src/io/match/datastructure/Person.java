@@ -142,8 +142,9 @@ public class Person {
 	}
 	
 	private String getAttribute(AttributeType type, String name) {
+		name = name.toLowerCase();
 		for (Attribute attribute : attributes) {
-			if (attribute.getAttributeName().equals(name)) {
+			if (attribute.getAttributeName().toLowerCase().equals(name)) {
 				switch (type) {
 				case GENERAL:
 					return ((GeneralAttribute) attribute).getData();

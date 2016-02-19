@@ -19,8 +19,8 @@ public class Model {
 	private final static String ATTRIBUTE_DIR = "data/attributes.match";
 	private String studentsDir = "data/data.csv";
 	private String falcutyDir = "data/data.csv";
-	private String studentsFADir = "";
-	private String falcutyFADir = "";
+	private String studentsFADir = "data/studentsFA.csv";
+	private String falcutyFADir = "data/falcutiesFA.csv";
 	
 	// Init IO
 	private AttributesIO attributeIO;
