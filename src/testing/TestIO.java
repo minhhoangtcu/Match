@@ -3,6 +3,7 @@ package testing;
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.reader.AttributesIO;
+import io.match.reader.FixedAttributesIO;
 import io.match.reader.PeopleIO;
 import io.match.reader.PeopleStringReader;
 
@@ -16,9 +17,10 @@ public class TestIO {
 
 		String attrURL = "data/attributes.match";
 		String peopleURL = "data/data.csv";
+		String faURL = "";
 		
 		AttributesIO aIO = new AttributesIO(attrURL);
-		PeopleIO pIO = new PeopleIO(peopleURL, aIO.getAttributes());
+		PeopleIO pIO = new PeopleIO(peopleURL, new FixedAttributesIO(faURL).getAttributes(), aIO.getAttributes());
 		
 		testMatching(aIO, pIO);
 		testPrintingAllPeople(pIO);

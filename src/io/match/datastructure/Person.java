@@ -15,7 +15,7 @@ public class Person {
 	private PersonType type;
 	private int numMatchesAvaiable, numMatched;
 	private boolean isMatched;
-	private LinkedList<Person> matches;
+	private LinkedList<String> matches;
 
 	public Person() {
 		attributes = new LinkedList<>();
@@ -164,7 +164,6 @@ public class Person {
 	public PersonType getType() {
 		return type;
 	}
-
 	public void setType(PersonType type) {
 		this.type = type;
 	}
@@ -186,10 +185,13 @@ public class Person {
 	public void setMatched(boolean isMatched) {
 		this.isMatched = isMatched;
 	}
-	public LinkedList<Person> getMatches() {
+	public LinkedList<String> getMatches() {
 		return matches;
 	}
-	public void addMatch(Person match) {
+	public void setAllMatch(LinkedList<String> matches) {
+		matches = matches;
+	}
+	public void addMatch(String match) {
 		matches.add(match);
 	}
 	public void removeMatch(Person match) {

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.reader.AttributesIO;
+import io.match.reader.FixedAttributesIO;
 import io.match.reader.PeopleIO;
 
 public class Model {
@@ -18,6 +19,8 @@ public class Model {
 	private final static String ATTRIBUTE_DIR = "data/attributes.match";
 	private String studentsDir = "data/data.csv";
 	private String falcutyDir = "data/data.csv";
+	private String studentsFADir = "";
+	private String falcutyFADir = "";
 	
 	// Init IO
 	private AttributesIO attributeIO;
@@ -28,19 +31,21 @@ public class Model {
 		faculties = new LinkedList<>();
 		
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
-		loadStudents(studentsDir);
-		loadFalcuty(falcutyDir);
+		loadStudents(studentsDir, studentsFADir);
+		loadFalcuty(falcutyDir, falcutyFADir);
 	}
 	
-	public void loadStudents(String url) throws FileNotFoundException, IOException {
-		studentsDir = url;
-		studentsIO = new PeopleIO(studentsDir, attributeIO.getAttributes());
+	public void loadStudents(String studentsDir, String studentsFADir) throws FileNotFoundException, IOException {
+		this.studentsDir = studentsDir;
+		this.studentsFADir = studentsFADir;
+		studentsIO = new PeopleIO(studentsDir, new FixedAttributesIO(studentsFADir).getAttributes(), getAttributes());
 		students = studentsIO.getPeople();
 	}
 	
-	public void loadFalcuty(String url) throws FileNotFoundException, IOException {
-		falcutyDir = url;
-		falcutiesIO = new PeopleIO(falcutyDir, attributeIO.getAttributes());
+	public void loadFalcuty(String falcutyDir, String falcutyFADir) throws FileNotFoundException, IOException {
+		this.falcutyDir = falcutyDir;
+		this.falcutyFADir = falcutyFADir;
+		falcutiesIO = new PeopleIO(falcutyDir, new FixedAttributesIO(falcutyFADir).getAttributes(), getAttributes());
 		faculties = falcutiesIO.getPeople();
 	}
 	
