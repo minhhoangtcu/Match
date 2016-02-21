@@ -17,6 +17,8 @@ public class PeopleStringReader {
 	
 	public static void print(Person person) {
 		
+		
+		
 		for (Attribute attr : person.getAttributes()) {
 			
 			switch (attr.getAttributeType()) {
@@ -32,6 +34,13 @@ public class PeopleStringReader {
 				printDataScale(attr);
 				break;
 			}
+		}
+		
+		System.out.printf("isMatched: %s\n", person.isMatched() ? "Already matched" : "Not matched");
+		System.out.printf("Num matched: %d\tNum avaiable matches: %d\n", person.getNumMatched(), person.getNumMatchesAvaiable());
+		System.out.printf("Matches: ");
+		for (String name : person.getMatches()) {
+			System.out.printf("%s ", name);
 		}
 		System.out.println();
 		

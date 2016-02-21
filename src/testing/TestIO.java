@@ -17,7 +17,7 @@ public class TestIO {
 
 		String attrURL = "data/attributes.match";
 		String peopleURL = "data/data.csv";
-		String faURL = "";
+		String faURL = "data/studentsFA.csv";
 		
 		AttributesIO aIO = new AttributesIO(attrURL);
 		PeopleIO pIO = new PeopleIO(peopleURL, new FixedAttributesIO(faURL).getAttributes(), aIO.getAttributes());
