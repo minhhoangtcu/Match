@@ -17,7 +17,7 @@ public class PeopleStringReader {
 	
 	public static void print(Person person) {
 		
-		
+		System.out.printf("name: %s\n", person.getName());
 		
 		for (Attribute attr : person.getAttributes()) {
 			

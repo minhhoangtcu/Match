@@ -11,13 +11,15 @@ import io.match.datastructure.attributes.ScaleAttribute;
 public class Person {
 
 	// Name of the attribute and answer to this attribute
+	private String name;
 	private LinkedList<Attribute> attributes;
 	private PersonType type;
 	private int numMatchesAvaiable, numMatched;
 	private boolean isMatched;
 	private LinkedList<String> matches;
 
-	public Person() {
+	public Person(String name) {
+		this.name = name; 
 		attributes = new LinkedList<>();
 		matches = new LinkedList<>();
 	}
@@ -162,6 +164,12 @@ public class Person {
 		throw new IllegalArgumentException(String.format("The person does not have attribute named %s", name));
 	}
 
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public PersonType getType() {
 		return type;
 	}
@@ -190,12 +198,12 @@ public class Person {
 		return matches;
 	}
 	public void setAllMatch(LinkedList<String> matches) {
-		matches = matches;
+		this.matches = matches;
 	}
 	public void addMatch(String match) {
 		matches.add(match);
 	}
-	public void removeMatch(Person match) {
+	public void removeMatch(String match) {
 		if (matches.isEmpty())
 			throw new IllegalArgumentException("No matches to remove");
 		if (!matches.remove(match)) {

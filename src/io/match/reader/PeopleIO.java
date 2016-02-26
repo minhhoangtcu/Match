@@ -1,11 +1,14 @@
 package io.match.reader;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.ScaleAttribute;
@@ -65,10 +68,12 @@ public class PeopleIO {
 			while ((line = bf.readLine()) != null) {
 
 				String[] elements = line.split(",");
-				Person temp = new Person();
-				people.add(temp);
-
 				int index = 0;
+				
+				String personName = IOUtil.getData(elements[index++]); // Name must always be the first element, because it will act as an identifier.
+				Person temp = new Person(personName);
+				people.add(temp);
+				
 				for (Attribute attribute : attributes) {
 					String name = attribute.getAttributeName();
 					String data = IOUtil.getData(elements[index++]);
@@ -104,7 +109,7 @@ public class PeopleIO {
 					}
 				}
 
-				FixedAttribute tempFA = fixedAttributes.get(temp.getGeneralAttribute("name"));
+				FixedAttribute tempFA = fixedAttributes.get(personName);
 				temp.setMatched(tempFA.isMatched());
 				temp.setNumMatched(tempFA.getNumMatched());
 				temp.setNumMatchesAvaiable(tempFA.getNumMatchesAvaiable());
@@ -122,7 +127,14 @@ public class PeopleIO {
 
 	}
 
-	public LinkedList<Person> getPeople() {
+	public void addPerson(Person person) throws IOException {
+		
+		//System.out.printf("Adding a new person\n");
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople));
+		
+	}
+	
+ 	public LinkedList<Person> getPeople() {
 		return people;
 	}
 }

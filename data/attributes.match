@@ -1,5 +1,3 @@
-timestamp,ignore
-name,general,string
 email,general,string
 birthday,general,string
 nationality,general,string

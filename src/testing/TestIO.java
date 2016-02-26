@@ -36,8 +36,8 @@ public class TestIO {
 				if (iPerson == jPerson)
 					continue;
 
-				String nameI = iPerson.getGeneralAttribute("name");
-				String nameJ = jPerson.getGeneralAttribute("name");
+				String nameI = iPerson.getName();
+				String nameJ = jPerson.getName();
 
 				double match = Compare.getMatch(iPerson, jPerson);
 
