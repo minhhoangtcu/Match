@@ -1,5 +1,7 @@
 package testing;
 
+import java.io.IOException;
+
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.reader.AttributesIO;
@@ -24,6 +26,8 @@ public class TestIO {
 		
 		testMatching(aIO, pIO);
 		testPrintingAllPeople(pIO);
+		
+		testAdding(pIO);
 		
 	}
 	
@@ -60,4 +64,14 @@ public class TestIO {
 		System.out.printf(">> PRINTING ALL TESTING ENDED\n\n");
 	}
 	
+	public void testAdding(PeopleIO pIO) throws IOException {
+		System.out.printf(">> ADDING PEOPLE TESTING\n");
+		
+		for (int i = 0; i < 5; i++) {
+			Person random = pIO.getPeople().get((int) (Math.random()*pIO.getPeople().size()));
+			pIO.addPerson(random);
+		}
+		
+		System.out.printf(">> ADDING PEOPLE TESTING ENDED\n\n");
+	}
 }

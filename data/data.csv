@@ -1,8 +1,15 @@
 "Name","Email","Birthday","Nationality","Classification","Phone Number","Major","What is your gender?","Which gender are you expecting your mentor to be?","This question importance to you","What department are you in?","What department(s) are you expecting your mentor to be in?","This question importance to you","How much are you interested in the program?","Which level of interest are you expecting your mentor to be?","This question important to you?"
 "David","David47285@yahoo.com","1994-02-18","Australian","Sophomore","739583828","Finance","Male","Male","Somewhat important","Business","No","Not important","4","2","Very important"
-"Nancy","Nancy3885@gmail.com","1996-10-24","Chinese","Freshman","8395828493","Engineer","Female","Female","Somewhat important","Science & Engineering","Yes","Somewhat important","4","4","Somewhat important"
 "Joe Smith","Sjoe495994@yahoo.com","1995-06-21","German","Freshman","4858394839","Pre-med","Male","Male","Not important","Nursing & Health Sciences","Yes","Very important","5","5","Not important"
 "Brandon ","Brah3059484@gmail.com","1995-07-24","Mexican","Freshman","729482820","Business","Male","Male","Very important","Business","No","Somewhat important","3","2","Somewhat important"
 "Mark Gray","Mgray305@yahoo.com","1997-06-21","French","Sophomore","3958383049","Computer Science","Male","No","Very important","Science & Engineering","Yes","Somewhat important","3","4","Somewhat important"
 "Minh","minh@test.com","1996-03-06","Vietnamese","Freshman","8888888888","Computer Science","Male","Female","Very important","Science & Engineering","Business;Communication;Fine Arts;Science & Engineering","Very important","3","4","Somewhat important"
 "Quang Map","quang@test","0212-02-11","Chinese","Junior","12341324","CITE","Male","Male","Somewhat important","Liberal Arts","Liberal Arts;Nursing & Health Science;Science & Engineering","Very important","3","4","Very important"
+
+"Nancy","Nancy3885@gmail.com","1996-10-24","Chinese","Freshman","8395828493","Engineer","Female","Female","Somewhat important","Science & Engineering","Yes","Somewhat important","4","4","Somewhat important"
+Nancy,Nancy3885@gmail.com,1996-10-24,Chinese,Freshman,8395828493,Engineer,Female,Science & Engineering,,
+
+Joe Smith,Sjoe495994@yahoo.com,1995-06-21,German,Freshman,4858394839,Pre-med,Male,Nursing & Health Sciences,,
+Nancy,Nancy3885@gmail.com,1996-10-24,Chinese,Freshman,8395828493,Engineer,Female,Science & Engineering,,
+David,David47285@yahoo.com,1994-02-18,Australian,Sophomore,739583828,Finance,Male,Business,,
+David,David47285@yahoo.com,1994-02-18,Australian,Sophomore,739583828,Finance,Male,Business,,

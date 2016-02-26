@@ -129,9 +129,32 @@ public class PeopleIO {
 
 	public void addPerson(Person person) throws IOException {
 		
-		//System.out.printf("Adding a new person\n");
-		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople));
+		System.out.printf("Adding: %s\n", person.getName());
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
 		
+		bf.write(person.getName() + ",");
+		for (Attribute attribute : person.getAttributes()) {
+			
+			switch (attribute.getAttributeType()) {
+			case GENERAL:
+				bf.write(PeopleStringReader.getDataGeneral(attribute));
+				break;
+			case WEIGHTED_ONE_TO_MULTIPLE:
+				bf.write(PeopleStringReader.getDataOneToMultiple(attribute));
+				break;
+			case WEIGHTED_SCALE:
+				bf.write(PeopleStringReader.getDataScale(attribute));
+				break;
+			case IGNORE:
+				break;
+			}
+			
+			bf.write(",");
+			
+		}
+		bf.write('\n');
+		
+		bf.close();
 	}
 	
  	public LinkedList<Person> getPeople() {
