@@ -13,29 +13,17 @@ public class Person {
 	// Name of the attribute and answer to this attribute
 	private String name;
 	private LinkedList<Attribute> attributes;
-	private PersonType type;
 	private int numMatchesAvaiable, numMatched;
 	private boolean isMatched;
 	private LinkedList<String> matches;
 
 	public Person(String name) {
 		this.name = name; 
-		attributes = new LinkedList<>();
-		matches = new LinkedList<>();
-	}
-
-	public Person toStudent() {
-		type = PersonType.STUDENT;
 		numMatchesAvaiable = 1;
 		numMatched = 0;
-		return this;
-	}
-
-	public Person toFalcuty(int max) {
-		type = PersonType.FACULTY;
-		numMatchesAvaiable = max;
-		numMatched = 0;
-		return this;
+		attributes = new LinkedList<>();
+		isMatched = false;
+		matches = new LinkedList<>();
 	}
 
 	/**
@@ -167,12 +155,6 @@ public class Person {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public PersonType getType() {
-		return type;
-	}
-	public void setType(PersonType type) {
-		this.type = type;
 	}
 	public int getNumMatched() {
 		return numMatched;

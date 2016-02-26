@@ -139,7 +139,7 @@ public class PeopleIO {
 
 	public void addPerson(Person person) throws IOException {
 
-		System.out.printf("Adding: %s\n", person.getName());
+		System.out.printf("Adding to data: %s\n", person.getName());
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
 
 		bf.write(person.getName() + ",");

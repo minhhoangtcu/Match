@@ -1,19 +1,23 @@
 package io.match.reader;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import io.match.datastructure.Person;
+
 public class FixedAttributesIO {
 
-	private String dir;
+	private String dirAttr;
 	private HashMap<String, FixedAttribute> attributes;
 
 	public FixedAttributesIO(String dir) throws FileNotFoundException, IOException {
-		this.dir = dir;
+		this.dirAttr = dir;
 		attributes = new HashMap<>();
 		initAttribute();
 	}
@@ -21,7 +25,7 @@ public class FixedAttributesIO {
 	private void initAttribute() throws FileNotFoundException, IOException {
 		
 		System.out.println("Init list of FIXED attributes");
-		BufferedReader bf = new BufferedReader(new FileReader(dir));
+		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
 		
 		String line = "undefined";
 		try {
@@ -32,29 +36,33 @@ public class FixedAttributesIO {
 				
 				String name = IOUtil.getData(elements[0]);
 				boolean isMatch = IOUtil.getData(elements[1]).toLowerCase().equals("true") ? true : false;
-				
-				if (elements.length == 5) {
-					int numMatched = Integer.parseInt(IOUtil.getData(elements[3]));
-					int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[4]));
-					temp = new FixedAttribute(isMatch, numMatchesAvaiable, numMatched);
+				int numMatched = Integer.parseInt(IOUtil.getData(elements[3]));
+				int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[4]));
+				temp = new FixedAttribute(isMatch, numMatchesAvaiable, numMatched);
 					
-					for (String match: IOUtil.getData(elements[2]).split(";")) {
-						temp.addMatch(match);
-					}
-					
-				} else {
-					temp = new FixedAttribute(isMatch, 1, isMatch ? 1 : 0);
+				for (String match: IOUtil.getData(elements[2]).split(";")) {
+					temp.addMatch(match);
 				}
-				
+					
 				attributes.put(name, temp);
 			}
 			
-			System.out.printf("End of file %s\n\n", dir);
+			System.out.printf("End of file %s\n\n", dirAttr);
 		} catch (Exception e) {
-			throw new IOException(String.format("FIXED Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dir, line, e.getMessage()));
+			e.printStackTrace();
+			throw new IOException(String.format("FIXED Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
 			bf.close();
 		}
+	}
+	
+	public void addAttribute(Person person) throws IOException {
+		
+		System.out.printf("Adding to FA: %s\n", person.getName());
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
+		
+		
+		
 	}
 
 	public HashMap<String, FixedAttribute> getAttributes() {
