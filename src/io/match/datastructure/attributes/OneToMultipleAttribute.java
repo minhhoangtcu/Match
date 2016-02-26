@@ -53,4 +53,8 @@ public class OneToMultipleAttribute extends Attribute implements Weightable<Stri
 			addExpectingChoice(expectation);
 		}
 	}
+
+	public HashSet<String> getPossibleChoices() {
+		return possibleChoices;
+	}
 }

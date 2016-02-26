@@ -1,9 +1,9 @@
-email,general,string
-birthday,general,string
-nationality,general,string
-classification,general,string
-phoneNumber,general,string
-major,general,string
+email,general
+birthday,general
+nationality,general
+classification,general
+phoneNumber,general
+major,general
 gender,weighted,multiple,2,Male,Female
 department,weighted,multiple,8,Business,Communication,Education,Fine Arts,Honors College,Liberal Arts,Nursing & Health Sciences,Science & Engineering
 interest,weighted,scale,1,5

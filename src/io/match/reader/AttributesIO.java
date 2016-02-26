@@ -1,8 +1,10 @@
 package io.match.reader;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -13,7 +15,7 @@ import io.match.datastructure.attributes.ScaleAttribute;
 
 public class AttributesIO {
 
-	private String dir;
+	private String dirAttr;
 	private LinkedList<Attribute> attributes;
 	
 	private static final String IGNORE = "ignore";
@@ -23,7 +25,7 @@ public class AttributesIO {
 	private static final String SCALE = "scale";
 
 	public AttributesIO(String dir) throws FileNotFoundException, IOException {
-		this.dir = dir;
+		this.dirAttr = dir;
 		attributes = new LinkedList<>();
 		initAttribute();
 	}
@@ -39,7 +41,7 @@ public class AttributesIO {
 	private void initAttribute() throws FileNotFoundException, IOException {
 		
 		System.out.println("Init list of attributes");
-		BufferedReader bf = new BufferedReader(new FileReader(dir));
+		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
 
 		String line = "undefined";
 		try {
@@ -50,9 +52,9 @@ public class AttributesIO {
 				attributes.add(getAttributeOfType(name, elements, 1));
 			}
 			
-			System.out.printf("End of file %s\n\n", dir);
+			System.out.printf("End of file %s\n\n", dirAttr);
 		} catch (Exception e) {
-			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dir, line, e.getMessage()));
+			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
 			bf.close();
 		}
@@ -113,12 +115,46 @@ public class AttributesIO {
 	 * 
 	 * @param attr
 	 *            the attribute to be added
+	 * @throws IOException 
 	 */
-	public void addAttribute(Attribute attr) {
+	public void addAttribute(Attribute attr) throws IOException {
 
-		// TODO: Finish the method, append a new line with provided attribute in
-		// the correct format in the file with the provided dir
-
+		System.out.printf("Adding to attribute list: %s\n", attr.getAttributeName());
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
+		
+		bf.write(attr.getAttributeName());
+		bf.write(",");
+		if (attr.isIgnored()) {
+			bf.write(IGNORE);
+			bf.write(",");
+		}
+		
+		switch (attr.getAttributeType()) {
+		case GENERAL:
+			bf.write(GENERAL);
+			break;
+			
+		case WEIGHTED_ONE_TO_MULTIPLE:
+			OneToMultipleAttribute tempM = (OneToMultipleAttribute) attr;
+			bf.write(String.format("%s,%s,", WEIGHTED, MULTIPLE));
+			
+			int numPossibleChoices = tempM.getPossibleChoices().size();
+			String[] choices = tempM.getPossibleChoices().toArray(new String[numPossibleChoices]);
+			for (int i = 0; i < numPossibleChoices; i++) {
+				bf.write(choices[i]);
+				if (i != numPossibleChoices-1)
+					bf.write(",");
+			}
+			break;
+			
+		case WEIGHTED_SCALE:
+			ScaleAttribute tempS = (ScaleAttribute) attr;
+			bf.write(String.format("%s,%s,%d,%d", WEIGHTED, SCALE, tempS.getFrom(), tempS.getTo()));
+			break;
+		}
+		
+		bf.write('\n');
+		bf.close();
 	}
 
 	public LinkedList<Attribute> getAttributes() throws IOException {
