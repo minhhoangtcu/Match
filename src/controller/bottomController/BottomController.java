@@ -1,5 +1,7 @@
 package controller.bottomController;
 
+import java.io.IOException;
+
 import application.Model;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,11 +29,15 @@ public class BottomController {
 		} catch (Exception e) {}
 	}
 	
-	private void setCenterLayout() throws Exception {
+	private void setCenterLayout() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/MainButtonBar.fxml"));
 		loader.setController(new MainButtonBarController(rootLayout, model));
-		Parent layout = loader.load();
-		bottomLayout.setCenter(layout);
+		try {
+			Parent layout = loader.load();
+			bottomLayout.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML file in setCenterLayout: BottomController");
+		}
 	}
 
 }

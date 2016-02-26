@@ -1,5 +1,7 @@
 package controller.centerController;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,10 +19,14 @@ public class CenterController {
 		} catch (Exception e) {}
 	}
 	
-	private void setCenterLayout() throws Exception {
+	private void setCenterLayout() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/IntroductionView.fxml"));
-		Parent layout = loader.load();
-		centerLayout.setCenter(layout);
+		try {
+			Parent layout = loader.load();
+			centerLayout.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML in setCenterLayout: CenterController");
+		}
 	}
 	
 	

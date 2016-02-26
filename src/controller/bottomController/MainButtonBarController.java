@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.swing.text.View;
 
 import application.Model;
+import controller.centerController.LoadViewController;
 import helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,8 +29,17 @@ public class MainButtonBarController {
 	}
 	
 	
-	public void loadLoadView() throws Exception{
-		System.out.println("from loadLoadView");
+	public void loadLoadView(){
+		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/LoadView.fxml"));
+		loader.setController(new LoadViewController(rootLayout, model));
+		try {
+			Parent layout = loader.load();
+			center.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
+		}
 	}
 	
 
@@ -40,7 +50,7 @@ public class MainButtonBarController {
 	 * @throws Exception
 	 */
 	public void loadMatchView() throws Exception{
-		System.out.println("from loadMatchView");
+		System.out.println("from loadMatchView: MainButtonBarController");
 	}
 
 	
@@ -79,6 +89,9 @@ public class MainButtonBarController {
 		}
 	}
 	
+	public void export() {
+		System.out.println("From export: MainButtonBarController");
+	}
 	
 	
 	

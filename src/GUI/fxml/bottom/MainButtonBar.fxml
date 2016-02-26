@@ -23,7 +23,8 @@
 		            onAction="#pushUpManagebar" />
             <Button fx:id="btnExport" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Export" HBox.hgrow="ALWAYS" />
+		            text="Export" HBox.hgrow="ALWAYS" 
+		            onAction="#export" />
          </children>
       </HBox>
    </children>
