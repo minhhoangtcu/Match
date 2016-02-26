@@ -16,6 +16,8 @@ import io.match.datastructure.attributes.ScaleAttribute;
 public class PeopleIO {
 
 	private String dirPeople;
+	private String dirAttr;
+	FixedAttributesIO aIO;
 	private HashMap<String, FixedAttribute> fixedAttributes;
 	private LinkedList<Person> people;
 	private LinkedList<Attribute> attributes;
@@ -39,10 +41,14 @@ public class PeopleIO {
 	 * @throws IOException
 	 *             cannot read from the file, or file is corrupted
 	 */
-	public PeopleIO(String dirPeople, HashMap<String, FixedAttribute> fixedAttributes, LinkedList<Attribute> attributes)
-			throws FileNotFoundException, IOException {
+	public PeopleIO(String dirPeople,
+					String dirAttr,
+					LinkedList<Attribute> attributes)
+							throws FileNotFoundException, IOException {
+		aIO = new FixedAttributesIO(dirAttr);
 		this.dirPeople = dirPeople;
-		this.fixedAttributes = fixedAttributes;
+		this.dirAttr = dirAttr;
+		this.fixedAttributes = aIO.getAttributes();
 		this.attributes = attributes;
 		people = new LinkedList<>();
 		initPeople();
@@ -159,12 +165,11 @@ public class PeopleIO {
 				int numOfExpectations = PeopleStringReader.getExpectingOneToMultiple(attributes[i]).size();
 				String[] expecting = PeopleStringReader.getExpectingOneToMultiple(attributes[i])
 						.toArray(new String[numOfExpectations]);
-				for (int j = 0; j < expecting.length - 1; j++) {
+				for (int j = 0; j < numOfExpectations; j++) {
 					bf.write(expecting[j]);
-					bf.write(";");
+					if (j != numOfExpectations - 1)
+						bf.write(";");
 				}
-				bf.write(expecting[expecting.length - 1]);
-				bf.write(",");
 
 				bf.write(PeopleStringReader.getImportanceOneToMultiple(attributes[i]));
 				break;
@@ -185,6 +190,9 @@ public class PeopleIO {
 
 		}
 		bf.write('\n');
+		
+		// Also add the fixed attribute to the file accordingly
+		aIO.addAttribute(person);
 
 		bf.close();
 

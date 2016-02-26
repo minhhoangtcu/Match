@@ -61,8 +61,29 @@ public class FixedAttributesIO {
 		System.out.printf("Adding to FA: %s\n", person.getName());
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
 		
+		bf.write(person.getName());
+		bf.write(",");
 		
+		bf.write(person.isMatched() ? "TRUE" : "FALSE");
+		bf.write(",");
 		
+		int numOfMatches = person.getMatches().size();
+		String[] matches = person.getMatches().toArray(new String[numOfMatches]);
+		for (int i = 0; i < numOfMatches; i++) {
+			bf.write(matches[i]);
+			if (i != numOfMatches - 1)
+				bf.write(";");
+		}
+		bf.write(",");
+		
+		bf.write(person.getNumMatched() + "");
+		bf.write(",");
+		
+		bf.write(person.getNumMatchesAvaiable() + "");
+		
+		bf.write('\n');
+		
+		bf.close();
 	}
 
 	public HashMap<String, FixedAttribute> getAttributes() {

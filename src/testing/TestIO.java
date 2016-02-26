@@ -1,11 +1,9 @@
 package testing;
 
 import java.io.IOException;
-
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.reader.AttributesIO;
-import io.match.reader.FixedAttributesIO;
 import io.match.reader.PeopleIO;
 import io.match.reader.PeopleStringReader;
 
@@ -22,7 +20,7 @@ public class TestIO {
 		String faURL = "data/studentsFA.csv";
 		
 		AttributesIO aIO = new AttributesIO(attrURL);
-		PeopleIO pIO = new PeopleIO(peopleURL, new FixedAttributesIO(faURL).getAttributes(), aIO.getAttributes());
+		PeopleIO pIO = new PeopleIO(peopleURL, faURL, aIO.getAttributes());
 		
 		testMatching(aIO, pIO);
 		testPrintingAllPeople(pIO);
