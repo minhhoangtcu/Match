@@ -38,14 +38,14 @@ public class Model {
 	public void loadStudents(String studentsDir, String studentsFADir) throws FileNotFoundException, IOException {
 		this.studentsDir = studentsDir;
 		this.studentsFADir = studentsFADir;
-		studentsIO = new PeopleIO(studentsDir, new FixedAttributesIO(studentsFADir).getAttributes(), getAttributes());
+		studentsIO = new PeopleIO(studentsDir, studentsFADir, getAttributes());
 		students = studentsIO.getPeople();
 	}
 	
 	public void loadFalcuty(String falcutyDir, String falcutyFADir) throws FileNotFoundException, IOException {
 		this.falcutyDir = falcutyDir;
 		this.falcutyFADir = falcutyFADir;
-		falcutiesIO = new PeopleIO(falcutyDir, new FixedAttributesIO(falcutyFADir).getAttributes(), getAttributes());
+		falcutiesIO = new PeopleIO(falcutyDir, falcutyFADir, getAttributes());
 		faculties = falcutiesIO.getPeople();
 	}
 	

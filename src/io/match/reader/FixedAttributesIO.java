@@ -49,7 +49,6 @@ public class FixedAttributesIO {
 			
 			System.out.printf("End of file %s\n\n", dirAttr);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new IOException(String.format("FIXED Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
 			bf.close();
