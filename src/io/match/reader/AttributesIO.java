@@ -27,7 +27,6 @@ public class AttributesIO {
 	public AttributesIO(String dir) throws FileNotFoundException, IOException {
 		this.dirAttr = dir;
 		attributes = new LinkedList<>();
-		initAttribute();
 	}
 
 	/**
@@ -38,7 +37,7 @@ public class AttributesIO {
 	 * 
 	 * @throws IOException
 	 */
-	private void initAttribute() throws FileNotFoundException, IOException {
+	public void readAttributes() throws FileNotFoundException, IOException {
 		
 		System.out.println("Init list of attributes");
 		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));

@@ -20,7 +20,9 @@ public class TestIO {
 		String faURL = "data/studentsFA.csv";
 		
 		AttributesIO aIO = new AttributesIO(attrURL);
+		aIO.readAttributes();
 		PeopleIO pIO = new PeopleIO(peopleURL, faURL, aIO.getAttributes());
+		pIO.readPeople();
 		
 		testMatching(aIO, pIO);
 		testPrintingAllPeople(pIO);

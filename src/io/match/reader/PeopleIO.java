@@ -17,7 +17,7 @@ public class PeopleIO {
 
 	private String dirPeople;
 	private String dirAttr;
-	FixedAttributesIO aIO;
+	private FixedAttributesIO aIO;
 	private HashMap<String, FixedAttribute> fixedAttributes;
 	private LinkedList<Person> people;
 	private LinkedList<Attribute> attributes;
@@ -41,17 +41,12 @@ public class PeopleIO {
 	 * @throws IOException
 	 *             cannot read from the file, or file is corrupted
 	 */
-	public PeopleIO(String dirPeople,
-					String dirAttr,
-					LinkedList<Attribute> attributes)
-							throws FileNotFoundException, IOException {
-		aIO = new FixedAttributesIO(dirAttr);
+	public PeopleIO(String dirPeople, String dirAttr, LinkedList<Attribute> attributes) {
 		this.dirPeople = dirPeople;
 		this.dirAttr = dirAttr;
 		this.fixedAttributes = aIO.getAttributes();
 		this.attributes = attributes;
 		people = new LinkedList<>();
-		initPeople();
 	}
 
 	/**
@@ -63,8 +58,11 @@ public class PeopleIO {
 	 * @throws FileNotFoundException,
 	 *             IOException
 	 */
-	private void initPeople() throws FileNotFoundException, IOException {
+	public void readPeople() throws FileNotFoundException, IOException {
 
+		aIO = new FixedAttributesIO(dirAttr);
+		aIO.readAttributes();
+		
 		System.out.printf("Init list of people\n");
 		BufferedReader bf = new BufferedReader(new FileReader(dirPeople));
 
@@ -76,19 +74,9 @@ public class PeopleIO {
 				String[] elements = line.split(",");
 				int index = 0;
 
-				String personName = IOUtil.getData(elements[index++]); // Name
-																		// must
-																		// always
-																		// be
-																		// the
-																		// first
-																		// element,
-																		// because
-																		// it
-																		// will
-																		// act
-																		// as an
-																		// identifier.
+				// Name must always be the first element
+				String personName = IOUtil.getData(elements[index++]);
+
 				Person temp = new Person(personName);
 				people.add(temp);
 
@@ -195,12 +183,24 @@ public class PeopleIO {
 
 		}
 		bf.write('\n');
-		
+
 		// Also add the fixed attribute to the file accordingly
 		aIO.addAttribute(person);
 
 		bf.close();
 
+	}
+	
+	/**
+	 * Wipe all contents from both people and fixed attribute files.
+	 * 
+	 * @throws IOException file was not found
+	 */
+	public void removeAllOnFile() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(dirPeople));
+		bw.close();
+		bw = new BufferedWriter(new FileWriter(dirAttr));
+		bw.close();
 	}
 
 	public LinkedList<Person> getPeople() {

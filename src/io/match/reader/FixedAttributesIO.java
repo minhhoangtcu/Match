@@ -16,13 +16,12 @@ public class FixedAttributesIO {
 	private String dirAttr;
 	private HashMap<String, FixedAttribute> attributes;
 
-	public FixedAttributesIO(String dir) throws FileNotFoundException, IOException {
+	public FixedAttributesIO(String dir) {
 		this.dirAttr = dir;
 		attributes = new HashMap<>();
-		initAttribute();
 	}
 	
-	private void initAttribute() throws FileNotFoundException, IOException {
+	public void readAttributes() throws FileNotFoundException, IOException {
 		
 		System.out.println("Init list of FIXED attributes");
 		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
