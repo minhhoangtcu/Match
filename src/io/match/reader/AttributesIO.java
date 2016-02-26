@@ -46,49 +46,8 @@ public class AttributesIO {
 			while ((line = bf.readLine()) != null) {
 				String[] elements = line.split(",");
 				String name = elements[0];
-				
-				switch (elements[1]) {
-				
-				case IGNORE:
-					attributes.add(new Attribute(name).setIgnored(true));
-					System.out.printf("Added ignored attribute %s\n", name);
-					break;
-					
-				case GENERAL:
-					// String dataType = elements[2];
-					// TODO: implement a way to handle more data types
-					attributes.add(new GeneralAttribute(name));
-					System.out.printf("Added general attribute %s\n", name);
-					break;
-					
-				case WEIGHTED:
-					switch (elements[2]) {
-					
-					case MULTIPLE:
-						int numberOfChoices = Integer.parseInt(elements[3]);
-						OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
-						for (int i = 0; i < numberOfChoices; i++) {
-							temp.addPossibleChoice(elements[4+i]);
-						}
-						attributes.add(temp);
-						System.out.printf("Added multiple attribute %s\n", name);
-						break;
-						
-					case SCALE:
-						int from = Integer.parseInt(elements[3]);
-						int to = Integer.parseInt(elements[4]);
-						attributes.add(new ScaleAttribute(name).setFrom(from).setTo(to));
-						System.out.printf("Added scale attribute %s\n", name);
-						break;
-						
-					default:
-						throw new Exception("Case not accepted, must be scale or multiple");
-					}
-					break;
-					
-				default:
-					throw new Exception("Case not accepted, must be ignore, general, or weighted");
-				}
+
+				attributes.add(getAttributeOfType(name, elements, 1));
 			}
 			
 			System.out.printf("End of file %s\n\n", dir);
@@ -98,6 +57,52 @@ public class AttributesIO {
 			bf.close();
 		}
 		
+	}
+	
+	/**
+	 * Add an attribute to the linked list in this class
+	 * 
+	 * @param name the name of the attribute
+	 * @param elements all elements read from the line
+	 * @param typeIndex the index where the type of the attribute is in the array 
+	 * @throws Exception 
+	 */
+	private Attribute getAttributeOfType(String name, String[] elements, int typeIndex) {
+		
+		switch (elements[typeIndex++]) {
+		
+		case IGNORE:
+			return getAttributeOfType(name, elements, typeIndex).setIgnored(true);
+			
+		case GENERAL:
+			System.out.printf("Added general attribute %s\n", name);
+			return new GeneralAttribute(name);
+			
+		case WEIGHTED:
+			switch (elements[typeIndex++]) {
+			
+			case MULTIPLE:
+				int numberOfChoices = Integer.parseInt(elements[typeIndex++]);
+				OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
+				for (int i = 0; i < numberOfChoices; i++) {
+					temp.addPossibleChoice(elements[typeIndex+i]);
+				}
+				System.out.printf("Added multiple attribute %s\n", name);
+				return temp;
+				
+			case SCALE:
+				int from = Integer.parseInt(elements[typeIndex++]);
+				int to = Integer.parseInt(elements[typeIndex]);
+				System.out.printf("Added scale attribute %s\n", name);
+				return new ScaleAttribute(name).setFrom(from).setTo(to); 
+				
+			default:
+				throw new IllegalArgumentException("Case not accepted, must be scale or multiple");
+			}
+			
+		default:
+			throw new IllegalArgumentException("Case not accepted, must be ignore, general, or weighted");
+		}
 	}
 
 	/**
