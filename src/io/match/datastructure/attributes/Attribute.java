@@ -25,7 +25,6 @@ public class Attribute {
 
 	public Attribute setIgnored(boolean isIgnored) {
 		this.isIgnored = isIgnored;
-		this.attributeType = AttributeType.IGNORE;
 		return this;
 	}
 }

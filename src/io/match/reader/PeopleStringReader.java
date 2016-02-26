@@ -30,8 +30,6 @@ public class PeopleStringReader {
 			case GENERAL:
 				printDataGeneral(attr);
 				break;
-			case IGNORE:
-				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
 				printDataOneToMultiple(attr);
 				break;
@@ -65,11 +63,19 @@ public class PeopleStringReader {
 	}
 	
 	public static String getImportanceOneToMultiple(Attribute input) {
-		return ((OneToMultipleAttribute) input).getInterst();
+		return IOUtil.getString(((OneToMultipleAttribute) input).getInterst());
 	}
 
 	public static int getDataScale(Attribute input) {
 		return ((ScaleAttribute) input).getChoice();
+	}
+	
+	public static int getExpectingScale(Attribute input) {
+		return ((ScaleAttribute) input).getExpectingChoice();
+	}
+	
+	public static String getImportanceScale(Attribute input) {
+		return IOUtil.getString(((ScaleAttribute) input).getInterst());
 	}
 
 	private static void printDataGeneral(Attribute input) {

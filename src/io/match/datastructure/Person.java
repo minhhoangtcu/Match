@@ -150,8 +150,6 @@ public class Person {
 				switch (type) {
 				case GENERAL:
 					return ((GeneralAttribute) attribute).getData();
-				case IGNORE:
-					break;
 				case WEIGHTED_ONE_TO_MULTIPLE:
 					return ((OneToMultipleAttribute) attribute).getChoice();
 				case WEIGHTED_SCALE:

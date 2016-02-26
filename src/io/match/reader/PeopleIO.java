@@ -69,12 +69,25 @@ public class PeopleIO {
 
 				String[] elements = line.split(",");
 				int index = 0;
-				
-				String personName = IOUtil.getData(elements[index++]); // Name must always be the first element, because it will act as an identifier.
+
+				String personName = IOUtil.getData(elements[index++]); // Name
+																		// must
+																		// always
+																		// be
+																		// the
+																		// first
+																		// element,
+																		// because
+																		// it
+																		// will
+																		// act
+																		// as an
+																		// identifier.
 				Person temp = new Person(personName);
 				people.add(temp);
-				
+
 				for (Attribute attribute : attributes) {
+
 					String name = attribute.getAttributeName();
 					String data = IOUtil.getData(elements[index++]);
 
@@ -101,9 +114,6 @@ public class PeopleIO {
 								IOUtil.readInterest(IOUtil.getData(elements[index++])));
 						break;
 
-					case IGNORE:
-						break;
-
 					default:
 						throw new Exception("Attribute is not initialized");
 					}
@@ -128,36 +138,59 @@ public class PeopleIO {
 	}
 
 	public void addPerson(Person person) throws IOException {
-		
+
 		System.out.printf("Adding: %s\n", person.getName());
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
-		
+
 		bf.write(person.getName() + ",");
-		for (Attribute attribute : person.getAttributes()) {
-			
-			switch (attribute.getAttributeType()) {
+		int numOfAttributes = person.getAttributes().size();
+		Attribute[] attributes = person.getAttributes().toArray(new Attribute[numOfAttributes]);
+
+		for (int i = 0; i < numOfAttributes; i++) {
+
+			switch (attributes[i].getAttributeType()) {
 			case GENERAL:
-				bf.write(PeopleStringReader.getDataGeneral(attribute));
+				bf.write(PeopleStringReader.getDataGeneral(attributes[i]));
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				bf.write(PeopleStringReader.getDataOneToMultiple(attribute));
+				bf.write(PeopleStringReader.getDataOneToMultiple(attributes[i]));
+				bf.write(",");
+
+				int numOfExpectations = PeopleStringReader.getExpectingOneToMultiple(attributes[i]).size();
+				String[] expecting = PeopleStringReader.getExpectingOneToMultiple(attributes[i])
+						.toArray(new String[numOfExpectations]);
+				for (int j = 0; j < expecting.length - 1; j++) {
+					bf.write(expecting[j]);
+					bf.write(";");
+				}
+				bf.write(expecting[expecting.length - 1]);
+				bf.write(",");
+
+				bf.write(PeopleStringReader.getImportanceOneToMultiple(attributes[i]));
 				break;
+
 			case WEIGHTED_SCALE:
-				bf.write(PeopleStringReader.getDataScale(attribute));
-				break;
-			case IGNORE:
+				bf.write(PeopleStringReader.getDataScale(attributes[i]) + "");
+				bf.write(",");
+
+				bf.write(PeopleStringReader.getExpectingScale(attributes[i]) + "");
+				bf.write(",");
+
+				bf.write(PeopleStringReader.getImportanceScale(attributes[i]));
 				break;
 			}
-			
-			bf.write(",");
-			
+
+			if (i != numOfAttributes - 1)
+				bf.write(",");
+
 		}
 		bf.write('\n');
-		
+
 		bf.close();
+
 	}
-	
- 	public LinkedList<Person> getPeople() {
+
+	public LinkedList<Person> getPeople() {
 		return people;
 	}
 }

@@ -20,6 +20,18 @@ public class IOUtil {
 		throw new Exception(String.format("Importance: %s is not %s, %s or %s\n", input, NOT_IMPORTANT,
 				SOMEWHAT_IMPORTANT, VERY_IMPORTANT));
 	}
+	
+	public static String getString(Interest input) {
+		switch (input) {
+		case NOT_IMPORTANT:
+			return NOT_IMPORTANT;
+		case SOMEWHAT_IMPORTANT:
+			return SOMEWHAT_IMPORTANT;
+		case VERY_IMPORTANT:
+			return VERY_IMPORTANT;
+		}
+		throw new IllegalArgumentException("Invalid interest");
+	}
 
 	public static String getData(String data) {
 		return data.replaceAll("\"", "");
