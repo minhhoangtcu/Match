@@ -165,10 +165,8 @@ public class PeopleIO {
 				int numOfExpectations = PeopleStringReader.getExpectingOneToMultiple(attributes[i]).size();
 				String[] expecting = PeopleStringReader.getExpectingOneToMultiple(attributes[i])
 						.toArray(new String[numOfExpectations]);
-				if (numOfExpectations == 1) {
+				if (numOfExpectations == 1)
 					bf.write(expecting[0]);
-					bf.write(";");
-				}
 				else {
 					for (int j = 0; j < numOfExpectations; j++) {
 						bf.write(expecting[j]);
@@ -176,6 +174,7 @@ public class PeopleIO {
 							bf.write(";");
 					}
 				}
+				bf.write(",");
 
 				bf.write(PeopleStringReader.getImportanceOneToMultiple(attributes[i]));
 				break;
