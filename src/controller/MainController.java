@@ -29,30 +29,30 @@ public class MainController {
 	@FXML
 	private void initialize() {
 		try {
-			setLeftLayout();
 			setCenterLayout();
 			setBottomLayout();
 		} catch (Exception e) {}
 	}
 	
-	private void setCenterLayout() throws Exception {
+	private void setCenterLayout() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/CenterLayout.fxml"));
 		loader.setController(new CenterController());
-		Parent layout = loader.load();
-		centerLayout.setCenter(layout);
+		try {
+			Parent layout = loader.load();
+			centerLayout.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load in setCenterLayout: MainController");
+		}
 	}
 
-	private void setBottomLayout() throws Exception{
+	private void setBottomLayout() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/BottomLayout.fxml"));
 		loader.setController(new BottomController(rootLayout, model));
-		Parent layout = loader.load();
-		centerLayout.setBottom(layout);
-	}
-
-	private void setLeftLayout() throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/left/LeftLayout.fxml"));
-		loader.setController(new LeftController());
-		Parent layout = loader.load();
-		rootLayout.setLeft(layout);
+		try {
+			Parent layout = loader.load();
+			centerLayout.setBottom(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load in setBottomLayout: MainController");
+		}
 	}
 }

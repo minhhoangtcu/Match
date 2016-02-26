@@ -7,23 +7,23 @@
 
 <AnchorPane prefHeight="25.0" prefWidth="517.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnAddUser" alignment="CENTER" 
+            <Button fx:id="btnLoad" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Add User" HBox.hgrow="ALWAYS" 
-		            onAction="#pushUpAddUserBar"/>
-            <Button fx:id="btnDeleteUser" alignment="CENTER" 
+		            text="Load" HBox.hgrow="ALWAYS" 
+		            onAction="#loadLoadView"/>
+            <Button fx:id="btnMatch" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Delete User" HBox.hgrow="ALWAYS" 
-		            onAction="#pushUpDeleteUserBar"/>
-            <Button fx:id="btnModifyUser" alignment="CENTER" 
+		            text="Match" HBox.hgrow="ALWAYS" 
+		            onAction="#loadMatchView"/>
+            <Button fx:id="btnManage" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Modify User" HBox.hgrow="ALWAYS"
-		            onAction="#loadModifyUser" />
-            <Button fx:id="btnMatchUser" alignment="CENTER" 
+		            text="Manage" HBox.hgrow="ALWAYS"
+		            onAction="#pushUpManagebar" />
+            <Button fx:id="btnExport" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
-		            text="Match User" HBox.hgrow="ALWAYS" />
+		            text="Export" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>

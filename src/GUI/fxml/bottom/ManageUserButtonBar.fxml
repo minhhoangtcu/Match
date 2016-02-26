@@ -10,12 +10,15 @@
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="btnAddAnUser" maxWidth="1.7976931348623157E308" 
-            		mnemonicParsing="false" text="Add An User" HBox.hgrow="ALWAYS" 
-            		onAction="#addUser"/>
-            <Button fx:id="btnAddMultipleUsers" maxWidth="1.7976931348623157E308" 
-            		mnemonicParsing="false" text="Add Multiple Users" HBox.hgrow="ALWAYS" 
-            		onAction="#addAllUser"/>
+            <Button fx:id="btnStudents" maxWidth="1.7976931348623157E308" 
+            		mnemonicParsing="false" text="Students" HBox.hgrow="ALWAYS" 
+            		onAction="#loadStudents"/>
+            <Button fx:id="btnFaculties" maxWidth="1.7976931348623157E308" 
+            		mnemonicParsing="false" text="Faculties" HBox.hgrow="ALWAYS" 
+            		onAction="#loadFaculties"/>
+            <Button fx:id="btnFields" maxWidth="1.7976931348623157E308" 
+            		mnemonicParsing="false" text="Fields" HBox.hgrow="ALWAYS" 
+            		onAction="#loadAttributes"/>
          </children>
       </HBox>
    </children>

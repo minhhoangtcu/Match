@@ -28,13 +28,29 @@ public class MainButtonBarController {
 	}
 	
 	
+	public void loadLoadView() throws Exception{
+		System.out.println("from loadLoadView");
+	}
+	
+
+	/**
+	 * 
+	 * user experience: pop up delete user button bar
+	 * 
+	 * @throws Exception
+	 */
+	public void loadMatchView() throws Exception{
+		System.out.println("from loadMatchView");
+	}
+
+	
 	/**
 	 * 
 	 * user experience: pop up add user button bar
 	 * 
 	 * @throws Exception
 	 */
-	public void pushUpAddUserBar() {
+	public void pushUpManagebar() {
 		// get center layout
 		BorderPane view = LayoutFetcher.getBottomLayout(rootLayout);
 		
@@ -48,14 +64,14 @@ public class MainButtonBarController {
 		} else {
 			
 			// load and set center layout
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/AddUserButtonBar.fxml"));
-			loader.setController(new AddUserBarController(rootLayout, model));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/ManageUserButtonBar.fxml"));
+			loader.setController(new ManageUserBarController(rootLayout, model));
 			try {
 				Parent layout = loader.load();
 				view.setTop(layout);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				System.out.println("In pushUpAddUserBar: class MainButtonBarController");
+				System.out.println("Fail to load in pushUpAddUserBar: class MainButtonBarController");
 			}
 			
 			// prepare for next time
@@ -63,46 +79,6 @@ public class MainButtonBarController {
 		}
 	}
 	
-	/**
-	 * 
-	 * user experience: pop up delete user button bar
-	 * 
-	 * @throws Exception
-	 */
-	public void pushUpDeleteUserBar() throws Exception{
-		// get center layout
-		BorderPane view = LayoutFetcher.getBottomLayout(rootLayout);
-		
-		if (deleteUserUp) {
-			// remove Top view
-			view.setTop(null);
-			
-			// prepare for collapse
-			deleteUserUp = false;
-			
-		} else {
-			
-			// load and set center layout
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/bottom/DeleteUserButtonBar.fxml"));
-//			loader.setController(new AddUserController());
-			Parent layout = loader.load();
-			view.setTop(layout);
-			
-			// prepare for next time
-			deleteUserUp = true;
-		}
-	}
-	
-	public void loadModifyUser() throws Exception{
-		// get center layout
-		BorderPane view = LayoutFetcher.getCenterLayout(rootLayout);
-		
-		// load and set center layout
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/AddUserLayout.fxml"));
-//				loader.setController(new AddUserController());
-		Parent layout = loader.load();
-		view.setCenter(layout);
-	}
 	
 	
 	

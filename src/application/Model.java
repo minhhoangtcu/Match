@@ -31,8 +31,8 @@ public class Model {
 		faculties = new LinkedList<>();
 		
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
-		loadStudents(studentsDir, studentsFADir);
-		loadFalcuty(falcutyDir, falcutyFADir);
+//		loadStudents(studentsDir, studentsFADir);
+//		loadFalcuty(falcutyDir, falcutyFADir);
 	}
 	
 	public void loadStudents(String studentsDir, String studentsFADir) throws FileNotFoundException, IOException {

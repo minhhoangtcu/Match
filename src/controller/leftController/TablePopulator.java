@@ -33,4 +33,26 @@ public class TablePopulator {
 		tableView.getColumns().addAll(nameColumn, matchedColumn);
 	}
 	
+	public static void populateFaculties(TableView tableView, LinkedList<Person> faculties) {
+		
+		tableView.getColumns().remove(0);
+		tableView.getColumns().remove(0);
+		
+		ObservableList<Row> observableList = FXCollections.observableArrayList();
+		for (Person person: faculties) {
+			String name = person.getGeneralAttribute("name");
+			observableList.add(new Row(name));
+		}
+		
+		TableColumn nameColumn = new TableColumn("Name");
+		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
+		
+		TableColumn matchedColumn = new TableColumn("Matched");
+		matchedColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
+
+		
+		tableView.setItems(observableList);
+		tableView.getColumns().addAll(nameColumn, matchedColumn);
+	}
+	
 }
