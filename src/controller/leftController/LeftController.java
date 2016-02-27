@@ -30,7 +30,6 @@ public class LeftController {
 	@FXML
 	public void initialize() {
 		System.out.println("From initialize: LeftController");
-		TablePopulator.populateStudent(displayTable, model.getStudents());
 	}
 	
 	public void loadStudents() {
@@ -71,7 +70,8 @@ public class LeftController {
 	
 	private void loadLeftLayout(LinkedList<Person> who) {
 		loadLeftLayout();
-		TablePopulator.populateStudent(displayTable, who);
+		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
+		TablePopulator.populateStudent(tableView, who);
 	}
 	
 	private void loadLeftLayout() {

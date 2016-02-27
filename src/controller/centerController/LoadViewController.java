@@ -71,10 +71,6 @@ public class LoadViewController {
 			try {
 				model.loadStudents(studentsURL, fixedStudentsURL);
 				model.loadFalcuty(facultiesURL, fixedFacultiesURL);
-				System.out.println("test");
-				for (Person person : model.getStudents()) {
-					System.out.println(person.getName());
-				}
 			} catch (FileNotFoundException e) {
 				System.out.println(e.getMessage());
 			} catch (IOException e) {
@@ -85,6 +81,4 @@ public class LoadViewController {
 			System.out.println(studentsURL + "\n" + fixedStudentsURL + "\n" + facultiesURL + "\n" + fixedFacultiesURL + "\n");
 		}
 	}
-	
-	
 }

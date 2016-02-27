@@ -20,7 +20,7 @@ public class TablePopulator {
 		
 		ObservableList<Row> observableList = FXCollections.observableArrayList();
 		for (Person person: students) {
-			String name = person.getGeneralAttribute("name");
+			String name = person.getName();
 			observableList.add(new Row(name));
 		}
 		
