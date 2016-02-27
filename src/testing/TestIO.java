@@ -31,7 +31,7 @@ public class TestIO {
 		
 	}
 	
-	public void testMatching(AttributesIO aIO, PeopleIO pIO) throws Exception {
+	public static void testMatching(AttributesIO aIO, PeopleIO pIO) throws Exception {
 		System.out.printf(">> COMPARE TESTING\n");
 
 		for (Person iPerson : pIO.getPeople()) {
@@ -53,7 +53,7 @@ public class TestIO {
 		System.out.printf(">> COMPARE TESTING ENDED\n\n");
 	}
 
-	public void testPrintingAllPeople(PeopleIO pIO) throws Exception {
+	public static void testPrintingAllPeople(PeopleIO pIO) {
 		System.out.printf(">> PRINTING ALL TESTING\n");
 		
 		for (Person person: pIO.getPeople()) {
@@ -64,7 +64,7 @@ public class TestIO {
 		System.out.printf(">> PRINTING ALL TESTING ENDED\n\n");
 	}
 	
-	public void testAdding(PeopleIO pIO) throws IOException {
+	public static void testAdding(PeopleIO pIO) throws IOException {
 		System.out.printf(">> ADDING PEOPLE TESTING\n");
 		
 		for (int i = 0; i < 5; i++) {

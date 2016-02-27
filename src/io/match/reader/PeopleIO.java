@@ -45,6 +45,7 @@ public class PeopleIO {
 		this.dirAttr = dirAttr;
 		this.attributes = attributes;
 		people = new LinkedList<>();
+		aIO = new FixedAttributesIO(dirAttr);
 	}
 
 	/**
@@ -58,7 +59,6 @@ public class PeopleIO {
 	 */
 	public void readPeople() throws FileNotFoundException, IOException {
 
-		aIO = new FixedAttributesIO(dirAttr);
 		aIO.readAttributes();
 		this.fixedAttributes = aIO.getAttributes();
 		
