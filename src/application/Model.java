@@ -53,8 +53,16 @@ public class Model {
 		return students;
 	}
 	
+	public boolean isEmptyStudents() {
+		return students.size() == 0;
+	}
+	
 	public LinkedList<Person> getFaculties() {
 		return faculties;
+	}
+	
+	public boolean isEmptyFaculties() {
+		return faculties.size() == 0;
 	}
 	
 	public LinkedList<Attribute> getAttributes() throws IOException {

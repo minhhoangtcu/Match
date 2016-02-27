@@ -13,6 +13,8 @@ public class TablePopulator {
 
 	public static void populateStudent(TableView tableView, LinkedList<Person> students) {
 		
+		System.out.println("From populateStudent: TablePopulator");
+		
 		tableView.getColumns().remove(0);
 		tableView.getColumns().remove(0);
 		

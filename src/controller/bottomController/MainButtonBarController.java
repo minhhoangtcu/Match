@@ -64,13 +64,14 @@ public class MainButtonBarController {
 	}
 	
 
-	/**
-	 * 
-	 * user experience: pop up delete user button bar
-	 * 
-	 * @throws Exception
-	 */
-	public void loadMatchView() throws Exception{
+	public void loadMatchView() {
+		
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) { 
+			System.out.println("Oop! Didn't load students and faculties files"
+					+ "\nFrom loadMatchView: MainButtonBarController");
+			return;
+		}
+		
 		// set left layout to null
 		rootLayout.setLeft(null);
 		
@@ -86,14 +87,14 @@ public class MainButtonBarController {
 		}
 	}
 
-	
-	/**
-	 * 
-	 * user experience: pop up add user button bar
-	 * 
-	 * @throws Exception
-	 */
 	public void loadManageView() {
+		
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) { 
+			System.out.println("Oop! Didn't load students and faculties files"
+					+ "\nFrom loadMatchView: MainButtonBarController");
+			return;
+		}
+		
 		loadLeftLayout(model.getStudents());
 		loadCenterLayout();
 	}
@@ -131,6 +132,11 @@ public class MainButtonBarController {
 	}
 	
 	public void export() {
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) {  
+			System.out.println("Oop! Didn't load students and faculties files"
+					+ "\nFrom loadMatchView: MainButtonBarController");
+			return;
+		}
 		System.out.println("From export: MainButtonBarController");
 	}
 	
