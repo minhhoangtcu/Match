@@ -1,6 +1,7 @@
 package controller.centerController;
 
 import application.Model;
+import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
 public class DisplayPersonController {
@@ -10,6 +11,11 @@ public class DisplayPersonController {
 	public DisplayPersonController(BorderPane rootLayout, Model model) {
 		this.rootLayout = rootLayout;
 		this.model = model;
+	}
+	
+	@FXML
+	public void initialize() {
+		
 	}
 	
 	public void add() {

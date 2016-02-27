@@ -8,6 +8,7 @@ import controller.centerController.AttributesViewController;
 import controller.centerController.DisplayPersonController;
 import helper.LayoutFetcher;
 import io.match.datastructure.Person;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableView;
@@ -15,12 +16,21 @@ import javafx.scene.layout.BorderPane;
 
 public class LeftController {
 	
+	@FXML
+	private TableView displayTable;
+	
 	BorderPane rootLayout;
 	Model model;
 	
 	public LeftController(BorderPane rootLayout, Model model) {
 		this.rootLayout = rootLayout;
 		this.model = model;
+	}
+	
+	@FXML
+	public void initialize() {
+		System.out.println("From initialize: LeftController");
+		TablePopulator.populateStudent(displayTable, model.getStudents());
 	}
 	
 	public void loadStudents() {
@@ -61,8 +71,7 @@ public class LeftController {
 	
 	private void loadLeftLayout(LinkedList<Person> who) {
 		loadLeftLayout();
-		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
-		TablePopulator.populateStudent(tableView, who);
+		TablePopulator.populateStudent(displayTable, who);
 	}
 	
 	private void loadLeftLayout() {
