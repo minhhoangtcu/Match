@@ -20,7 +20,7 @@
             <Button fx:id="btnManage" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
 		            text="Manage" HBox.hgrow="ALWAYS"
-		            onAction="#pushUpManagebar" />
+		            onAction="#loadManageView" />
             <Button fx:id="btnExport" alignment="CENTER" 
 		            maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
 		            text="Export" HBox.hgrow="ALWAYS" 

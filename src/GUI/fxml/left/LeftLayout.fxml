@@ -12,8 +12,15 @@
          <bottom>
             <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="268.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="studentButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#something" text="Student" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="facultyButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Faculty" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadStudent" maxWidth="1.7976931348623157E308" 
+                  			mnemonicParsing="false" onAction="#loadStudents" 
+                  			text="Student" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadFaculties" maxWidth="1.7976931348623157E308" 
+                  			mnemonicParsing="false" onAction="#loadFaculties" 
+                  			text="Faculty" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadField" maxWidth="1.7976931348623157E308" 
+                  			mnemonicParsing="false" onAction="#loadFields" 
+                  			text="Field" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </bottom>
