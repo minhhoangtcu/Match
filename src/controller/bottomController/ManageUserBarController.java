@@ -75,7 +75,7 @@ public class ManageUserBarController {
 	
 	private void loadLeftLayout() {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/left/LeftLayout.fxml"));
-		loader.setController(new LeftController());
+		loader.setController(new LeftController(rootLayout, model));
 		Parent layout;
 		try {
 			layout = loader.load();
