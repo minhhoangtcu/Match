@@ -39,7 +39,6 @@ public class AttributesIO {
 	 */
 	public void readAttributes() throws FileNotFoundException, IOException {
 		
-		System.out.println("Init list of attributes");
 		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
 
 		String line = "undefined";
@@ -51,7 +50,7 @@ public class AttributesIO {
 				attributes.add(getAttributeOfType(name, elements, 1));
 			}
 			
-			System.out.printf("End of file %s\n\n", dirAttr);
+			System.out.printf("Successfully read all attributes from %s\n\n", dirAttr);
 		} catch (Exception e) {
 			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
@@ -118,7 +117,7 @@ public class AttributesIO {
 	 */
 	public void addAttribute(Attribute attr) throws IOException {
 
-		System.out.printf("Adding to attribute list: %s\n", attr.getAttributeName());
+//		System.out.printf("Adding to attribute list: %s\n", attr.getAttributeName());
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
 		
 		bf.write(attr.getAttributeName());

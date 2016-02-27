@@ -27,12 +27,13 @@ public class TestRandom {
 		}
 		System.out.printf(">> GENERATE 10 PEOPLE TESTING ENDED\n\n");
 		
-		
-		System.out.printf(">> GENERATE 10 PEOPLE INTO A FILE \n");
+		int num = 10000;
+	
+		System.out.printf(">> GENERATE PEOPLE INTO A FILE \n");
 		String data = "data/testData.csv";
 		String fa = "data/testFa.csv";
-		random.generatePeopleToFiles(data, fa, 10);
-		System.out.printf(">> GENERATE 10 PEOPLE INTO A FILE TESTING ENDED\n\n");
+		random.generatePeopleToFiles(data, fa, num);
+		System.out.printf(">> GENERATE PEOPLE INTO A FILE TESTING ENDED\n\n");
 		
 		
 		System.out.printf(">> READ THE GENERATED PEOPLE \n");

@@ -62,7 +62,6 @@ public class PeopleIO {
 		aIO.readAttributes();
 		this.fixedAttributes = aIO.getAttributes();
 		
-		System.out.printf("Init list of people\n");
 		BufferedReader bf = new BufferedReader(new FileReader(dirPeople));
 
 		String line = "undefined";
@@ -121,7 +120,7 @@ public class PeopleIO {
 				temp.setAllMatch(tempFA.getMatches());
 
 			}
-			System.out.printf("End of file %s\n\n", dirPeople);
+			System.out.printf("Successfully read all people in file %s\n\n", dirPeople);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException(String.format("Person in file %s is corrupted.\nProgram failed on line: %s\n%s",
@@ -134,7 +133,7 @@ public class PeopleIO {
 
 	public void addPerson(Person person) throws IOException {
 
-		System.out.printf("Adding to data: %s\n", person.getName());
+//		System.out.printf("Adding to data: %s\n", person.getName());
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
 
 		bf.write(person.getName() + ",");
