@@ -18,7 +18,7 @@ public class Model {
 	// Link to the files for the IO
 	private final static String ATTRIBUTE_DIR = "data/attributes.match";
 	private String studentsDir = "data/data.csv";
-	private String falcutyDir = "data/data.csv";
+	private String falcutyDir = "data/data2.csv";
 	private String studentsFADir = "data/studentsFA.csv";
 	private String falcutyFADir = "data/falcutiesFA.csv";
 	
@@ -31,14 +31,16 @@ public class Model {
 		faculties = new LinkedList<>();
 		
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
-//		loadStudents(studentsDir, studentsFADir);
-//		loadFalcuty(falcutyDir, falcutyFADir);
+		attributeIO.readAttributes();
+		loadStudents(studentsDir, studentsFADir);
+		loadFalcuty(falcutyDir, falcutyFADir);
 	}
 	
 	public void loadStudents(String studentsDir, String studentsFADir) throws FileNotFoundException, IOException {
 		this.studentsDir = studentsDir;
 		this.studentsFADir = studentsFADir;
 		studentsIO = new PeopleIO(studentsDir, studentsFADir, getAttributes());
+		studentsIO.readPeople();
 		students = studentsIO.getPeople();
 	}
 	
@@ -46,6 +48,7 @@ public class Model {
 		this.falcutyDir = falcutyDir;
 		this.falcutyFADir = falcutyFADir;
 		falcutiesIO = new PeopleIO(falcutyDir, falcutyFADir, getAttributes());
+		falcutiesIO.readPeople();
 		faculties = falcutiesIO.getPeople();
 	}
 	
