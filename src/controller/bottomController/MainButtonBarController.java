@@ -6,6 +6,7 @@ import javax.swing.text.View;
 
 import application.Model;
 import controller.centerController.LoadViewController;
+import controller.centerController.MatchViewController;
 import helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,22 +17,36 @@ import javafx.scene.layout.BorderPane;
 
 public class MainButtonBarController {
 	
-	private Model model;
+	@FXML
+	private Button btnLoad;
+	@FXML
+	private Button btnMatch;
 	
+	private Model model;
 	private BorderPane rootLayout;
-	private boolean addUserUp = false;
-	private boolean deleteUserUp = false;
+	
+	
+	private boolean manageUserUp = false;
 	
 	
 	public MainButtonBarController(BorderPane rootLayout, Model model) {
 		this.rootLayout = rootLayout;
 		this.model = model;
+		
+		setEnableButtons(true);
 	}
 	
-	
+	private void setEnableButtons(boolean b) {
+//		btnMatch.setDisable(b);
+	}
+
+
 	public void loadLoadView(){
-		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		// set left layout to null
+		rootLayout.setLeft(null);
 		
+		// load center layout
+		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/LoadView.fxml"));
 		loader.setController(new LoadViewController(rootLayout, model));
 		try {
@@ -50,7 +65,19 @@ public class MainButtonBarController {
 	 * @throws Exception
 	 */
 	public void loadMatchView() throws Exception{
-		System.out.println("from loadMatchView: MainButtonBarController");
+		// set left layout to null
+		rootLayout.setLeft(null);
+		
+		// load center layout
+		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/MatchView.fxml"));
+		loader.setController(new MatchViewController(rootLayout, model));
+		try {
+			Parent layout = loader.load();
+			center.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
+		}
 	}
 
 	
@@ -64,12 +91,12 @@ public class MainButtonBarController {
 		// get center layout
 		BorderPane view = LayoutFetcher.getBottomLayout(rootLayout);
 		
-		if (addUserUp) {
+		if (manageUserUp) {
 			// remove Top view
 			view.setTop(null);
 			
 			// prepare for collapse
-			addUserUp = false;
+			manageUserUp = false;
 			
 		} else {
 			
@@ -85,7 +112,7 @@ public class MainButtonBarController {
 			}
 			
 			// prepare for next time
-			addUserUp = true;
+			manageUserUp = true;
 		}
 	}
 	
