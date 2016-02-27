@@ -113,6 +113,10 @@ public class Person {
 		attributes.add(temp);
 	}
 	
+	public void addOneToMultipleAttribute(OneToMultipleAttribute attr) {
+		attributes.add(attr);
+	}
+	
 	/**
 	 * Add a scale attribute to this person
 	 * 
@@ -129,6 +133,10 @@ public class Person {
 		temp.setExpectingChoice(expectingChoice);
 		temp.setInterst(interest);
 		attributes.add(temp);
+	}
+	
+	public void addScaleAttribute(ScaleAttribute attr) {
+		attributes.add(attr);
 	}
 	
 	private String getAttribute(AttributeType type, String name) {

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.Interest;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.reader.AttributesIO;
@@ -46,10 +47,19 @@ public class PeopleGenerator {
 		
 		Person temp = new Person(RandomStringUtils.random(15, true, false));
 		for (Attribute attr: attributes) {
+			switch (attr.getAttributeType()) {
+			case GENERAL:
+			case WEIGHTED_ONE_TO_MULTIPLE:
+				temp.addOneToMultipleAttribute(getRandomOneToMUltipleAttribute(attr));
+				break;
+			case WEIGHTED_SCALE:
+			}
 			
 		}
-		
-		
+	}
+	
+	private GeneralAttribute getGeneralAttribute(Attribute attr) {
+		return new GeneralAttribute(attr.getAttributeName(), )
 	}
 	
 	private OneToMultipleAttribute getRandomOneToMUltipleAttribute(Attribute attr) {
