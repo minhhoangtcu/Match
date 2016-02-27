@@ -32,7 +32,7 @@ public class OneToMultipleAttribute extends Attribute
 			numOfExpectingChoices++;
 			return this;
 		} else
-			throw new IllegalArgumentException(String.format("Expecting choice: %s does not exist", param));
+			throw new IllegalArgumentException(String.format("Expecting choice: %s is not one of the possible choices", param));
 	}
 
 	public String getChoice() {
@@ -40,7 +40,10 @@ public class OneToMultipleAttribute extends Attribute
 	}
 
 	public void setChoice(String choice) throws IllegalArgumentException {
-		this.choice = choice;
+		if (possibleChoices.contains(choice)) {
+			this.choice = choice;
+		} else
+			throw new IllegalArgumentException(String.format("Choice: %s is not one of the possible choices", choice));
 	}
 
 	public Interest getInterst() {
@@ -49,6 +52,12 @@ public class OneToMultipleAttribute extends Attribute
 
 	public void setInterst(Interest interst) {
 		this.interest = interst;
+	}
+	
+	public void setPossibleChoices(String[] possible) {
+		for (String p : possible) {
+			addPossibleChoice(p);
+		}
 	}
 
 	public void setExpectingChoice(String[] expecting) throws IllegalArgumentException {

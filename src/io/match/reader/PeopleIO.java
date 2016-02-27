@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
 public class PeopleIO {
@@ -29,10 +30,8 @@ public class PeopleIO {
 	 * 
 	 * @param dirPeople
 	 *            the directory to the people
-	 * @param fixedAttributes
-	 *            the hash map of a name of a person to the machine generated
-	 *            content such as his matches, number of matches, and avaiable
-	 *            matches.
+	 * @param dirAttr
+	 *            the directory to the fixed attribute file to these people
 	 * @param attributes
 	 *            the linked list of attributes. As the program reads through
 	 *            the data text file, it is going to look for these attributes.
@@ -44,7 +43,6 @@ public class PeopleIO {
 	public PeopleIO(String dirPeople, String dirAttr, LinkedList<Attribute> attributes) {
 		this.dirPeople = dirPeople;
 		this.dirAttr = dirAttr;
-		this.fixedAttributes = aIO.getAttributes();
 		this.attributes = attributes;
 		people = new LinkedList<>();
 	}
@@ -62,6 +60,7 @@ public class PeopleIO {
 
 		aIO = new FixedAttributesIO(dirAttr);
 		aIO.readAttributes();
+		this.fixedAttributes = aIO.getAttributes();
 		
 		System.out.printf("Init list of people\n");
 		BufferedReader bf = new BufferedReader(new FileReader(dirPeople));
@@ -95,7 +94,9 @@ public class PeopleIO {
 						// If we are putting a weighted attribute in, we also
 						// know that the next 2 fields are: 1. expecting same
 						// and 2. importance
-						temp.addOneToMultipleAttribute(name, IOUtil.getData(data),
+						temp.addOneToMultipleAttribute(name, 
+								IOUtil.getData(data),
+								((OneToMultipleAttribute) attribute).getPossibleChoices(),
 								IOUtil.getData(elements[index++]).split(";"),
 								IOUtil.readInterest(IOUtil.getData(elements[index++])));
 						break;

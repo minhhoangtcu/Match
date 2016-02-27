@@ -49,6 +49,7 @@ public class Model {
 		faculties = falcutiesIO.getPeople();
 	}
 	
+	
 	public LinkedList<Person> getStudents() {
 		return students;
 	}
