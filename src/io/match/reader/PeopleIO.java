@@ -150,9 +150,8 @@ public class PeopleIO {
 				bf.write(PeopleStringReader.getDataOneToMultiple(attributes[i]));
 				bf.write(",");
 
-				int numOfExpectations = PeopleStringReader.getExpectingOneToMultiple(attributes[i]).size();
-				String[] expecting = PeopleStringReader.getExpectingOneToMultiple(attributes[i])
-						.toArray(new String[numOfExpectations]);
+				int numOfExpectations = PeopleStringReader.getExpectingOneToMultiple(attributes[i]).length;
+				String[] expecting = PeopleStringReader.getExpectingOneToMultiple(attributes[i]);
 				if (numOfExpectations == 1)
 					bf.write(expecting[0]);
 				else {

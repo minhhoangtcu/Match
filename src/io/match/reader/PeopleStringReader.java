@@ -1,7 +1,5 @@
 package io.match.reader;
 
-import java.util.HashSet;
-
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
@@ -58,7 +56,7 @@ public class PeopleStringReader {
 		return ((OneToMultipleAttribute) input).getChoice();
 	}
 	
-	public static HashSet<String> getExpectingOneToMultiple(Attribute input) {
+	public static String[] getExpectingOneToMultiple(Attribute input) {
 		return ((OneToMultipleAttribute) input).getExpectingChoice();
 	}
 	

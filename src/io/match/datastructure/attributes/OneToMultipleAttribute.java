@@ -2,30 +2,37 @@ package io.match.datastructure.attributes;
 
 import java.util.HashSet;
 
-public class OneToMultipleAttribute extends Attribute implements Weightable<String>, Expectable<HashSet<String>>, Interestable {
-	
+public class OneToMultipleAttribute extends Attribute
+		implements Weightable<String>, Expectable<String[]>, Interestable {
+
 	private String choice;
 	private HashSet<String> possibleChoices;
 	private HashSet<String> expectingChoices;
 	private Interest interest;
-	
+	private int numOfPossibleChoices, numOfExpectingChoices;
+
 	public OneToMultipleAttribute(String name) {
 		super(name);
 		possibleChoices = new HashSet<>();
 		expectingChoices = new HashSet<>();
 		attributeType = AttributeType.WEIGHTED_ONE_TO_MULTIPLE;
+		numOfPossibleChoices = 0;
+		numOfExpectingChoices = 0;
 	}
 
 	public OneToMultipleAttribute addPossibleChoice(String param) {
-		// TODO: write a case to control the input
 		possibleChoices.add(param);
+		numOfPossibleChoices++;
 		return this;
 	}
-	
+
 	public OneToMultipleAttribute addExpectingChoice(String param) {
-		// TODO: write a case to control the input
-		expectingChoices.add(param);
-		return this;
+		if (possibleChoices.contains(param)) {
+			expectingChoices.add(param);
+			numOfExpectingChoices++;
+			return this;
+		} else
+			throw new IllegalArgumentException(String.format("Expecting choice: %s does not exist", param));
 	}
 
 	public String getChoice() {
@@ -44,17 +51,29 @@ public class OneToMultipleAttribute extends Attribute implements Weightable<Stri
 		this.interest = interst;
 	}
 
-	public HashSet<String> getExpectingChoice() {
-		return expectingChoices;
-	}
-
-	public void setExpectingChoice(HashSet<String> expecting) throws IllegalArgumentException {
+	public void setExpectingChoice(String[] expecting) throws IllegalArgumentException {
 		for (String expectation : expecting) {
 			addExpectingChoice(expectation);
 		}
 	}
+	
+	public String[] getExpectingChoice() {
+		return expectingChoices.toArray(new String[numOfExpectingChoices]);
+	}
 
-	public HashSet<String> getPossibleChoices() {
-		return possibleChoices;
+	public String[] getPossibleChoices() {
+		return possibleChoices.toArray(new String[numOfPossibleChoices]);
+	}
+
+	public int getNumOfPossibleChoices() {
+		return numOfPossibleChoices;
+	}
+
+	public int getNumOfExpectingChoices() {
+		return numOfExpectingChoices;
+	}
+
+	public void setNumOfExpectingChoices(int numOfExpectingChoices) {
+		this.numOfExpectingChoices = numOfExpectingChoices;
 	}
 }

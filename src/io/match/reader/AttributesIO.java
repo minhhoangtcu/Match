@@ -137,8 +137,8 @@ public class AttributesIO {
 			OneToMultipleAttribute tempM = (OneToMultipleAttribute) attr;
 			bf.write(String.format("%s,%s,", WEIGHTED, MULTIPLE));
 			
-			int numPossibleChoices = tempM.getPossibleChoices().size();
-			String[] choices = tempM.getPossibleChoices().toArray(new String[numPossibleChoices]);
+			int numPossibleChoices = tempM.getNumOfPossibleChoices();
+			String[] choices = tempM.getPossibleChoices();
 			for (int i = 0; i < numPossibleChoices; i++) {
 				bf.write(choices[i]);
 				if (i != numPossibleChoices-1)
