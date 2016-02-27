@@ -34,7 +34,7 @@ public class IOUtil {
 	}
 
 	public static String getData(String data) {
-		return data.replaceAll("\"", "");
+		return data.replaceAll("\"", "").trim();
 	}
 
 }

@@ -16,7 +16,8 @@ public class PeopleStringReader {
 	 * Print out the information of a person onto the console. This serves as a
 	 * debugging method
 	 * 
-	 * @param person provided person
+	 * @param person
+	 *            provided person
 	 */
 	public static void print(Person person) {
 
@@ -45,7 +46,7 @@ public class PeopleStringReader {
 			System.out.printf("%s ", name);
 		}
 		System.out.println();
-
+		System.out.println();
 	}
 
 	public static String getDataGeneral(Attribute input) {
@@ -55,11 +56,11 @@ public class PeopleStringReader {
 	public static String getDataOneToMultiple(Attribute input) {
 		return ((OneToMultipleAttribute) input).getChoice();
 	}
-	
+
 	public static String[] getExpectingOneToMultiple(Attribute input) {
 		return ((OneToMultipleAttribute) input).getExpectingChoice();
 	}
-	
+
 	public static String getImportanceOneToMultiple(Attribute input) {
 		return IOUtil.getString(((OneToMultipleAttribute) input).getInterst());
 	}
@@ -67,11 +68,11 @@ public class PeopleStringReader {
 	public static int getDataScale(Attribute input) {
 		return ((ScaleAttribute) input).getChoice();
 	}
-	
+
 	public static int getExpectingScale(Attribute input) {
 		return ((ScaleAttribute) input).getExpectingChoice();
 	}
-	
+
 	public static String getImportanceScale(Attribute input) {
 		return IOUtil.getString(((ScaleAttribute) input).getInterst());
 	}
@@ -81,10 +82,15 @@ public class PeopleStringReader {
 	}
 
 	private static void printDataOneToMultiple(Attribute input) {
-		System.out.printf("%s: %s\n", input.getAttributeName(), getDataOneToMultiple(input));
+		System.out.printf("%s: %s\t", input.getAttributeName(), getDataOneToMultiple(input));
+		for (String expectation : getExpectingOneToMultiple(input)) {
+			System.out.printf("%s ", expectation);
+		}
+		System.out.printf("\tImportance: %s\n", getImportanceOneToMultiple(input));
 	}
 
 	private static void printDataScale(Attribute input) {
-		System.out.printf("%s: %s\n", input.getAttributeName(), getDataScale(input));
+		System.out.printf("%s: %s\tExpecting: %s\tImportance: %s\n", input.getAttributeName(), getDataScale(input),
+				getExpectingScale(input), getImportanceScale(input));
 	}
 }

@@ -95,6 +95,10 @@ public class Person {
 		attributes.add(new GeneralAttribute(name, data));
 	}
 	
+	public void addGeneralAttribute(GeneralAttribute attr) {
+		attributes.add(attr);
+	}
+	
 	/**
 	 * Add an one to multiple attribute to this person
 	 * 
@@ -103,11 +107,12 @@ public class Person {
 	 * @param expectingChoices the expected choices that this person want his/her matches to be
 	 * @param interest level of importance of this attribute
 	 */
-	public void addOneToMultipleAttribute(String name, String choice, String[] expectingChoices, Interest interest) {
+	public void addOneToMultipleAttribute(String name, String choice, String[] possibleChoices, String[] expectingChoices, Interest interest) {
 		OneToMultipleAttribute temp = new OneToMultipleAttribute(name);
+		temp.setPossibleChoices(possibleChoices);
 		temp.setChoice(choice);
 		for (String expectingChoice : expectingChoices) {
-			temp.addExpectingChoice(expectingChoice);
+			temp.addExpectingChoice(expectingChoice.trim());
 		}
 		temp.setInterst(interest);
 		attributes.add(temp);

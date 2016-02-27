@@ -137,7 +137,11 @@ public class Compare {
 	}
 	
 	private static boolean isMatchAttribute(OneToMultipleAttribute firstAttr, OneToMultipleAttribute secondAttr) {
-		return firstAttr.getExpectingChoice().contains(secondAttr.getChoice());
+		for (String expecting: firstAttr.getExpectingChoice()) {
+			if (expecting.equals(secondAttr.getChoice()))
+				return true;
+		}
+		return false;
 	}
 	
 	private static boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
