@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import application.Model;
+import controller.centerController.AttributesViewController;
+import controller.centerController.DisplayPersonController;
 import controller.leftController.LeftController;
 import controller.leftController.TablePopulator;
 import helper.LayoutFetcher;
@@ -25,15 +27,44 @@ public class ManageUserBarController {
 	
 	public void loadStudents() {
 		loadLeftLayout(model.getStudents());
+		loadCenterLayout();
 	}
-	
+
 	public void loadFaculties() {
 		loadLeftLayout(model.getFaculties());
+		loadCenterLayout();
 	}
 	
 	public void loadAttributes() {
 		rootLayout.setLeft(null);
+		loadAttributesLayout();
+	}
+	
+	
+	private void loadAttributesLayout() {
+		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
 		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/AttributesView.fxml"));
+		loader.setController(new AttributesViewController(rootLayout, model));
+		try {
+			Parent layout = loader.load();
+			center.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML file in loadAttributesLayout: BottomController");
+		}
+	}
+
+	private void loadCenterLayout() {
+		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/fxml/center/PersonTemplate.fxml"));
+		loader.setController(new DisplayPersonController(rootLayout, model));
+		try {
+			Parent layout = loader.load();
+			center.setCenter(layout);
+		} catch (IOException e) {
+			System.out.println("Fail to load FXML file in setCenterLayout: BottomController");
+		}
 	}
 	
 	private void loadLeftLayout(LinkedList<Person> who) {
