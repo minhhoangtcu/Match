@@ -120,7 +120,7 @@ public class PeopleIO {
 				temp.setAllMatch(tempFA.getMatches());
 
 			}
-			System.out.printf("Successfully read all people in file %s\n\n", dirPeople);
+//			System.out.printf("Successfully read all people in file %s\n\n", dirPeople);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException(String.format("Person in file %s is corrupted.\nProgram failed on line: %s\n%s",

@@ -23,7 +23,7 @@ public class FixedAttributesIO {
 	
 	public void readAttributes() throws FileNotFoundException, IOException {
 		
-		System.out.println("Init list of FIXED attributes");
+//		System.out.println("Init list of FIXED attributes");
 		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
 		
 		String line = "undefined";
@@ -46,7 +46,7 @@ public class FixedAttributesIO {
 				attributes.put(name, temp);
 			}
 			
-			System.out.printf("Succesfully read all fixed attributes from file %s\n\n", dirAttr);
+//			System.out.printf("Succesfully read all fixed attributes from file %s\n\n", dirAttr);
 		} catch (Exception e) {
 			throw new IOException(String.format("FIXED Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {

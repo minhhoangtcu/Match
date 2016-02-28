@@ -24,14 +24,14 @@ public class TestIO {
 		PeopleIO pIO = new PeopleIO(peopleURL, faURL, aIO.getAttributes());
 		pIO.readPeople();
 		
-		testMatching(aIO, pIO);
+		testMatching(pIO);
 		testPrintingAllPeople(pIO);
 		
 		testAdding(pIO);
 		
 	}
 	
-	public static void testMatching(AttributesIO aIO, PeopleIO pIO) throws Exception {
+	public static void testMatching(PeopleIO pIO) throws Exception {
 		System.out.printf(">> COMPARE TESTING\n");
 
 		for (Person iPerson : pIO.getPeople()) {
@@ -51,6 +51,17 @@ public class TestIO {
 		}
 
 		System.out.printf(">> COMPARE TESTING ENDED\n\n");
+	}
+	
+	public static void testMatchingWithoutPrinting(PeopleIO pIO) throws Exception {
+		for (Person iPerson : pIO.getPeople()) {
+
+			for (Person jPerson : pIO.getPeople()) {
+				if (iPerson == jPerson)
+					continue;
+				Compare.getMatch(iPerson, jPerson);
+			}
+		}
 	}
 
 	public static void testPrintingAllPeople(PeopleIO pIO) {

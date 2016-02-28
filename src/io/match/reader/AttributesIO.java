@@ -50,7 +50,7 @@ public class AttributesIO {
 				attributes.add(getAttributeOfType(name, elements, 1));
 			}
 			
-			System.out.printf("Successfully read all attributes from %s\n\n", dirAttr);
+//			System.out.printf("Successfully read all attributes from %s\n\n", dirAttr);
 		} catch (Exception e) {
 			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
@@ -75,7 +75,7 @@ public class AttributesIO {
 			return getAttributeOfType(name, elements, typeIndex).setIgnored(true);
 			
 		case GENERAL:
-			System.out.printf("Added general attribute %s\n", name);
+//			System.out.printf("Added general attribute %s\n", name);
 			return new GeneralAttribute(name);
 			
 		case WEIGHTED:
@@ -87,13 +87,13 @@ public class AttributesIO {
 				for (int i = 0; i < numberOfChoices; i++) {
 					temp.addPossibleChoice(elements[typeIndex+i]);
 				}
-				System.out.printf("Added multiple attribute %s\n", name);
+//				System.out.printf("Added multiple attribute %s\n", name);
 				return temp;
 				
 			case SCALE:
 				int from = Integer.parseInt(elements[typeIndex++]);
 				int to = Integer.parseInt(elements[typeIndex]);
-				System.out.printf("Added scale attribute %s\n", name);
+//				System.out.printf("Added scale attribute %s\n", name);
 				return new ScaleAttribute(name).setFrom(from).setTo(to); 
 				
 			default:
