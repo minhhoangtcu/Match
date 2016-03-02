@@ -21,7 +21,7 @@ public class Compare {
 	 * @return
 	 * @throws Exception 
 	 */
-	public static double getMatch(Person first, Person second) throws Exception {
+	public static double getMatch(Person first, Person second) {
 		
 		if (first.getAttributes().size() != second.getAttributes().size())
 			throw new IllegalArgumentException("Numbers of attributes from 2 arguments do not match!");
@@ -43,7 +43,7 @@ public class Compare {
 			Attribute secondAttr = secondIterator.next();
 			
 			if (!isSameAttribute(firstAttr, secondAttr))
-				throw new Exception("The names of attributes of 2 people do not match!");
+				throw new IllegalArgumentException("The names of attributes of 2 people do not match!");
 			
 			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute) {
 				continue; // We do not have to deal with general attribute, for now
@@ -123,7 +123,7 @@ public class Compare {
 					gainedPointSecond += pointGainedPercentage*secondPointGained;
 			}
 			else
-				throw new Exception("The type of attributes of 2 people do not match!");
+				throw new IllegalArgumentException("The type of attributes of 2 people do not match!");
 		}
 		
 		/**

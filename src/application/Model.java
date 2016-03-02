@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.reader.AttributesIO;
-import io.match.reader.FixedAttributesIO;
 import io.match.reader.PeopleIO;
 
 public class Model {
@@ -32,6 +31,8 @@ public class Model {
 		
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
 		attributeIO.readAttributes();
+		
+		// TODO: REMOVE THESE LINES AFTER TESTING
 		loadStudents(studentsDir, studentsFADir);
 		loadFalcuty(falcutyDir, falcutyFADir);
 	}
