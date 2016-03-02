@@ -8,9 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.AttributeUtil;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
 
@@ -97,7 +97,7 @@ public class PeopleIO {
 								IOUtil.getData(data),
 								((OneToMultipleAttribute) attribute).getPossibleChoices(),
 								IOUtil.getData(elements[index++]).split(";"),
-								IOUtil.readInterest(IOUtil.getData(elements[index++])));
+								AttributeUtil.getInterest(IOUtil.getData(elements[index++])));
 						break;
 
 					case WEIGHTED_SCALE:
@@ -105,7 +105,7 @@ public class PeopleIO {
 						temp.addScaleAttribute(name, convertedAttribute.getFrom(), convertedAttribute.getTo(),
 								Integer.parseInt(IOUtil.getData(data)),
 								Integer.parseInt(IOUtil.getData(elements[index++])),
-								IOUtil.readInterest(IOUtil.getData(elements[index++])));
+								AttributeUtil.getInterest(IOUtil.getData(elements[index++])));
 						break;
 
 					default:

@@ -2,6 +2,7 @@ package io.match.reader;
 
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.AttributeUtil;
 import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
@@ -62,7 +63,7 @@ public class PeopleStringReader {
 	}
 
 	public static String getImportanceOneToMultiple(Attribute input) {
-		return IOUtil.getString(((OneToMultipleAttribute) input).getInterst());
+		return AttributeUtil.getString(((OneToMultipleAttribute) input).getInterst());
 	}
 
 	public static int getDataScale(Attribute input) {
@@ -74,7 +75,7 @@ public class PeopleStringReader {
 	}
 
 	public static String getImportanceScale(Attribute input) {
-		return IOUtil.getString(((ScaleAttribute) input).getInterst());
+		return AttributeUtil.getString(((ScaleAttribute) input).getInterst());
 	}
 
 	private static void printDataGeneral(Attribute input) {
