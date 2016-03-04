@@ -61,6 +61,19 @@ public class Model {
 		faculties = falcutiesIO.getPeople();
 	}
 	
+	/**
+	 * STUDENTS' METHODS 
+	 */
+	
+	public Person removeStudent(String name) {
+		for (Person person : students) {
+			if (person.getName().equals(name)) {
+				students.remove(person);
+				return person;
+			}
+		}
+		throw new IllegalArgumentException(String.format("The student with provided name: %s does not exist in the data base", name));
+	}
 	
 	public LinkedList<Person> getStudents() {
 		return students;
@@ -68,6 +81,20 @@ public class Model {
 	
 	public boolean isEmptyStudents() {
 		return students.size() == 0;
+	}
+
+	/**
+	 * FALCUTIES' METHODS 
+	 */
+
+	public Person removeFalcuty(String name) {
+		for (Person person : faculties) {
+			if (person.getName().equals(name)) {
+				faculties.remove(person);
+				return person;
+			}
+		}
+		throw new IllegalArgumentException(String.format("The faculty with provided name: %s does not exist in the data base", name));
 	}
 	
 	public LinkedList<Person> getFaculties() {
