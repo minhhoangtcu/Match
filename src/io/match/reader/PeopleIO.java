@@ -63,8 +63,7 @@ public class PeopleIO {
 	 */
 	public void readPeople() throws FileNotFoundException, IOException {
 
-		aIO.readAttributes();
-		this.fixedAttributes = aIO.getAttributes();
+		loadFixedAttributes();
 
 		BufferedReader bf = new BufferedReader(new FileReader(dirPeople));
 		HashSet<String> names = new HashSet<>();
@@ -145,7 +144,12 @@ public class PeopleIO {
 		} finally {
 			bf.close();
 		}
-
+	}
+	
+	private void loadFixedAttributes() throws FileNotFoundException, IOException {
+		aIO.setDebug(isDebug);
+		aIO.readAttributes();
+		this.fixedAttributes = aIO.getAttributes();
 	}
 
 	public void addPerson(Person person) throws IOException {
@@ -224,5 +228,9 @@ public class PeopleIO {
 
 	public LinkedList<Person> getPeople() {
 		return people;
+	}
+	
+	public void setDebug(boolean isDebug) {
+		this.isDebug = isDebug;
 	}
 }
