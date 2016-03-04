@@ -24,10 +24,9 @@ public class TestIO {
 		PeopleIO pIO = new PeopleIO(peopleURL, faURL, aIO.getAttributes());
 		pIO.readPeople();
 		
-		testMatching(pIO);
+		//testMatching(pIO);
 		testPrintingAllPeople(pIO);
-		
-		testAdding(pIO);
+		//testAdding(pIO);
 		
 	}
 	
