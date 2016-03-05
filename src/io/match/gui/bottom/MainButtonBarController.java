@@ -87,6 +87,7 @@ public class MainButtonBarController {
 			MatchViewController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
+			controller.populateMatchTable();
 			center.setCenter(layout);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");

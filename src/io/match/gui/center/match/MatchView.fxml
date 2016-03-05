@@ -45,7 +45,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField />
+                              <TextField fx:id="tfStudent" onKeyReleased="#shortenTable" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -55,7 +55,7 @@
                                     <Insets right="20.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField />
+                              <TextField fx:id="tfFaculty" onKeyReleased="#shortenTable" />
                            </children>
                         </HBox>
                      </children>
@@ -64,11 +64,11 @@
             </HBox>
          </bottom>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn prefWidth="75.0" text="Students" />
-                <TableColumn prefWidth="249.0" text="Faculties" />
-                  <TableColumn prefWidth="130.0" text="Match Probability" />
+                <TableColumn fx:id="studentColumn" prefWidth="75.0" text="Students" />
+                <TableColumn fx:id="facultyColumn" prefWidth="249.0" text="Faculties" />
+                  <TableColumn fx:id="probabilityColumn" prefWidth="130.0" text="Match Probability" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
