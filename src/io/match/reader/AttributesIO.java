@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
-
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
@@ -23,10 +22,13 @@ public class AttributesIO {
 	private static final String WEIGHTED = "weighted";
 	private static final String MULTIPLE = "multiple";
 	private static final String SCALE = "scale";
+	
+	private boolean isDebug;
 
 	public AttributesIO(String dir) throws FileNotFoundException, IOException {
 		this.dirAttr = dir;
 		attributes = new LinkedList<>();
+		isDebug = false;
 	}
 
 	/**
@@ -50,7 +52,9 @@ public class AttributesIO {
 				attributes.add(getAttributeOfType(name, elements, 1));
 			}
 			
-//			System.out.printf("Successfully read all attributes from %s\n\n", dirAttr);
+			if (isDebug)
+				System.out.printf("Successfully read all attributes from %s\n\n", dirAttr);
+			
 		} catch (Exception e) {
 			throw new IOException(String.format("Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
@@ -75,7 +79,9 @@ public class AttributesIO {
 			return getAttributeOfType(name, elements, typeIndex).setIgnored(true);
 			
 		case GENERAL:
-//			System.out.printf("Added general attribute %s\n", name);
+			if (isDebug)
+				System.out.printf("Added general attribute %s\n", name);
+			
 			return new GeneralAttribute(name);
 			
 		case WEIGHTED:
@@ -87,13 +93,19 @@ public class AttributesIO {
 				for (int i = 0; i < numberOfChoices; i++) {
 					temp.addPossibleChoice(elements[typeIndex+i]);
 				}
-//				System.out.printf("Added multiple attribute %s\n", name);
+				
+				if (isDebug)
+					System.out.printf("Added multiple attribute %s\n", name);
+				
 				return temp;
 				
 			case SCALE:
 				int from = Integer.parseInt(elements[typeIndex++]);
 				int to = Integer.parseInt(elements[typeIndex]);
-//				System.out.printf("Added scale attribute %s\n", name);
+				
+				if (isDebug)
+					System.out.printf("Added scale attribute %s\n", name);
+				
 				return new ScaleAttribute(name).setFrom(from).setTo(to); 
 				
 			default:
@@ -117,7 +129,9 @@ public class AttributesIO {
 	 */
 	public void addAttribute(Attribute attr) throws IOException {
 
-//		System.out.printf("Adding to attribute list: %s\n", attr.getAttributeName());
+		if (isDebug)
+			System.out.printf("Adding to attribute list: %s\n", attr.getAttributeName());
+		
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
 		
 		bf.write(attr.getAttributeName());
@@ -155,9 +169,11 @@ public class AttributesIO {
 		bf.close();
 	}
 
-	public LinkedList<Attribute> getAttributes() throws IOException {
-		if (attributes.isEmpty())
-			throw new IOException("List of attributes is not initialized");
+	public LinkedList<Attribute> getAttributes() {
 		return attributes;
+	}
+	
+	public void setDebug(boolean isDebug) {
+		this.isDebug = isDebug;
 	}
 }

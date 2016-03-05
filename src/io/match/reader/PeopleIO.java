@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.AttributeUtil;
@@ -22,6 +24,7 @@ public class PeopleIO {
 	private HashMap<String, FixedAttribute> fixedAttributes;
 	private LinkedList<Person> people;
 	private LinkedList<Attribute> attributes;
+	private boolean isDebug;
 
 	/**
 	 * <p>
@@ -46,6 +49,7 @@ public class PeopleIO {
 		this.attributes = attributes;
 		people = new LinkedList<>();
 		aIO = new FixedAttributesIO(dirAttr);
+		isDebug = false;
 	}
 
 	/**
@@ -59,10 +63,10 @@ public class PeopleIO {
 	 */
 	public void readPeople() throws FileNotFoundException, IOException {
 
-		aIO.readAttributes();
-		this.fixedAttributes = aIO.getAttributes();
-		
+		loadFixedAttributes();
+
 		BufferedReader bf = new BufferedReader(new FileReader(dirPeople));
+		HashSet<String> names = new HashSet<>();
 
 		String line = "undefined";
 		try {
@@ -70,14 +74,20 @@ public class PeopleIO {
 			while ((line = bf.readLine()) != null) {
 
 				String[] elements = line.split(",");
-				int index = 0;
+				int index = 0; // a counter to determine which element the
+								// program is reading from the line
 
-				// Name must always be the first element
+				// Name must always be the first element and unique
 				String personName = IOUtil.getData(elements[index++]);
+				if (names.contains(personName))
+					throw new IOException(String.format("Duplicate name: %s", personName));
+				else
+					names.add(personName);
 
 				Person temp = new Person(personName);
 				people.add(temp);
 
+				// Set Attributes for the person
 				for (Attribute attribute : attributes) {
 
 					String name = attribute.getAttributeName();
@@ -93,7 +103,7 @@ public class PeopleIO {
 						// If we are putting a weighted attribute in, we also
 						// know that the next 2 fields are: 1. expecting same
 						// and 2. importance
-						temp.addOneToMultipleAttribute(name, 
+						temp.addOneToMultipleAttribute(name,
 								IOUtil.getData(data),
 								((OneToMultipleAttribute) attribute).getPossibleChoices(),
 								IOUtil.getData(elements[index++]).split(";"),
@@ -102,7 +112,9 @@ public class PeopleIO {
 
 					case WEIGHTED_SCALE:
 						ScaleAttribute convertedAttribute = (ScaleAttribute) attribute;
-						temp.addScaleAttribute(name, convertedAttribute.getFrom(), convertedAttribute.getTo(),
+						temp.addScaleAttribute(name,
+								convertedAttribute.getFrom(),
+								convertedAttribute.getTo(),
 								Integer.parseInt(IOUtil.getData(data)),
 								Integer.parseInt(IOUtil.getData(elements[index++])),
 								AttributeUtil.getInterest(IOUtil.getData(elements[index++])));
@@ -113,6 +125,7 @@ public class PeopleIO {
 					}
 				}
 
+				// Set Fixed Attributes for the person
 				FixedAttribute tempFA = fixedAttributes.get(personName);
 				temp.setMatched(tempFA.isMatched());
 				temp.setNumMatched(tempFA.getNumMatched());
@@ -120,7 +133,10 @@ public class PeopleIO {
 				temp.setAllMatch(tempFA.getMatches());
 
 			}
-//			System.out.printf("Successfully read all people in file %s\n\n", dirPeople);
+			
+			if (isDebug)
+				System.out.printf("Successfully read all people in file %s\n\n", dirPeople);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new IOException(String.format("Person in file %s is corrupted.\nProgram failed on line: %s\n%s",
@@ -128,12 +144,19 @@ public class PeopleIO {
 		} finally {
 			bf.close();
 		}
-
+	}
+	
+	private void loadFixedAttributes() throws FileNotFoundException, IOException {
+		aIO.setDebug(isDebug);
+		aIO.readAttributes();
+		this.fixedAttributes = aIO.getAttributes();
 	}
 
 	public void addPerson(Person person) throws IOException {
 
-//		System.out.printf("Adding to data: %s\n", person.getName());
+		if (isDebug)
+			System.out.printf("Adding to file the person: %s\n", person.getName());
+		
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
 
 		bf.write(person.getName() + ",");
@@ -189,11 +212,12 @@ public class PeopleIO {
 		bf.close();
 
 	}
-	
+
 	/**
 	 * Wipe all contents from both people and fixed attribute files.
 	 * 
-	 * @throws IOException file was not found
+	 * @throws IOException
+	 *             file was not found
 	 */
 	public void removeAllOnFile() throws IOException {
 		BufferedWriter bw = new BufferedWriter(new FileWriter(dirPeople));
@@ -204,5 +228,9 @@ public class PeopleIO {
 
 	public LinkedList<Person> getPeople() {
 		return people;
+	}
+	
+	public void setDebug(boolean isDebug) {
+		this.isDebug = isDebug;
 	}
 }

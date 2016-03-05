@@ -13,15 +13,19 @@ public class FixedAttributesIO {
 
 	private String dirAttr;
 	private HashMap<String, FixedAttribute> attributes;
+	private boolean isDebug;
 
 	public FixedAttributesIO(String dir) {
 		this.dirAttr = dir;
 		attributes = new HashMap<>();
+		isDebug = false;
 	}
 	
 	public void readAttributes() throws FileNotFoundException, IOException {
 		
-//		System.out.println("Init list of FIXED attributes");
+		if (isDebug)
+			System.out.println("Init list of FIXED attributes");
+		
 		BufferedReader bf = new BufferedReader(new FileReader(dirAttr));
 		
 		String line = "undefined";
@@ -44,7 +48,9 @@ public class FixedAttributesIO {
 				attributes.put(name, temp);
 			}
 			
-//			System.out.printf("Succesfully read all fixed attributes from file %s\n\n", dirAttr);
+			if (isDebug)
+				System.out.printf("Succesfully read all fixed attributes from file %s\n\n", dirAttr);
+			
 		} catch (Exception e) {
 			throw new IOException(String.format("FIXED Attributes in file %s is corrupted.\nProgram failed on line: %s\n%s", dirAttr, line, e.getMessage()));
 		} finally {
@@ -54,7 +60,9 @@ public class FixedAttributesIO {
 	
 	public void addAttribute(Person person) throws IOException {
 		
-//		System.out.printf("Adding to FA: %s\n", person.getName());
+		if (isDebug)
+			System.out.printf("Adding to FA: %s\n", person.getName());
+		
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
 		
 		bf.write(person.getName());
@@ -84,5 +92,9 @@ public class FixedAttributesIO {
 
 	public HashMap<String, FixedAttribute> getAttributes() {
 		return attributes;
+	}
+	
+	public void setDebug(boolean isDebug) {
+		this.isDebug = isDebug;
 	}
 }
