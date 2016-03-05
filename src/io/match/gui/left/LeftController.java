@@ -78,9 +78,10 @@ public class LeftController {
 	private void loadLeftLayout(LinkedList<Person> who) {
 		loadLeftLayout();
 		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
-		TablePopulator.populateStudent(tableView, who);
+		tableView = TablePopulator.populateStudent(tableView, who);
+		AssignListener.assignListener(tableView);
 	}
-	
+
 	private void loadLeftLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));

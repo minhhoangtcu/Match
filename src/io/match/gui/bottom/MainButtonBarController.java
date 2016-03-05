@@ -11,6 +11,7 @@ import io.match.datastructure.Person;
 import io.match.gui.center.load.LoadViewController;
 import io.match.gui.center.manage.DisplayPersonController;
 import io.match.gui.center.match.MatchViewController;
+import io.match.gui.left.AssignListener;
 import io.match.gui.left.LeftController;
 import io.match.gui.left.TablePopulator;
 import io.match.helper.LayoutFetcher;
@@ -108,6 +109,7 @@ public class MainButtonBarController {
 		loadLeftLayout();
 		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
 		TablePopulator.populateStudent(tableView, who);
+		AssignListener.assignListener(tableView);
 	}
 	
 	private void loadLeftLayout() {
