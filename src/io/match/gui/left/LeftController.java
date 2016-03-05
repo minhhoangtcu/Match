@@ -45,6 +45,21 @@ public class LeftController {
 	}
 	
 	public void loadFields() {
+		//load left layout
+		loadLeftLayout();
+		
+		//populate table
+		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
+		try {
+			tableView = TablePopulator.populateAttributes(tableView, model.getAttributes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		AssignListener.assignListener(tableView);
+		
+		
+		// load center layout
 		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/attribute/AttributesView.fxml"));
