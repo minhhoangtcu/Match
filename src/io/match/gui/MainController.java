@@ -29,7 +29,7 @@ public class MainController {
 			
 			CenterController controller = loader.getController();
 			controller.setModel(model);
-			controller.setCenterLayout();
+			controller.setIntroductionView();
 			rootLayout.setCenter(layout);
 		} catch (IOException e) {
 			System.out.println("Fail to load in setCenterLayout: MainController");

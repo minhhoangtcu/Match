@@ -30,8 +30,8 @@ public class BottomController {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/bottom/MainButtonBar.fxml"));
 			Parent layout = loader.load();
-			
 			MainButtonBarController controller = loader.getController();
+			
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
 			bottomLayout.setCenter(layout);

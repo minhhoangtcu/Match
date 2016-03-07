@@ -20,7 +20,7 @@ public class CenterController {
 		this.model = model;
 	}
 	
-	public void setCenterLayout() {
+	public void setIntroductionView() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/IntroductionView.fxml"));
 			Parent layout = loader.load();

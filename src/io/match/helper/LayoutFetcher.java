@@ -5,6 +5,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class LayoutFetcher {
+	
+	private static BorderPane centerLayout;
+	private static BorderPane bottomLayout;
+	private static TableView tableView;
+	
 	/**
 	 * Since the overall layout is a nested layout. This method try to trace through children
 	 * and try to fetch out the correct layout wanted to modify
@@ -16,9 +21,11 @@ public class LayoutFetcher {
 	 * @return center layout
 	 */
 	public static BorderPane getCenterLayout(BorderPane rootLayout) {
-		AnchorPane centerLayout = (AnchorPane) rootLayout.getChildren().get(0);
-		BorderPane view = (BorderPane) centerLayout.getChildren().get(0);
-		return view;
+		if (centerLayout == null) {
+			AnchorPane temp = (AnchorPane) rootLayout.getChildren().get(0);
+			centerLayout = (BorderPane) temp.getChildren().get(0);
+		}
+		return centerLayout;
 	}
 	
 	/**
@@ -32,9 +39,11 @@ public class LayoutFetcher {
 	 * @return bottom layout
 	 */
 	public static BorderPane getBottomLayout(BorderPane rootLayout) {
-		AnchorPane bottomLayout = (AnchorPane) rootLayout.getChildren().get(1);
-		BorderPane view = (BorderPane) bottomLayout.getChildren().get(0);
-		return view;
+		if (bottomLayout == null) {
+			AnchorPane temp = (AnchorPane) rootLayout.getChildren().get(1);
+			bottomLayout = (BorderPane) temp.getChildren().get(0);
+		}
+		return bottomLayout;
 	}
 	
 	/**
@@ -48,9 +57,11 @@ public class LayoutFetcher {
 	 */
 	
 	public static TableView getTableInLeftLayout(BorderPane rootLayout) {
-		AnchorPane leftLayout = (AnchorPane) rootLayout.getLeft();
-		BorderPane borderPane = (BorderPane) leftLayout.getChildren().get(0);
-		TableView table = (TableView) borderPane.getCenter();
-		return table;
+		if (tableView == null) {
+			AnchorPane leftLayout = (AnchorPane) rootLayout.getLeft();
+			BorderPane borderPane = (BorderPane) leftLayout.getChildren().get(0);
+			tableView = (TableView) borderPane.getCenter();
+		}
+		return tableView;
 	}
 }

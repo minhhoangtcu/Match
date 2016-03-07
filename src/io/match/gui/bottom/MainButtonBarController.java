@@ -2,9 +2,6 @@ package io.match.gui.bottom;
 
 import java.io.IOException;
 import java.util.LinkedList;
-
-import javax.swing.text.View;
-
 import io.match.Match;
 import io.match.Model;
 import io.match.datastructure.Person;
@@ -12,151 +9,166 @@ import io.match.gui.center.load.LoadViewController;
 import io.match.gui.center.manage.DisplayPersonController;
 import io.match.gui.center.match.MatchViewController;
 import io.match.gui.left.AssignListener;
-import io.match.gui.left.LeftController;
+import io.match.gui.left.ManageLeftController;
 import io.match.gui.left.TablePopulator;
 import io.match.helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class MainButtonBarController {
-	
+
 	@FXML
 	private Button btnLoad;
+
 	@FXML
 	private Button btnMatch;
-	
+
+	// Required 
 	private Model model;
 	private BorderPane rootLayout;
-	
-	
+
+	// Layout to be initialized and store within the program. 
+	private AnchorPane loadCenterView;
+	private AnchorPane matchCenterView;
+	private AnchorPane manageLeftView;
+	private AnchorPane manageCenterView;
+
 	private boolean manageUserUp = false;
-	
-	
+
 	public void setModel(Model model) {
 		this.model = model;
 	}
-	
+
 	public void setRootLayout(BorderPane rootLayout) {
 		this.rootLayout = rootLayout;
 	}
 
-
-	public void loadLoadView(){
+	@FXML
+	private void loadLoadView() {
 		rootLayout.setLeft(null);
-		
-		// load center layout
-		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		if (loadCenterView == null) {
+			initLoadView();
+		}
+		LayoutFetcher.getCenterLayout(rootLayout).setCenter(loadCenterView);
+	}
+
+	private void initLoadView() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/load/LoadView.fxml"));
-			Parent layout = loader.load();
-			
+			loadCenterView = (AnchorPane) loader.load();
+
 			LoadViewController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
-			center.setCenter(layout);
+
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
 		}
 	}
-	
 
-	public void loadMatchView() {
-		
-		if (model.isEmptyFaculties() && model.isEmptyStudents()) { 
-			System.out.println("Oop! Didn't load students and faculties files"
-					+ "\nFrom loadMatchView: MainButtonBarController");
+	@FXML
+	private void loadMatchView() {
+
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) {
+			System.out.println(
+					"Oop! Didn't load students and faculties files" + "\nFrom loadMatchView: MainButtonBarController");
 			return;
 		}
-		
-		// set left layout to null
+
 		rootLayout.setLeft(null);
 		
-		// load center layout
+		if (matchCenterView == null)
+			initMatchView();
 		
+		LayoutFetcher.getCenterLayout(rootLayout).setCenter(matchCenterView);
 		
+	}
+	
+	private void initMatchView() {
 		try {
-			BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/match/MatchView.fxml"));
-			Parent layout = loader.load();
+			matchCenterView = (AnchorPane) loader.load();
 
 			MatchViewController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
 			controller.populateMatchTable();
-			center.setCenter(layout);
+			
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
 		}
 	}
 
-	public void loadManageView() {
-		
-		if (model.isEmptyFaculties() && model.isEmptyStudents()) { 
-			System.out.println("Oop! Didn't load students and faculties files"
-					+ "\nFrom loadMatchView: MainButtonBarController");
+	@FXML
+	private void loadManageView() {
+
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) {
+			System.out.println(
+					"Oop! Didn't load students and faculties files" + "\nFrom loadMatchView: MainButtonBarController");
 			return;
 		}
-		
-		loadLeftLayout(model.getStudents());
-		loadCenterLayout();
+
+		// Set up the left view for Manage tab
+		if (manageLeftView == null) {
+			initManageLeftView();
+			rootLayout.setLeft(manageLeftView);
+			loadLeftLayoutWithPeople(model.getStudents());
+		}
+		rootLayout.setLeft(manageLeftView);
+				
+		// Set up center view for Manage tab
+		if (manageCenterView == null) {
+			initManageCenterLayout();
+		}
+		LayoutFetcher.getCenterLayout(rootLayout).setCenter(manageCenterView);
 	}
-	
-	private void loadLeftLayout(LinkedList<Person> who) {
-		loadLeftLayout();
-		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
-		TablePopulator.populateStudent(tableView, who);
-		AssignListener.assignListener(tableView);
-	}
-	
-	private void loadLeftLayout() {
-		
+
+	private void initManageLeftView() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
-			Parent layout = loader.load();
-			
-			LeftController controller = loader.getController();
+			manageLeftView = (AnchorPane) loader.load();
+
+			ManageLeftController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
-			rootLayout.setLeft(layout);
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("Fail to load in loadStudents: MainButtonBarController");
 		}
 	}
 	
-	private void loadCenterLayout() {
-		
+	private void loadLeftLayoutWithPeople(LinkedList<Person> who) {
+		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
+		TablePopulator.populateStudent(tableView, who);
+		AssignListener.assignListener(tableView);
+	}
+
+	private void initManageCenterLayout() {
+
 		try {
-			BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/manage/PersonTemplate.fxml"));
-			Parent layout = loader.load();
-			
-			
+			manageCenterView = loader.load();
+
 			DisplayPersonController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
-			center.setCenter(layout);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in setCenterLayout: MainButtonBarController");
 		}
 	}
-	
-	public void export() {
-		if (model.isEmptyFaculties() && model.isEmptyStudents()) {  
-			System.out.println("Oop! Didn't load students and faculties files"
-					+ "\nFrom loadMatchView: MainButtonBarController");
+
+	@FXML
+	private void export() {
+		if (model.isEmptyFaculties() && model.isEmptyStudents()) {
+			System.out.println(
+					"Oop! Didn't load students and faculties files" + "\nFrom loadMatchView: MainButtonBarController");
 			return;
 		}
 		System.out.println("From export: MainButtonBarController");
 	}
-	
-	
-	
-	
 
 }

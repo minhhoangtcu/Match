@@ -16,7 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 
-public class LeftController {
+public class ManageLeftController {
 	
 	@FXML
 	private TableView displayTable;
@@ -33,17 +33,19 @@ public class LeftController {
 	}
 	
 
-	
+	@FXML
 	public void loadStudents() {
 		loadLeftLayout(model.getStudents());
 		loadCenterLayout();
 	}
 	
+	@FXML
 	public void loadFaculties() {
 		loadLeftLayout(model.getFaculties());
 		loadCenterLayout();
 	}
 	
+	@FXML
 	public void loadFields() {
 		//load left layout
 		loadLeftLayout();
@@ -52,8 +54,8 @@ public class LeftController {
 		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
 		try {
 			tableView = TablePopulator.populateAttributes(tableView, model.getAttributes());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
+			System.err.println("Failed to populate the table.");
 			e.printStackTrace();
 		}
 		AssignListener.assignListener(tableView);
@@ -102,7 +104,7 @@ public class LeftController {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
 			Parent layout = loader.load();
 			
-			LeftController controller = loader.getController();
+			ManageLeftController controller = loader.getController();
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
 			rootLayout.setLeft(layout);

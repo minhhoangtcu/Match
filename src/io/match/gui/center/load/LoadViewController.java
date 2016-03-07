@@ -11,6 +11,7 @@ import io.match.helper.LoadFile;
 import javafx.scene.layout.BorderPane;
 
 public class LoadViewController {
+	
 	private BorderPane rootLayout;
 	private Model model;
 	private String studentsURL = "", 
