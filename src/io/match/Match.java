@@ -53,8 +53,7 @@ public class Match extends Application {
 			
 			MainController controller = loader.getController();
 			controller.setModel(model);
-			controller.setCenterLayout();
-			controller.setBottomLayout();
+			
 			
 		} catch (IOException e) {
 			System.out.println("Fail to load setUpPrimaryStage: Match");

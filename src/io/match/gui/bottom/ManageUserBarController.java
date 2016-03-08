@@ -8,7 +8,7 @@ import io.match.Model;
 import io.match.datastructure.Person;
 import io.match.gui.center.attribute.AttributesViewController;
 import io.match.gui.center.manage.DisplayPersonController;
-import io.match.gui.left.ManageLeftController;
+import io.match.gui.left.LeftController;
 import io.match.gui.left.TablePopulator;
 import io.match.helper.LayoutFetcher;
 import javafx.fxml.FXMLLoader;
@@ -83,7 +83,7 @@ public class ManageUserBarController {
 	
 	private void loadLeftLayout() {
 		FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
-		ManageLeftController controller = loader.getController();
+		LeftController controller = loader.getController();
 		controller.setModel(model);
 		controller.setRootLayout(rootLayout);
 		try {

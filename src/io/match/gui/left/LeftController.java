@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import io.match.Match;
 import io.match.Model;
 import io.match.datastructure.Person;
+import io.match.gui.MainController;
 import io.match.gui.bottom.MainButtonBarController;
 import io.match.gui.center.attribute.AttributesViewController;
 import io.match.gui.center.manage.DisplayPersonController;
@@ -14,22 +15,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-public class ManageLeftController {
+public class LeftController {
+	
+	@FXML
+	private AnchorPane leftLayout;
 	
 	@FXML
 	private TableView displayTable;
 	
 	BorderPane rootLayout;
-	Model model;
+	private Model model;
+	private MainController mController;
 	
 	public void setModel(Model model) {
 		this.model = model;
 	}
 	
-	public void setRootLayout(BorderPane rootLayout) {
-		this.rootLayout = rootLayout;
+	public void setMainController(MainController controller) {
+		mController = controller;
+		mController.setLeftTableView(displayTable);
+		mController.setLeftLayout(leftLayout);
+		rootLayout = mController.getRootLayout();
 	}
 	
 
@@ -104,9 +113,9 @@ public class ManageLeftController {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
 			Parent layout = loader.load();
 			
-			ManageLeftController controller = loader.getController();
+			LeftController controller = loader.getController();
 			controller.setModel(model);
-			controller.setRootLayout(rootLayout);
+			controller.setMainController(mController);
 			rootLayout.setLeft(layout);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
