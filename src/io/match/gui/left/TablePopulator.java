@@ -16,7 +16,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TablePopulator {
 
-	public static TableView populateStudent(TableView tableView, LinkedList<Person> students) {
+	public static void populateStudent(TableView tableView, LinkedList<Person> students) {
+		
+		tableView.getColumns().removeAll(tableView.getColumns());
 		
 		ObservableList<Row> observableList = FXCollections.observableArrayList();
 		for (Person person: students) {
@@ -25,41 +27,44 @@ public class TablePopulator {
 			observableList.add(new Row(name, convertBoolean(match)));
 		}
 		
-		TableColumn nameColumn = (TableColumn) tableView.getColumns().get(0);
+		TableColumn nameColumn = new TableColumn<>("Student");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
 		
-		TableColumn matchedColumn = (TableColumn) tableView.getColumns().get(1);
+		TableColumn matchedColumn = new TableColumn<>("Match");
 		matchedColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("match"));
 		
 		matchedColumn.setStyle("-fx-alignment: CENTER;");
-
-		tableView.setItems(observableList);
 		
-		return tableView;
+		tableView.getColumns().addAll(nameColumn, matchedColumn);
+		tableView.setItems(observableList);
 	}
 
-	public static TableView populateFaculties(TableView tableView, LinkedList<Person> faculties) {
-				
+	public static void populateFaculties(TableView tableView, LinkedList<Person> faculties) {
+		
+		tableView.getColumns().removeAll(tableView.getColumns());
+		
 		ObservableList<Row> observableList = FXCollections.observableArrayList();
 		for (Person person: faculties) {
-			String name = person.getGeneralAttribute("name");
+			String name = person.getName();
 			Boolean match = person.isMatched();
 			observableList.add(new Row(name, convertBoolean(match)));
 		}
 		
-		TableColumn nameColumn = (TableColumn) tableView.getColumns().get(0);
+		TableColumn nameColumn = new TableColumn<>("Faculty");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
 		
-		TableColumn matchedColumn = (TableColumn) tableView.getColumns().get(1);
+		TableColumn matchedColumn = new TableColumn<>("Match");
 		matchedColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("match"));
-
 		
+		matchedColumn.setStyle("-fx-alignment: CENTER;");
+		
+		tableView.getColumns().addAll(nameColumn, matchedColumn);
 		tableView.setItems(observableList);
-		
-		return tableView;
 	}
 	
-	public static TableView populateAttributes(TableView tableView, LinkedList<Attribute> attributes) {
+	public static void populateAttributes(TableView tableView, LinkedList<Attribute> attributes) {
+		
+		tableView.getColumns().removeAll(tableView.getColumns());
 		
 		ObservableList<Row> observableList = FXCollections.observableArrayList();
 		for (Attribute attribute: attributes) {
@@ -68,15 +73,11 @@ public class TablePopulator {
 			observableList.add(new Row(name, convertBoolean(match)));
 		}
 		
-		TableColumn nameColumn = (TableColumn) tableView.getColumns().get(0);
+		TableColumn nameColumn = new TableColumn<>("Field");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
 		
-		TableColumn matchedColumn = (TableColumn) tableView.getColumns().get(1);
-
-		tableView.getColumns().remove(matchedColumn);
+		tableView.getColumns().add(nameColumn);
 		tableView.setItems(observableList);
-		
-		return tableView;
 	}
 	
 

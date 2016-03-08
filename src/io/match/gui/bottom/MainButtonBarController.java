@@ -118,20 +118,17 @@ public class MainButtonBarController {
 		if (manageLeftView == null) {
 			manageLeftView = mController.getLeftLayout();
 			mController.getRootLayout().setLeft(manageLeftView);
-			loadLeftLayoutWithPeople(model.getStudents());
+			TablePopulator.populateStudent(mController.getLeftTableView(), model.getStudents());
+		} else {
+			mController.getRootLayout().setLeft(manageLeftView);
 		}
-		mController.getRootLayout().setLeft(manageLeftView);
+		
 				
 		// Set up center view for Manage tab
 		if (manageCenterView == null) {
 			initManageCenterLayout();
 		}
 		mController.getCenterLayout().setCenter(manageCenterView);
-	}
-	
-	private void loadLeftLayoutWithPeople(LinkedList<Person> who) {
-		TablePopulator.populateStudent(mController.getLeftTableView(), who);
-		AssignListener.assignListener(mController.getLeftTableView());
 	}
 
 	private void initManageCenterLayout() {

@@ -10,7 +10,6 @@ import io.match.gui.MainController;
 import io.match.gui.bottom.MainButtonBarController;
 import io.match.gui.center.attribute.AttributesViewController;
 import io.match.gui.center.manage.DisplayPersonController;
-import io.match.helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,39 +38,36 @@ public class LeftController {
 		mController.setLeftTableView(displayTable);
 		mController.setLeftLayout(leftLayout);
 		rootLayout = mController.getRootLayout();
+		displayTable.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> System.out.println("listener in table"));
 	}
 	
 
 	@FXML
 	public void loadStudents() {
-		loadLeftLayout(model.getStudents());
+		TablePopulator.populateStudent(displayTable, model.getStudents());
 		loadCenterLayout();
 	}
 	
 	@FXML
 	public void loadFaculties() {
-		loadLeftLayout(model.getFaculties());
+		TablePopulator.populateFaculties(displayTable, model.getFaculties());
 		loadCenterLayout();
 	}
 	
 	@FXML
 	public void loadFields() {
-		//load left layout
-		loadLeftLayout();
 		
-		//populate table
-		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
 		try {
-			tableView = TablePopulator.populateAttributes(tableView, model.getAttributes());
+			TablePopulator.populateAttributes(displayTable, model.getAttributes());
 		} catch (Exception e) {
 			System.err.println("Failed to populate the table.");
 			e.printStackTrace();
 		}
-		AssignListener.assignListener(tableView);
 		
 		
 		// load center layout
-		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		BorderPane center = mController.getCenterLayout();
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/attribute/AttributesView.fxml"));
 			Parent layout = loader.load();
@@ -87,7 +83,7 @@ public class LeftController {
 	}
 	
 	private void loadCenterLayout() {
-		BorderPane center = LayoutFetcher.getCenterLayout(rootLayout);
+		BorderPane center = mController.getCenterLayout();
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/manage/PersonTemplate.fxml"));
 			Parent layout = loader.load();
@@ -100,27 +96,6 @@ public class LeftController {
 			System.out.println("Fail to load FXML file in loadCenterLayout: LeftController");
 		}
 	}
-	
-	private void loadLeftLayout(LinkedList<Person> who) {
-		loadLeftLayout();
-		TableView tableView = LayoutFetcher.getTableInLeftLayout(rootLayout);
-		tableView = TablePopulator.populateStudent(tableView, who);
-		AssignListener.assignListener(tableView);
-	}
 
-	private void loadLeftLayout() {
-		try {
-			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
-			Parent layout = loader.load();
-			
-			LeftController controller = loader.getController();
-			controller.setModel(model);
-			controller.setMainController(mController);
-			rootLayout.setLeft(layout);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Fail to load in loadStudents: LeftController");
-		}
-	}
 
 }
