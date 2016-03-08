@@ -2,6 +2,18 @@ package io.match.gui.left;
 
 import javafx.scene.control.TableView;
 
+
+/*
+ * 
+ * 
+ * UNUSED
+ * 
+ * 
+ * 
+ */
+
+
+
 public class AssignListener {
 	
 	public static void assignListener(TableView tableView) {

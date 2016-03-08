@@ -5,9 +5,7 @@ import java.util.LinkedList;
 
 import io.match.Match;
 import io.match.Model;
-import io.match.datastructure.Person;
 import io.match.gui.MainController;
-import io.match.gui.bottom.MainButtonBarController;
 import io.match.gui.center.attribute.AttributesViewController;
 import io.match.gui.center.manage.DisplayPersonController;
 import javafx.fxml.FXML;

@@ -17,7 +17,6 @@ public class BottomController {
 	
 	@FXML
 	private BorderPane bottomLayout;
-	private BorderPane rootLayout;
 	
 	
 	public void setModel(Model model) {
@@ -26,7 +25,6 @@ public class BottomController {
 	
 	public void setMainController(MainController controller) {
 		mController = controller;
-		rootLayout = mController.getRootLayout();
 		initialize();
 	}
 	

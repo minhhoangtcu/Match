@@ -1,24 +1,17 @@
 package io.match.gui.bottom;
 
 import java.io.IOException;
-import java.util.LinkedList;
 import io.match.Match;
 import io.match.Model;
-import io.match.datastructure.Person;
 import io.match.gui.MainController;
 import io.match.gui.center.load.LoadViewController;
 import io.match.gui.center.manage.DisplayPersonController;
 import io.match.gui.center.match.MatchViewController;
-import io.match.gui.left.AssignListener;
-import io.match.gui.left.LeftController;
 import io.match.gui.left.TablePopulator;
-import io.match.helper.LayoutFetcher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
 public class MainButtonBarController {
 
@@ -37,8 +30,6 @@ public class MainButtonBarController {
 	private AnchorPane matchCenterView;
 	private AnchorPane manageLeftView;
 	private AnchorPane manageCenterView;
-
-	private boolean manageUserUp = false;
 
 	public void setModel(Model model) {
 		this.model = model;
@@ -65,7 +56,6 @@ public class MainButtonBarController {
 
 			LoadViewController controller = loader.getController();
 			controller.setModel(model);
-			controller.setRootLayout(mController.getRootLayout());
 
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");

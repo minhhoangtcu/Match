@@ -41,7 +41,6 @@ public class MainController {
 			Parent layout = loader.load();
 			
 			CenterController controller = loader.getController();
-			controller.setModel(model);
 			controller.setMainController(this);
 			controller.setIntroductionView();
 			rootLayout.setCenter(layout);
