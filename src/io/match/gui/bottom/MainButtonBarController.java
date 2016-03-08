@@ -56,7 +56,6 @@ public class MainButtonBarController {
 
 			LoadViewController controller = loader.getController();
 			controller.setModel(model);
-
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
 		}
@@ -72,12 +71,9 @@ public class MainButtonBarController {
 		}
 
 		mController.getRootLayout().setLeft(null);
-		
 		if (matchCenterView == null)
 			initMatchView();
-		
 		mController.getCenterLayout().setCenter(matchCenterView);
-		
 	}
 	
 	private void initMatchView() {
@@ -87,9 +83,7 @@ public class MainButtonBarController {
 
 			MatchViewController controller = loader.getController();
 			controller.setModel(model);
-			controller.setRootLayout(mController.getRootLayout());
-			controller.populateMatchTable();
-			
+			controller.setMainController(mController);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadLoadView: MainButtonBarController");
 		}
@@ -129,7 +123,7 @@ public class MainButtonBarController {
 
 			DisplayPersonController controller = loader.getController();
 			controller.setModel(model);
-			controller.setRootLayout(mController.getRootLayout());
+			controller.setMainController(mController);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in setCenterLayout: MainButtonBarController");
 		}

@@ -4,6 +4,7 @@ import java.beans.EventHandler;
 
 import io.match.Model;
 import io.match.datastructure.Person;
+import io.match.gui.MainController;
 import io.match.gui.left.Row;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,8 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class MatchViewController {
-	private BorderPane rootLayout;
 	private Model model;
+	private MainController mController;
 
 	@FXML
 	private TableView tableView;
@@ -44,16 +45,18 @@ public class MatchViewController {
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
-	public void setRootLayout(BorderPane rootLayout) {
-		this.rootLayout = rootLayout;
+	
+	public void setMainController(MainController controller) {
+		mController = controller;
+		intialize();
 	}
 
 	public void match() {
 		System.out.println("From match: MatchViewController");
 	}
-
-	public void populateMatchTable() {
+	
+	
+	private void intialize() {
 		populateMatchTable("", "");
 	}
 

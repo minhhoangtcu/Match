@@ -1,19 +1,21 @@
 package io.match.gui.center.manage;
 
 import io.match.Model;
+import io.match.gui.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
 
 public class DisplayPersonController {
-	BorderPane rootLayout;
-	Model model;
+	
+	private Model model;
+	private MainController mController;
 	
 	public void setModel(Model model) {
 		this.model = model;
 	}
 	
-	public void setRootLayout(BorderPane rootLayout) {
-		this.rootLayout = rootLayout;
+	public void setMainController(MainController controller) {
+		mController = controller;
 	}
 	
 	@FXML
