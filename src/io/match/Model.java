@@ -79,6 +79,21 @@ public class Model {
 		return students;
 	}
 	
+	/**
+	 * Get the student with the provided name.
+	 * 
+	 * @param name distinct name of the student to search for in the database
+	 * @return the person with matching provided name
+	 */
+	public Person getStudent(String name) {
+		try {
+			return getPerson(students, name);
+		}
+		catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(String.format("The student with provided name: %s does not exist in the data base", name));
+		}
+	}
+	
 	public boolean isEmptyStudents() {
 		return students.size() == 0;
 	}
@@ -97,6 +112,21 @@ public class Model {
 		throw new IllegalArgumentException(String.format("The faculty with provided name: %s does not exist in the data base", name));
 	}
 	
+	/**
+	 * Get the faculty with the provided name.
+	 * 
+	 * @param name distinct name of the faculty to search for in the database
+	 * @return the person with matching provided name
+	 */
+	public Person getFaculty(String name) {
+		try {
+			return getPerson(faculties, name);
+		}
+		catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(String.format("The faculty with provided name: %s does not exist in the data base", name));
+		}
+	}
+	
 	public LinkedList<Person> getFaculties() {
 		return faculties;
 	}
@@ -106,10 +136,20 @@ public class Model {
 	}
 	
 	/*
-	 * OTHER DATA
+	 * OTHER HELPER METHOD
 	 */
 	
 	public LinkedList<Attribute> getAttributes() {
 		return attributeIO.getAttributes();
 	}
+	
+	private Person getPerson(LinkedList<Person> people, String name) {
+		for (Person person : people) {
+			if (person.getName().equals(name))
+				return person;
+		}
+		throw new IllegalArgumentException();
+	}
+	
+	
 }
