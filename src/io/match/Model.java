@@ -13,6 +13,7 @@ public class Model {
 	// Define basic data structure
 	private LinkedList<Person> students;
 	private LinkedList<Person> faculties;
+	private LinkedList<Attribute> attributes;
 	
 	// Link to the files for the IO
 	private final static String ATTRIBUTE_DIR = "data/attributes.match";
@@ -35,6 +36,7 @@ public class Model {
 		attributeIO = new AttributesIO(ATTRIBUTE_DIR);
 		attributeIO.setDebug(isDebug);
 		attributeIO.readAttributes();
+		attributes = attributeIO.getAttributes();
 		
 		if (isDebug) {
 			loadStudents(studentsDir, studentsFADir);
@@ -136,12 +138,31 @@ public class Model {
 	}
 	
 	/*
-	 * OTHER HELPER METHOD
+	 * ATTRIBUTE'S METHODS
 	 */
+	
+	/**
+	 * Get the attribute with the provided name.
+	 * 
+	 * @param name distinct name of the faculty to search for in the database
+	 * @return the person with matching provided name
+	 */
+	public Attribute getAttribute(String name) {
+		try {
+			return getAttribute(attributes, name);
+		}
+		catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(String.format("The faculty with provided name: %s does not exist in the data base", name));
+		}
+	}
 	
 	public LinkedList<Attribute> getAttributes() {
 		return attributeIO.getAttributes();
 	}
+	
+	/*
+	 * OTHER HELPER METHODS
+	 */
 	
 	private Person getPerson(LinkedList<Person> people, String name) {
 		for (Person person : people) {
@@ -151,5 +172,11 @@ public class Model {
 		throw new IllegalArgumentException();
 	}
 	
-	
+	private Attribute getAttribute(LinkedList<Attribute> attributes, String name) {
+		for (Attribute attribute : attributes) {
+			if (attribute.getAttributeName().equals(name))
+				return attribute;
+		}
+		throw new IllegalArgumentException();
+	}
 }
