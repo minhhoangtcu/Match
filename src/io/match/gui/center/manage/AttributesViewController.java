@@ -4,6 +4,7 @@ import io.match.Model;
 import javafx.scene.layout.BorderPane;
 
 public class AttributesViewController {
+	
 	BorderPane rootLayout;
 	Model model;
 		

@@ -1,15 +1,11 @@
 package io.match.gui.left;
 
 import java.util.LinkedList;
-
-import javax.security.auth.callback.Callback;
-
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.AttributeUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -66,21 +62,22 @@ public class TablePopulator {
 		
 		tableView.getColumns().removeAll(tableView.getColumns());
 		
-		ObservableList<Row> observableList = FXCollections.observableArrayList();
+		ObservableList<Row> observableList = FXCollections.observableArrayList();	
 		for (Attribute attribute: attributes) {
 			String name = attribute.getAttributeName();
-			Boolean match = false;
-			observableList.add(new Row(name, convertBoolean(match)));
+			String type = AttributeUtil.getStringFromType(attribute.getAttributeType());
+			observableList.add(new Row(name, type));
 		}
 		
 		TableColumn nameColumn = new TableColumn<>("Field");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
 		
-		tableView.getColumns().add(nameColumn);
+		TableColumn typeColumn = new TableColumn<>("Attribute Type");
+		typeColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("type"));
+		
+		tableView.getColumns().addAll(nameColumn, typeColumn);
 		tableView.setItems(observableList);
 	}
-	
-
 	
 	private static String convertBoolean(Boolean match) {
 		return match == true ? "X" : "";

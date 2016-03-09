@@ -63,7 +63,7 @@ public class PeopleStringReader {
 	}
 
 	public static String getImportanceOneToMultiple(Attribute input) {
-		return AttributeUtil.getString(((OneToMultipleAttribute) input).getInterst());
+		return AttributeUtil.getStringFromInterest(((OneToMultipleAttribute) input).getInterst());
 	}
 
 	public static int getDataScale(Attribute input) {
@@ -75,7 +75,7 @@ public class PeopleStringReader {
 	}
 
 	public static String getImportanceScale(Attribute input) {
-		return AttributeUtil.getString(((ScaleAttribute) input).getInterst());
+		return AttributeUtil.getStringFromInterest(((ScaleAttribute) input).getInterst());
 	}
 
 	private static void printDataGeneral(Attribute input) {

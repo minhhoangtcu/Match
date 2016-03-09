@@ -39,50 +39,48 @@ public class LeftController {
 		mController.setLeftLayout(leftLayout);
 		rootLayout = mController.getRootLayout();
 		displayTable.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> loadCenterLayout(newValue));
+				(observable, oldValue, newValue) -> loadCenterLayoutWithPerson(newValue));
 	}
 	
 
 	@FXML
 	public void loadStudents() {
 		TablePopulator.populateStudent(displayTable, model.getStudents());
-		loadCenterLayout(null);
+		loadCenterLayoutWithPerson(null);
 	}
 	
 	@FXML
 	public void loadFaculties() {
 		TablePopulator.populateFaculties(displayTable, model.getFaculties());
-		loadCenterLayout(null);
+		loadCenterLayoutWithPerson(null);
 	}
 	
 	@FXML
 	public void loadFields() {
 		
-		try {
-			TablePopulator.populateAttributes(displayTable, model.getAttributes());
-		} catch (Exception e) {
-			System.err.println("Failed to populate the table.");
-			e.printStackTrace();
-		}
-		
+		TablePopulator.populateAttributes(displayTable, model.getAttributes());
 		
 		// load center layout
 		BorderPane center = mController.getCenterLayout();
 		try {
-			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/attribute/AttributesView.fxml"));
-			Parent layout = loader.load();
+			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/manage/AttributesView.fxml"));
+			Parent layout = loader.load(); // fail to load here
 			
 			AttributesViewController controller = loader.getController();
 			controller.setModel(model);
-
+			controller.setRootLayout(rootLayout);
+			
 			center.setCenter(layout);
+			
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadAttributesLayout: BottomController");
 		}
 	}
 	
-	private void loadCenterLayout(Object object) {
+	private void loadCenterLayoutWithPerson(Object object) {
+		
 		BorderPane center = mController.getCenterLayout();
+		
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/center/manage/PersonTemplate.fxml"));
 			Parent layout = loader.load();
@@ -90,6 +88,7 @@ public class LeftController {
 			DisplayPersonController controller = loader.getController();
 			controller.setModel(model);
 			controller.setMainController(mController);
+			
 			if (object != null) {
 				Row row = (Row) object;
 				String name = row.getName();
