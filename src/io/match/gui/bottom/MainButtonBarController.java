@@ -15,12 +15,20 @@ import javafx.scene.layout.AnchorPane;
 
 public class MainButtonBarController {
 
+	//TODO: Fade out or change the style of the button for the current tab.
+	
 	@FXML
 	private Button btnLoad;
 
 	@FXML
 	private Button btnMatch;
 
+	@FXML
+	private Button btnManage;
+	
+	@FXML
+	private Button btnExport;
+	
 	// Required 
 	private Model model;
 	private MainController mController;
@@ -34,7 +42,6 @@ public class MainButtonBarController {
 	public void setModel(Model model) {
 		this.model = model;
 	}
-
 	
 	public void setMainController(MainController controller) {
 		mController = controller;
