@@ -1,4 +1,4 @@
-package io.match.gui.center.attribute;
+package io.match.gui.center.manage;
 
 import io.match.Model;
 import javafx.scene.layout.BorderPane;
