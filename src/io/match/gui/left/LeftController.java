@@ -17,19 +17,25 @@ import javafx.scene.layout.BorderPane;
 
 public class LeftController {
 
-	// GUI's
+	/*
+	 * GUI's
+	 */
 	@FXML
 	private AnchorPane leftLayout;
 
 	@FXML
 	private TableView displayTable;
 
-	// Required
+	/*
+	 * Required
+	 */
 	private BorderPane rootLayout;
 	private Model model;
 	private MainController mController;
 
-	// Helper variables
+	/*
+	 * Helper variables
+	 */
 	private DisplayType type;
 
 	enum DisplayType {
@@ -90,6 +96,9 @@ public class LeftController {
 				break;
 			}
 		}
+		else {
+			// Set default layout
+		}
 	}
 
 	private void loadCenterLayoutWithAttribute(Attribute attribute) {
@@ -126,6 +135,7 @@ public class LeftController {
 			controller.setMainController(mController);
 			
 			// Handle passed Person
+			
 
 			center.setCenter(layout);
 		} catch (IOException e) {

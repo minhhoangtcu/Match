@@ -11,12 +11,16 @@ import javafx.scene.control.ScrollPane;
 
 public class DisplayPersonController {
 	
-	// Required
+	/*
+	 * Required
+	 */
 	private Model model;
 	private MainController mController;
-	private Object object;
+	private Person person;
 	
-	// GUI's
+	/*
+	 * GUI's
+	 */
 	@FXML
 	private Button btnAddNew;
 	
@@ -37,27 +41,27 @@ public class DisplayPersonController {
 		mController = controller;
 	}
 	
-	public void setObject(Object object) {
-		this.object = object;
-		if (object instanceof io.match.datastructure.Person) popupPerson((Person) object);
-		if (object instanceof io.match.datastructure.attributes.Attribute) popupAttribute((Attribute) object);
-		
+	public void setPerson(Person person) {
+		this.person = person;
+		popupPerson(person);
 	}
 
 	private void popupPerson(Person person) {
+		
 		for (Attribute attribute: person.getAttributes()) {
-			if (attribute.getAttributeType() == AttributeType.GENERAL) {
-				
-			} else if (attribute.getAttributeType() == AttributeType.WEIGHTED_ONE_TO_MULTIPLE) {
+			
+			switch (attribute.getAttributeType()) {
+			case GENERAL:
 				System.out.println("weighted one to multiple");
-			} else if (attribute.getAttributeType() == AttributeType.WEIGHTED_SCALE) {
+				break;
+			case WEIGHTED_ONE_TO_MULTIPLE:
+				System.out.println("weighted one to multiple");
+				break;
+			case WEIGHTED_SCALE:
 				System.out.println("weighted scale");
+				break;
 			}
 		}
-	}
-	
-	private void popupAttribute(Attribute attribute) {
-		System.out.println(attribute.getAttributeName());
 	}
 	
 	@FXML
