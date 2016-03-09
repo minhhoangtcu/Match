@@ -3,13 +3,14 @@ package io.match.gui.left;
 import java.io.IOException;
 import io.match.Match;
 import io.match.Model;
+import io.match.datastructure.Person;
+import io.match.datastructure.attributes.Attribute;
 import io.match.gui.MainController;
 import io.match.gui.center.manage.AttributesViewController;
 import io.match.gui.center.manage.DisplayPersonController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -27,15 +28,12 @@ public class LeftController {
 	private BorderPane rootLayout;
 	private Model model;
 	private MainController mController;
-	
+
 	// Helper variables
-	private boolean isDisplayingPerson;
 	private DisplayType type;
-	
+
 	enum DisplayType {
-		STUDENT,
-		FACULTY,
-		ATTRIBUTE
+		STUDENT, FACULTY, ATTRIBUTE
 	}
 
 	public void setModel(Model model) {
@@ -48,48 +46,53 @@ public class LeftController {
 	 * 
 	 */
 	public void setMainController(MainController controller) {
-		isDisplayingPerson = false;
-		
 		mController = controller;
 		mController.setLeftTableView(displayTable);
 		mController.setLeftLayout(leftLayout);
 		rootLayout = mController.getRootLayout();
 		displayTable.getSelectionModel().selectedItemProperty()
-				.addListener((observable, oldValue, newValue) -> loadCenterLayoutWithPerson(newValue));
+				.addListener((observable, oldValue, newValue) -> loadCenter(newValue));
 	}
 
 	@FXML
 	public void loadStudents() {
-		isDisplayingPerson = true;
 		type = DisplayType.STUDENT;
 		TablePopulator.populateStudent(displayTable, model.getStudents());
-		loadCenter(null);
+		loadCenter(null); // default layout
 	}
 
 	@FXML
 	public void loadFaculties() {
-		isDisplayingPerson = true;
 		type = DisplayType.FACULTY;
 		TablePopulator.populateFaculties(displayTable, model.getFaculties());
-		loadCenter(null);
+		loadCenter(null); // default layout
 	}
 
 	@FXML
 	public void loadFields() {
-		isDisplayingPerson = false;
 		type = DisplayType.ATTRIBUTE;
 		TablePopulator.populateAttributes(displayTable, model.getAttributes());
-		loadCenter(null);
+		loadCenter(null); // default layout
 	}
 
 	private void loadCenter(Object row) {
-		if (isDisplayingPerson)
-			loadCenterLayoutWithPerson(row);
-		else
-			loadCenterLayoutWithAttribute(row);
+		if (row != null) {
+			String name = ((Row) row).getName();
+			switch (type) {
+			case STUDENT:
+				loadCenterLayoutWithPerson(model.getStudent(name));
+				break;
+			case FACULTY:
+				loadCenterLayoutWithPerson(model.getFaculty(name));
+				break;
+			case ATTRIBUTE:
+				loadCenterLayoutWithAttribute(model.getAttribute(name));
+				break;
+			}
+		}
 	}
 
-	private void loadCenterLayoutWithAttribute(Object object) {
+	private void loadCenterLayoutWithAttribute(Attribute attribute) {
 
 		BorderPane center = mController.getCenterLayout();
 
@@ -101,6 +104,8 @@ public class LeftController {
 			controller.setModel(model);
 			controller.setRootLayout(rootLayout);
 
+			// Handle passed Attribute
+
 			center.setCenter(layout);
 
 		} catch (IOException e) {
@@ -108,7 +113,7 @@ public class LeftController {
 		}
 	}
 
-	private void loadCenterLayoutWithPerson(Object object) {
+	private void loadCenterLayoutWithPerson(Person person) {
 
 		BorderPane center = mController.getCenterLayout();
 
@@ -119,24 +124,9 @@ public class LeftController {
 			DisplayPersonController controller = loader.getController();
 			controller.setModel(model);
 			controller.setMainController(mController);
-
-			if (object != null) {
-				Row row = (Row) object;
-				String name = row.getName();
-				
-				switch (type) {
-				case STUDENT:
-					controller.setObject(model.getStudent(name));
-					break;
-				case FACULTY:
-					controller.setObject(model.getFaculty(name));
-					break;
-				case ATTRIBUTE:
-					controller.setObject(model.getAttribute(name));
-					break;
-				}
-			}
 			
+			// Handle passed Person
+
 			center.setCenter(layout);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadCenterLayout: LeftController");
