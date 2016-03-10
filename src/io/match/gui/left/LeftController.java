@@ -56,6 +56,7 @@ public class LeftController {
 		mController.setLeftTableView(displayTable);
 		mController.setLeftLayout(leftLayout);
 		rootLayout = mController.getRootLayout();
+		type = DisplayType.STUDENT; // Default to show students first
 		displayTable.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> loadCenter(newValue));
 	}
@@ -133,10 +134,8 @@ public class LeftController {
 			DisplayPersonController controller = loader.getController();
 			controller.setModel(model);
 			controller.setMainController(mController);
+			controller.setPerson(person);
 			
-			// Handle passed Person
-			
-
 			center.setCenter(layout);
 		} catch (IOException e) {
 			System.out.println("Fail to load FXML file in loadCenterLayout: LeftController");

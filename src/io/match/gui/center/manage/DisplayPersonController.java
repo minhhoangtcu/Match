@@ -3,11 +3,12 @@ package io.match.gui.center.manage;
 import io.match.Model;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.AttributeType;
 import io.match.gui.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 
 public class DisplayPersonController {
 	
@@ -33,6 +34,9 @@ public class DisplayPersonController {
 	@FXML
 	private ScrollPane scrollPane;
 	
+	@FXML
+	private VBox boxInfo;
+	
 	public void setModel(Model model) {
 		this.model = model;
 	}
@@ -47,6 +51,12 @@ public class DisplayPersonController {
 	}
 
 	private void popupPerson(Person person) {
+		
+		/*
+		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
+		 */
+		Label label = new Label("Label");
+		boxInfo.getChildren().add(label);
 		
 		for (Attribute attribute: person.getAttributes()) {
 			

@@ -46,6 +46,9 @@
                <BorderPane.margin>
                   <Insets top="20.0" />
                </BorderPane.margin>
+               <content>
+                  <VBox fx:id="boxInfo" />
+               </content>
             </ScrollPane>
          </center>
       </BorderPane>
