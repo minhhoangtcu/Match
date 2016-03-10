@@ -86,18 +86,30 @@ public class PersonComponentPopup {
 	public static void popupName(String name, GridPane gridPane, int row, boolean disable) {
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		gridPane.add(new Label("Name"), 0, row);
-		gridPane.add(new Label(": " + name), 1, row);
+		if (disable) {
+			gridPane.add(new Label(": " + name), 1, row);
+		} else {
+			gridPane.add(new TextField(name), 1, row);
+		}
 	}
 	
 	public static void popupMatched(int matched, GridPane gridPane, int row, boolean disable) {
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		gridPane.add(new Label("Matched"), 0, row);
-		gridPane.add(new Label(": " + matched), 1, row);
+		if (disable) {
+			gridPane.add(new Label(": " + matched), 1, row);
+		} else {
+			gridPane.add(new TextField("" + matched), 1, row);
+		}
 	}
 	
 	public static void popupAvailableMatches(int available, GridPane gridPane, int row, boolean disable) {
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		gridPane.add(new Label("Matches Available"), 0, row);
-		gridPane.add(new Label(": " +  available), 1, row);
+		if (disable) {
+			gridPane.add(new Label(": " + available), 1, row);
+		} else {
+			gridPane.add(new TextField("" + available), 1, row);
+		}
 	}
 }
