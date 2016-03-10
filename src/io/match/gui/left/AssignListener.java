@@ -24,7 +24,7 @@ public class AssignListener {
 
 	
 	private static void popupPerson(Object newValue) {
-		Row row = (Row) newValue;
+		TableRow row = (TableRow) newValue;
 		System.out.println(row);
 	}
 

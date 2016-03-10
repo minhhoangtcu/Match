@@ -1,6 +1,7 @@
 package io.match.gui.left;
 
 import java.io.IOException;
+
 import io.match.Match;
 import io.match.Model;
 import io.match.datastructure.Person;
@@ -11,6 +12,7 @@ import io.match.gui.center.manage.DisplayPersonController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -24,7 +26,16 @@ public class LeftController {
 	private AnchorPane leftLayout;
 
 	@FXML
-	private TableView displayTable;
+	private TableView<TableRow> displayTable;
+	
+	@FXML
+	private Button btnLoadStudent;
+	
+	@FXML
+	private Button btnLoadFaculties;
+	
+	@FXML
+	private Button btnLoadField;
 
 	/*
 	 * Required
@@ -84,7 +95,7 @@ public class LeftController {
 
 	private void loadCenter(Object row) {
 		if (row != null) {
-			String name = ((Row) row).getName();
+			String name = ((TableRow) row).getName();
 			switch (type) {
 			case STUDENT:
 				loadCenterLayoutWithPerson(model.getStudent(name));

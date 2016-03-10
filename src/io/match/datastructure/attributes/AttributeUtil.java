@@ -6,7 +6,7 @@ public class AttributeUtil {
 	private static final String SOMEWHAT_IMPORTANT = "Somewhat important";
 	private static final String NOT_IMPORTANT = "Not important";
 	private static final String GENERAL = "General";
-	private static final String WEIGHTED_ONE_TO_MULTIPLE = "Weighted - Multiple Choices";
+	private static final String WEIGHTED_ONE_TO_MULTIPLE = "Weighted - MC";
 	private static final String WEIGHTED_SCALE = "Weighted - Scale";
 	
 	public static Interest getInterest(String input) throws Exception {
