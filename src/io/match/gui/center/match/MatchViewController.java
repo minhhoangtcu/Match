@@ -51,14 +51,15 @@ public class MatchViewController {
 		mController = controller;
 		intialize();
 	}
-
-	public void match() {
-		System.out.println("From match: MatchViewController");
-	}
 	
-	
+	@FXML
 	private void intialize() {
 		populateMatchTable("", "");
+	}
+
+	@FXML
+	private void match() {
+		System.out.println("From match: MatchViewController");
 	}
 
 	@FXML
@@ -93,6 +94,8 @@ public class MatchViewController {
 		studentColumn.setCellValueFactory(new PropertyValueFactory<MatchRow, String>("studentName"));
 		facultyColumn.setCellValueFactory(new PropertyValueFactory<MatchRow, String>("facultyName"));
 		probabilityColumn.setCellValueFactory(new PropertyValueFactory<MatchRow, Double>("probability"));
+		probabilityColumn.setStyle("-fx-alignment: CENTER;");
+		
 		tableView.setItems(observableList);
 	}
 }
