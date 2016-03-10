@@ -73,7 +73,7 @@ public class TablePopulator {
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("name"));
 		
 		TableColumn typeColumn = new TableColumn<>("Attribute Type");
-		typeColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("type"));
+		typeColumn.setCellValueFactory(new PropertyValueFactory<Row,String>("match"));
 		
 		tableView.getColumns().addAll(nameColumn, typeColumn);
 		tableView.setItems(observableList);

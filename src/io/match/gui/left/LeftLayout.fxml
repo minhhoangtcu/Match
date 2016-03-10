@@ -19,7 +19,7 @@
             </HBox>
          </bottom>
          <center>
-            <TableView fx:id="displayTable" prefHeight="357.0" prefWidth="268.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="displayTable" BorderPane.alignment="CENTER">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
