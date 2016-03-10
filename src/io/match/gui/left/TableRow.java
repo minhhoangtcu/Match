@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class TableRow {
 	
+	// Required names. These variables cannot be changed without the changes in TablePopulator.
 	private final SimpleStringProperty name;
 	private final SimpleStringProperty value;
 	
