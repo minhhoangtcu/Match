@@ -37,6 +37,7 @@ public class DisplayPersonController {
 	@FXML
 	private VBox boxInfo;
 	
+	
 	public void setModel(Model model) {
 		this.model = model;
 	}
@@ -55,8 +56,9 @@ public class DisplayPersonController {
 		/*
 		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
 		 */
-		Label label = new Label("Label");
-		boxInfo.getChildren().add(label);
+		addLabel(String.format("Name: \t%s\n", person.getName()));
+		
+		addLabel(String.format("Matched: \t%d\tMatches Avaiable: \t%d", person.getNumMatched(), person.getNumMatchesAvaiable()));
 		
 		for (Attribute attribute: person.getAttributes()) {
 			
@@ -74,6 +76,10 @@ public class DisplayPersonController {
 		}
 	}
 	
+	private void addLabel(String text) {
+		boxInfo.getChildren().add(new Label(text));
+	}
+	
 	@FXML
 	private void add() {
 		System.out.println("From add: DisplayPersonController");
@@ -88,4 +94,5 @@ public class DisplayPersonController {
 	private void delete() {
 		System.out.println("From delete: DisplayPersonController");
 	}
+	
 }
