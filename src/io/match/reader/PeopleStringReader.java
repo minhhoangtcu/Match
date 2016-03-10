@@ -61,6 +61,10 @@ public class PeopleStringReader {
 	public static String[] getExpectingOneToMultiple(Attribute input) {
 		return ((OneToMultipleAttribute) input).getExpectingChoice();
 	}
+	
+	public static String[] getPossibleOneToMultiple(Attribute input) {
+		return ((OneToMultipleAttribute) input).getPossibleChoices();
+	}
 
 	public static String getImportanceOneToMultiple(Attribute input) {
 		return AttributeUtil.getStringFromInterest(((OneToMultipleAttribute) input).getInterst());

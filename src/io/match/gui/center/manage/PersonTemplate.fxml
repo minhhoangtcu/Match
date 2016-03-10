@@ -47,16 +47,14 @@
                   <Insets top="20.0" />
                </BorderPane.margin>
                <content>
-                  <GridPane fx:id="gridPane" alignment="TOP_CENTER">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <GridPane fx:id="gridPane">
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                     </padding>
+                     <columnConstraints>
+                        <ColumnConstraints minWidth="10.0" percentWidth="30.0" />
+                        <ColumnConstraints minWidth="10.0" percentWidth="70.0" />
+                     </columnConstraints>
                   </GridPane>
                </content>
             </ScrollPane>

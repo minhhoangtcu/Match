@@ -6,10 +6,11 @@ import io.match.datastructure.attributes.Attribute;
 import io.match.gui.MainController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.ColumnConstraintsBuilder;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.RowConstraints;
 
 public class DisplayPersonController {
 	
@@ -49,7 +50,8 @@ public class DisplayPersonController {
 	}
 	
 	private void initialize() {
-		
+		gridPane.getRowConstraints().removeAll();
+		gridPane.setVgap(10);
 	}
 
 	public void setPerson(Person person) {
@@ -63,22 +65,23 @@ public class DisplayPersonController {
 		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
 		 */
 		int row = 0;
+		boolean disable = true;
 
-		PersonComponentPopup.popupName(person.getName(), gridPane, row++);
-		PersonComponentPopup.popupMatched(person.getNumMatched(), gridPane, row++);
-		PersonComponentPopup.popupAvailableMatches(person.getNumMatchesAvaiable(), gridPane, row++);
+		PersonComponentPopup.popupName(person.getName(), gridPane, row++, disable);
+		PersonComponentPopup.popupMatched(person.getNumMatched(), gridPane, row++, disable);
+		PersonComponentPopup.popupAvailableMatches(person.getNumMatchesAvaiable(), gridPane, row++, disable);
 		
 		for (Attribute attribute: person.getAttributes()) {
 			
 			switch (attribute.getAttributeType()) {
 			case GENERAL:
-				PersonComponentPopup.popupGeneralAttribute(attribute, gridPane, row++, false);
+				PersonComponentPopup.popupGeneralAttribute(attribute, gridPane, row++, disable);
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				System.out.println("weighted one to multiple");
+				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row++, disable);
 				break;
 			case WEIGHTED_SCALE:
-				System.out.println("weighted scale");
+				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row++, disable);
 				break;
 			}
 		}
