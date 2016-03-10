@@ -1,15 +1,14 @@
 package io.match.gui.center.manage;
 
 import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.reader.PeopleStringReader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
@@ -40,7 +39,7 @@ public class PersonComponentPopup {
 		gridPane.add(new Label(attribute.getAttributeName()), 0, row);
 		
 		// add right component
-		VBox hBox = new VBox();
+		VBox vBox = new VBox();
 	    ToggleGroup group = new ToggleGroup();
 	    
 	    String choice = PeopleStringReader.getDataOneToMultiple(attribute);
@@ -52,11 +51,11 @@ public class PersonComponentPopup {
 	    	}
 	    	button.setDisable(disable);
 	    	
-	    	 // edit hBox
-	    	hBox.getChildren().add(button);
-	    	hBox.setMargin(button, new Insets(5, 0, 5, 0));
+	    	 // edit vBox
+	    	vBox.getChildren().add(button);
+	    	vBox.setMargin(button, new Insets(5, 0, 5, 0));
 	    }
-	    gridPane.add(hBox, 1, row);
+	    gridPane.add(vBox, 1, row);
 	    
 	}
 	
@@ -66,11 +65,22 @@ public class PersonComponentPopup {
 		gridPane.add(new Label(attribute.getAttributeName()), 0, row);
 		
 		// add right component
-		if (disable) {
-			gridPane.add(new Label(": " + PeopleStringReader.getDataScale(attribute)), 1, row);
-		} else {
-			
-		}
+		VBox vBox = new VBox();
+		
+		double min = PeopleStringReader.getMinScale(attribute);
+		double max = PeopleStringReader.getMaxScale(attribute);
+		double choice = PeopleStringReader.getDataScale(attribute);
+		Slider slider = new Slider(min, max, choice);
+		slider.setShowTickMarks(true);
+		slider.setShowTickLabels(true);
+		slider.setSnapToTicks(true);
+		slider.setMajorTickUnit(1);
+		slider.setMinorTickCount(0);
+		slider.setDisable(disable);
+		
+		vBox.getChildren().add(slider);
+		
+		gridPane.add(vBox, 1, row);
 	}
 	
 	public static void popupName(String name, GridPane gridPane, int row, boolean disable) {

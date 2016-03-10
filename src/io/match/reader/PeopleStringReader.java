@@ -81,6 +81,14 @@ public class PeopleStringReader {
 	public static String getImportanceScale(Attribute input) {
 		return AttributeUtil.getStringFromInterest(((ScaleAttribute) input).getInterst());
 	}
+	
+	public static int getMinScale(Attribute input) {
+		return ((ScaleAttribute) input).getFrom();
+	}
+	
+	public static int getMaxScale(Attribute input) {
+		return ((ScaleAttribute) input).getTo();
+	}
 
 	private static void printDataGeneral(Attribute input) {
 		System.out.printf("%s: %s\n", input.getAttributeName(), getDataGeneral(input));
