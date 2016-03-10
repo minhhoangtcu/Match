@@ -84,7 +84,7 @@ public class LeftController {
 
 	private void loadCenter(Object row) {
 		if (row != null) {
-			String name = ((Row) row).getName();
+			String name = ((TableRow) row).getName();
 			switch (type) {
 			case STUDENT:
 				loadCenterLayoutWithPerson(model.getStudent(name));

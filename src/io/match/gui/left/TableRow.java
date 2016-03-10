@@ -2,16 +2,20 @@ package io.match.gui.left;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Row {
+public class TableRow {
+	
 	private final SimpleStringProperty name;
-	private final SimpleStringProperty match;
+	private final SimpleStringProperty value;
 	
 	
-	public Row(String name, String match) {
+	public TableRow(String name, String value) {
 		this.name = new SimpleStringProperty(name);
-		this.match = new SimpleStringProperty(match);
+		this.value = new SimpleStringProperty(value);
 	}
 	
+	/*
+	 * NAME
+	 */
 	public String getName() {
         return name.get();
     }
@@ -24,15 +28,18 @@ public class Row {
     	return name;
     }
     
-    public boolean getMatch() {
-    	return match.get() == "X";
+    /*
+     * VALUE
+     */
+    public String getKey() {
+    	return value.get();
     }
     
-    public void setMatch(String match) {
-    	this.match.set(match);
+    public void setKey(String match) {
+    	this.value.set(match);
     }
     
-    public SimpleStringProperty matchProperty() {
-    	return match;
+    public SimpleStringProperty valueProperty() {
+    	return value;
     }
 }

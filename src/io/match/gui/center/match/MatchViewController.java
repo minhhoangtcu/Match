@@ -6,7 +6,7 @@ import io.match.Model;
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.gui.MainController;
-import io.match.gui.left.Row;
+import io.match.gui.left.TableRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
