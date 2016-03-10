@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 public class DisplayPersonController {
@@ -35,7 +36,7 @@ public class DisplayPersonController {
 	private ScrollPane scrollPane;
 	
 	@FXML
-	private VBox boxInfo;
+	private GridPane gridPane;
 	
 	
 	public void setModel(Model model) {
@@ -44,8 +45,13 @@ public class DisplayPersonController {
 
 	public void setMainController(MainController controller) {
 		mController = controller;
+		initialize();
 	}
 	
+	private void initialize() {
+		
+	}
+
 	public void setPerson(Person person) {
 		this.person = person;
 		popupPerson(person);
@@ -56,15 +62,17 @@ public class DisplayPersonController {
 		/*
 		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
 		 */
-		addLabel(String.format("Name: \t%s\n", person.getName()));
-		
-		addLabel(String.format("Matched: \t%d\tMatches Avaiable: \t%d", person.getNumMatched(), person.getNumMatchesAvaiable()));
+		int row = 0;
+
+		PersonComponentPopup.popupName(person.getName(), gridPane, row++);
+		PersonComponentPopup.popupMatched(person.getNumMatched(), gridPane, row++);
+		PersonComponentPopup.popupAvailableMatches(person.getNumMatchesAvaiable(), gridPane, row++);
 		
 		for (Attribute attribute: person.getAttributes()) {
 			
 			switch (attribute.getAttributeType()) {
 			case GENERAL:
-				System.out.println("weighted one to multiple");
+				PersonComponentPopup.popupGeneralAttribute(attribute, gridPane, row++, false);
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
 				System.out.println("weighted one to multiple");
@@ -74,10 +82,6 @@ public class DisplayPersonController {
 				break;
 			}
 		}
-	}
-	
-	private void addLabel(String text) {
-		boxInfo.getChildren().add(new Label(text));
 	}
 	
 	@FXML
