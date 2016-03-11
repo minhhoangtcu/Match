@@ -50,6 +50,7 @@ public class PersonComponentPopup {
 	    		button.setSelected(true);
 	    	}
 	    	button.setDisable(disable);
+	    	button.setStyle("-fx-opacity: 1;");
 	    	
 	    	 // edit vBox
 	    	vBox.getChildren().add(button);
@@ -77,6 +78,7 @@ public class PersonComponentPopup {
 		slider.setMajorTickUnit(1);
 		slider.setMinorTickCount(0);
 		slider.setDisable(disable);
+		slider.setStyle("-fx-opacity: 1;");
 		
 		vBox.getChildren().add(slider);
 		
