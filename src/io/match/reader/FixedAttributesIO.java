@@ -36,9 +36,8 @@ public class FixedAttributesIO {
 				FixedAttribute temp;
 				
 				String name = IOUtil.getData(elements[0]);
-				int numMatched = Integer.parseInt(IOUtil.getData(elements[2]));
-				int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[3]));
-				temp = new FixedAttribute(numMatchesAvaiable, numMatched);
+				int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[2]));
+				temp = new FixedAttribute(numMatchesAvaiable);
 					
 				for (String match: IOUtil.getData(elements[1]).split(";")) {
 					if (!match.equals(""))
@@ -68,9 +67,6 @@ public class FixedAttributesIO {
 		bf.write(person.getName());
 		bf.write(",");
 		
-		bf.write(person.isMatched() ? "TRUE" : "FALSE");
-		bf.write(",");
-		
 		int numOfMatches = person.getMatches().size();
 		String[] matches = person.getMatches().toArray(new String[numOfMatches]);
 		for (int i = 0; i < numOfMatches; i++) {
@@ -78,9 +74,6 @@ public class FixedAttributesIO {
 			if (i != numOfMatches - 1)
 				bf.write(";");
 		}
-		bf.write(",");
-		
-		bf.write(person.getNumMatched() + "");
 		bf.write(",");
 		
 		bf.write(person.getNumMatchesAvaiable() + "");

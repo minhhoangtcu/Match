@@ -8,13 +8,12 @@ import java.util.LinkedList;
  */
 class FixedAttribute {
 
-	private int numMatchesAvaiable, numMatched;
+	private int numMatchesAvaiable;
 	private LinkedList<String> matches;
 
-	public FixedAttribute(int numMatchesAvaiable, int numMatched) {
+	public FixedAttribute(int numMatchesAvaiable) {
 		matches = new LinkedList<>();
-		this.numMatchesAvaiable= numMatchesAvaiable;
-		this.numMatched = numMatched;
+		this.numMatchesAvaiable = numMatchesAvaiable;
 	}
 	
 	public void addMatch(String match) {
@@ -24,7 +23,7 @@ class FixedAttribute {
 		return numMatchesAvaiable;
 	}
 	public int getNumMatched() {
-		return numMatched;
+		return matches.size();
 	}
 	public LinkedList<String> getMatches() {
 		return matches;

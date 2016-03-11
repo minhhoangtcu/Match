@@ -13,13 +13,12 @@ public class Person {
 	// Name of the attribute and answer to this attribute
 	private String name;
 	private LinkedList<Attribute> attributes;
-	private int numMatchesAvaiable, numMatched;
+	private int numMatchesAvaiable;
 	private LinkedList<String> matches;
 
 	public Person(String name) {
 		this.name = name; 
 		numMatchesAvaiable = 1;
-		numMatched = 0;
 		attributes = new LinkedList<>();
 		matches = new LinkedList<>();
 	}
@@ -40,7 +39,6 @@ public class Person {
 
 	public void addMatch(String match) {
 		matches.add(match);
-		numMatched++;
 	}
 
 	public void addOneToMultipleAttribute(OneToMultipleAttribute attr) {
@@ -144,7 +142,7 @@ public class Person {
 		return name;
 	}
 	public int getNumMatched() {
-		return numMatched;
+		return matches.size();
 	}
 	public int getNumMatchesAvaiable() {
 		return numMatchesAvaiable;
@@ -178,7 +176,7 @@ public class Person {
 		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
 	}
 	public boolean isMatched() {
-		return numMatched >= numMatchesAvaiable;
+		return getNumMatched() == numMatchesAvaiable;
 	}
 	public void removeMatch(String match) {
 		if (matches.isEmpty())
@@ -195,9 +193,6 @@ public class Person {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public void setNumMatched(int numMatched) {
-		this.numMatched = numMatched;
 	}
 	public void setNumMatchesAvaiable(int numMatchesAvaiable) {
 		this.numMatchesAvaiable = numMatchesAvaiable;

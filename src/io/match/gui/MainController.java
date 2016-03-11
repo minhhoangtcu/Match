@@ -7,6 +7,7 @@ import io.match.Model;
 import io.match.gui.bottom.BottomController;
 import io.match.gui.center.CenterController;
 import io.match.gui.left.LeftController;
+import io.match.gui.left.TableRow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +23,7 @@ public class MainController {
 	private BorderPane rootLayout;
 	private BorderPane centerLayout;
 	private AnchorPane leftLayout;
-	private TableView leftTableView;
+	private TableView<TableRow> leftTableView;
 	
 	public void setModel(Model model) {
 		this.model = model;
@@ -66,7 +67,7 @@ public class MainController {
 	private void setLeftLayout() {
 		try {
 			FXMLLoader loader = new FXMLLoader(Match.class.getResource("gui/left/LeftLayout.fxml"));
-			Parent layout = (AnchorPane) loader.load();
+			leftLayout = (AnchorPane) loader.load();
 
 			LeftController controller = loader.getController();
 			controller.setModel(model);
@@ -95,11 +96,11 @@ public class MainController {
 		this.centerLayout = centerLayout;
 	}
 
-	public TableView getLeftTableView() {
+	public TableView<TableRow> getLeftTableView() {
 		return leftTableView;
 	}
 
-	public void setLeftTableView(TableView leftTableView) {
+	public void setLeftTableView(TableView<TableRow> leftTableView) {
 		this.leftTableView = leftTableView;
 	}
 
@@ -110,7 +111,4 @@ public class MainController {
 	public void setLeftLayout(AnchorPane leftLayout) {
 		this.leftLayout = leftLayout;
 	}
-	
-	
-	
 }

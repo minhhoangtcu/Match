@@ -1,12 +1,9 @@
 package io.match.gui.center.match;
 
-import java.beans.EventHandler;
-
 import io.match.Model;
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.gui.MainController;
-import io.match.gui.left.TableRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,24 +12,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 
 public class MatchViewController {
 	private Model model;
 	private MainController mController;
 
 	@FXML
-	private TableView tableView;
+	private TableView<MatchRow> tableView;
 
 	@FXML
-	private TableColumn studentColumn;
+	private TableColumn<MatchRow, String> studentColumn;
 
 	@FXML
-	private TableColumn facultyColumn;
+	private TableColumn<MatchRow, String> facultyColumn;
 
 	@FXML
-	private TableColumn probabilityColumn;
+	private TableColumn<MatchRow, Double> probabilityColumn;
 
 	@FXML
 	private Button btnMatch;
@@ -49,14 +44,9 @@ public class MatchViewController {
 	
 	public void setMainController(MainController controller) {
 		mController = controller;
-		intialize();
-	}
-	
-	@FXML
-	private void intialize() {
 		populateMatchTable("", "");
 	}
-
+	
 	@FXML
 	private void match() {
 		System.out.println("From match: MatchViewController");

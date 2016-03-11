@@ -127,7 +127,6 @@ public class PeopleIO {
 
 				// Set Fixed Attributes for the person
 				FixedAttribute tempFA = fixedAttributes.get(personName);
-				temp.setNumMatched(tempFA.getNumMatched());
 				temp.setNumMatchesAvaiable(tempFA.getNumMatchesAvaiable());
 				temp.setAllMatch(tempFA.getMatches());
 

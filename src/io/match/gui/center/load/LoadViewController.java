@@ -2,13 +2,8 @@ package io.match.gui.center.load;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import io.match.Model;
-import io.match.datastructure.Person;
-import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.AttributeType;
 import io.match.helper.LoadFile;
-import javafx.scene.layout.BorderPane;
 
 public class LoadViewController {
 	
