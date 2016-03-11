@@ -3,18 +3,29 @@ package io.match.gui.center.manage;
 import io.match.datastructure.attributes.Attribute;
 import io.match.reader.PeopleStringReader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
+/*
+ * TODO: 
+ * - Add stripes to Multiple/Scale
+ * - Center the content
+ * - Make a the whole thing nicer
+ * 
+ */
+
 public class PersonComponentPopup {
 	
-	private static final int rowHeight = 20;
+	private static final int rowHeight = 30;
+	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
 	
 	public static void popupGeneralAttribute(
 			Attribute attribute, GridPane gridPane, int row, boolean disable) {
@@ -22,7 +33,11 @@ public class PersonComponentPopup {
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		
 		// add left label
-		gridPane.add(new Label(attribute.getAttributeName()), 0, row);
+		Pane back  = new Pane();
+		Label name = new Label();
+		back.getChildren().add(name);
+		back.setStyle("-fx-background-color: #C0C0C0;");
+		gridPane.add(back, 0, row);
 		
 		// add right component
 		if (disable) {
@@ -85,6 +100,41 @@ public class PersonComponentPopup {
 		gridPane.add(vBox, 1, row);
 	}
 	
+	public static void popupString(String left, String right, GridPane gridPane, int row, boolean isDisable, boolean isColored) {
+		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
+		gridPane.add(getStyledPane(left, isDisable, isColored), 0, row);
+		
+		if (isDisable) {
+			gridPane.add(getStyledPane(": " + right, isDisable, isColored), 1, row);
+		} else {
+			gridPane.add(getStyledPane(right, isDisable, isColored), 1, row);
+		}
+	}
+	
+	private static Pane getStyledPane(String text, boolean isDisable, boolean isColored) {
+		Pane back  = new Pane();
+		
+		if (isDisable) {
+			Label lbl = new Label(text);
+			back.getChildren().add(lbl);
+			// TODO: Set to the middle of the cell
+			lbl.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
+		}
+		else
+			back.getChildren().add(new TextField(text));
+		
+		if (isColored)
+			back.setStyle(COLORED_STYLE);
+		return back;
+	}
+	
+	
+	
+	/*
+	 * 
+	 * UNUSED
+	 * 
+	 */
 	public static void popupName(String name, GridPane gridPane, int row, boolean disable) {
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		gridPane.add(new Label("Name"), 0, row);
