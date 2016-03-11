@@ -36,13 +36,13 @@ public class FixedAttributesIO {
 				FixedAttribute temp;
 				
 				String name = IOUtil.getData(elements[0]);
-				boolean isMatch = IOUtil.getData(elements[1]).toLowerCase().equals("true") ? true : false;
-				int numMatched = Integer.parseInt(IOUtil.getData(elements[3]));
-				int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[4]));
-				temp = new FixedAttribute(isMatch, numMatchesAvaiable, numMatched);
+				int numMatched = Integer.parseInt(IOUtil.getData(elements[2]));
+				int numMatchesAvaiable = Integer.parseInt(IOUtil.getData(elements[3]));
+				temp = new FixedAttribute(numMatchesAvaiable, numMatched);
 					
-				for (String match: IOUtil.getData(elements[2]).split(";")) {
-					temp.addMatch(match);
+				for (String match: IOUtil.getData(elements[1]).split(";")) {
+					if (!match.equals(""))
+						temp.addMatch(match);
 				}
 					
 				attributes.put(name, temp);

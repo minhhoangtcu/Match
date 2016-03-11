@@ -14,7 +14,6 @@ public class Person {
 	private String name;
 	private LinkedList<Attribute> attributes;
 	private int numMatchesAvaiable, numMatched;
-	private boolean isMatched;
 	private LinkedList<String> matches;
 
 	public Person(String name) {
@@ -22,68 +21,12 @@ public class Person {
 		numMatchesAvaiable = 1;
 		numMatched = 0;
 		attributes = new LinkedList<>();
-		isMatched = false;
 		matches = new LinkedList<>();
 	}
 
-	/**
-	 * <p>
-	 * Get all attributes from this person. This method is best used for
-	 * printing out all the information. Please do remember to use a switch case
-	 * to handle the attribute types.
-	 * </p>
-	 * 
-	 * @return all attributes from this person
-	 */
-	public LinkedList<Attribute> getAttributes() {
-		return attributes;
+	public void addGeneralAttribute(GeneralAttribute attr) {
+		attributes.add(attr);
 	}
-
-	/**
-	 * <p>
-	 * Get the data from provided attribute name. Please only enter the name
-	 * similarly to what declared on the attributes file. Also, avoid using this
-	 * method because it has to search linearly for the attribute.
-	 * </p>
-	 * 
-	 * @param name
-	 *            name of the attribute as provided in the attribute file
-	 * @return the data the attribute contains
-	 */
-	public String getGeneralAttribute(String name) {
-		return getAttribute(AttributeType.GENERAL, name);
-	}
-
-	/**
-	 * <p>
-	 * Get the data from provided attribute name. Please only enter the name
-	 * similarly to what declared on the attributes file. Also, avoid using this
-	 * method because it has to search linearly for the attribute.
-	 * </p>
-	 * 
-	 * @param name
-	 *            name of the attribute as provided in the attribute file
-	 * @return the choice this person made
-	 */
-	public String getOneToMultipleAttribute(String name) {
-		return getAttribute(AttributeType.WEIGHTED_ONE_TO_MULTIPLE, name);
-	}
-
-	/**
-	 * <p>
-	 * Get the data from provided attribute name. Please only enter the name
-	 * similarly to what declared on the attributes file. Also, avoid using this
-	 * method because it has to search linearly for the attribute.
-	 * </p>
-	 * 
-	 * @param name
-	 *            name of the attribute as provided in the attribute file
-	 * @return the level this person picked
-	 */
-	public int getScaleAttribute(String name) {
-		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
-	}
-
 
 	/**
 	 * Add a general attribute to this person
@@ -94,11 +37,17 @@ public class Person {
 	public void addGeneralAttribute(String name, String data) {
 		attributes.add(new GeneralAttribute(name, data));
 	}
-	
-	public void addGeneralAttribute(GeneralAttribute attr) {
+
+	public void addMatch(String match) {
+		matches.add(match);
+		numMatched++;
+	}
+
+	public void addOneToMultipleAttribute(OneToMultipleAttribute attr) {
 		attributes.add(attr);
 	}
-	
+
+
 	/**
 	 * Add an one to multiple attribute to this person
 	 * 
@@ -118,7 +67,7 @@ public class Person {
 		attributes.add(temp);
 	}
 	
-	public void addOneToMultipleAttribute(OneToMultipleAttribute attr) {
+	public void addScaleAttribute(ScaleAttribute attr) {
 		attributes.add(attr);
 	}
 	
@@ -140,10 +89,6 @@ public class Person {
 		attributes.add(temp);
 	}
 	
-	public void addScaleAttribute(ScaleAttribute attr) {
-		attributes.add(attr);
-	}
-	
 	private String getAttribute(AttributeType type, String name) {
 		name = name.toLowerCase();
 		for (Attribute attribute : attributes) {
@@ -162,39 +107,78 @@ public class Person {
 		}
 		throw new IllegalArgumentException(String.format("The person does not have attribute named %s", name));
 	}
+	
+	/**
+	 * <p>
+	 * Get all attributes from this person. This method is best used for
+	 * printing out all the information. Please do remember to use a switch case
+	 * to handle the attribute types.
+	 * </p>
+	 * 
+	 * @return all attributes from this person
+	 */
+	public LinkedList<Attribute> getAttributes() {
+		return attributes;
+	}
+	
+	/**
+	 * <p>
+	 * Get the data from provided attribute name. Please only enter the name
+	 * similarly to what declared on the attributes file. Also, avoid using this
+	 * method because it has to search linearly for the attribute.
+	 * </p>
+	 * 
+	 * @param name
+	 *            name of the attribute as provided in the attribute file
+	 * @return the data the attribute contains
+	 */
+	public String getGeneralAttribute(String name) {
+		return getAttribute(AttributeType.GENERAL, name);
+	}
+	
+	public LinkedList<String> getMatches() {
+		return matches;
+	}
 
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getNumMatched() {
 		return numMatched;
-	}
-	public void setNumMatched(int numMatched) {
-		this.numMatched = numMatched;
 	}
 	public int getNumMatchesAvaiable() {
 		return numMatchesAvaiable;
 	}
-	public void setNumMatchesAvaiable(int numMatchesAvaiable) {
-		this.numMatchesAvaiable = numMatchesAvaiable;
+	/**
+	 * <p>
+	 * Get the data from provided attribute name. Please only enter the name
+	 * similarly to what declared on the attributes file. Also, avoid using this
+	 * method because it has to search linearly for the attribute.
+	 * </p>
+	 * 
+	 * @param name
+	 *            name of the attribute as provided in the attribute file
+	 * @return the choice this person made
+	 */
+	public String getOneToMultipleAttribute(String name) {
+		return getAttribute(AttributeType.WEIGHTED_ONE_TO_MULTIPLE, name);
+	}
+	/**
+	 * <p>
+	 * Get the data from provided attribute name. Please only enter the name
+	 * similarly to what declared on the attributes file. Also, avoid using this
+	 * method because it has to search linearly for the attribute.
+	 * </p>
+	 * 
+	 * @param name
+	 *            name of the attribute as provided in the attribute file
+	 * @return the level this person picked
+	 */
+	public int getScaleAttribute(String name) {
+		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
 	}
 	public boolean isMatched() {
-		return isMatched;
-	}
-	public void setMatched(boolean isMatched) {
-		this.isMatched = isMatched;
-	}
-	public LinkedList<String> getMatches() {
-		return matches;
-	}
-	public void setAllMatch(LinkedList<String> matches) {
-		this.matches = matches;
-	}
-	public void addMatch(String match) {
-		matches.add(match);
+		return numMatched >= numMatchesAvaiable;
 	}
 	public void removeMatch(String match) {
 		if (matches.isEmpty())
@@ -202,5 +186,20 @@ public class Person {
 		if (!matches.remove(match)) {
 			throw new IllegalArgumentException("Cannout find the provided person to remove");
 		}
+	}
+	public void setAllMatch(LinkedList<String> matches) {
+		if (matches.size() <= numMatchesAvaiable)
+			this.matches = matches;
+		else
+			throw new IllegalArgumentException("Cannot set number of matches larger than number of avaiable matches");
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setNumMatched(int numMatched) {
+		this.numMatched = numMatched;
+	}
+	public void setNumMatchesAvaiable(int numMatchesAvaiable) {
+		this.numMatchesAvaiable = numMatchesAvaiable;
 	}
 }

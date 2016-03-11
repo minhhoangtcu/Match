@@ -9,12 +9,10 @@ import java.util.LinkedList;
 class FixedAttribute {
 
 	private int numMatchesAvaiable, numMatched;
-	private boolean isMatched;
 	private LinkedList<String> matches;
 
-	public FixedAttribute(boolean isMatched, int numMatchesAvaiable, int numMatched) {
+	public FixedAttribute(int numMatchesAvaiable, int numMatched) {
 		matches = new LinkedList<>();
-		this.isMatched = isMatched;
 		this.numMatchesAvaiable= numMatchesAvaiable;
 		this.numMatched = numMatched;
 	}
@@ -27,9 +25,6 @@ class FixedAttribute {
 	}
 	public int getNumMatched() {
 		return numMatched;
-	}
-	public boolean isMatched() {
-		return isMatched;
 	}
 	public LinkedList<String> getMatches() {
 		return matches;

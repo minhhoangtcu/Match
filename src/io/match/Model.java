@@ -161,6 +161,35 @@ public class Model {
 	}
 	
 	/*
+	 * MATCHING METHODS
+	 */
+	public void match(Person first, Person second) {
+		if (first.isMatched())
+			throw new IllegalArgumentException(String.format("%s is already matched!", first.getName()));
+		else if (second.isMatched())
+			throw new IllegalArgumentException(String.format("%s is already matched!", second.getName()));
+		else {
+			
+			first.addMatch(second.getName());
+			second.addMatch(first.getName());
+			
+		}
+	}
+	
+	public void unMatch(Person first, Person second) {
+		if (first.getNumMatched() <= 0)
+			throw new IllegalArgumentException(String.format("%s has no match!", first.getName()));
+		else if (second.isMatched())
+			throw new IllegalArgumentException(String.format("%s has no match!", second.getName()));
+		else {
+			
+			first.removeMatch(second.getName());
+			second.removeMatch(first.getName());
+			
+		}
+	}
+	
+	/*
 	 * OTHER HELPER METHODS
 	 */
 	
