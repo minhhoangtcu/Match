@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 
 /*
  * TODO: 
- * - Add stripes to Multiple/Scale
  * - Center the content
  * - Make a the whole thing nicer
  * 
@@ -35,6 +34,7 @@ public class PersonComponentPopup {
 			back.getChildren().add(lbl);
 			// TODO: Set to the middle of the cell
 			lbl.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
+			
 		} else
 			back.getChildren().add(new TextField(text));
 
