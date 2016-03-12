@@ -17,8 +17,7 @@ import javafx.scene.layout.VBox;
 /*
  * TODO: 
  * - Center the content
- * - Make a the whole thing nicer
- * 
+ * - Widen the text fields
  */
 
 public class PersonComponentPopup {
@@ -26,20 +25,31 @@ public class PersonComponentPopup {
 	private static final int rowHeight = 24;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
 
-	private static Pane getStyledPane(String text, boolean isDisable, boolean isColored) {
+	private static Pane getStyledPane(String text, boolean isColored) {
 		Pane back = new Pane();
 
-		if (isDisable) {
-			Label lbl = new Label(text);
-			back.getChildren().add(lbl);
-			// TODO: Set to the middle of the cell
-			lbl.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
-			
-		} else
-			back.getChildren().add(new TextField(text));
+		Label lbl = new Label(text);
+		back.getChildren().add(lbl);
+		// TODO: Set to the middle of the cell
+		lbl.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
+		
+		return back;
+	}
+	
+	private static Pane getEditableStyledPane(String text, boolean isColored) {
+		Pane back = new Pane();
+
+		TextField tf = new TextField(text);
+		back.getChildren().add(tf);
+		// TODO: Set to the middle of the cell
+		tf.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
+
+		if (isColored)
+			back.setStyle(COLORED_STYLE);
+		
 		return back;
 	}
 
@@ -110,14 +120,14 @@ public class PersonComponentPopup {
 	 */
 	public static void popupString(String left, String right, GridPane gridPane, int row, boolean isDisable,
 			boolean isColored) {
-		
+
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
-		gridPane.add(getStyledPane(left, isDisable, isColored), 0, row);
+		gridPane.add(getStyledPane(left, isColored), 0, row);
 
 		if (isDisable) {
-			gridPane.add(getStyledPane(": " + right, isDisable, isColored), 1, row);
+			gridPane.add(getStyledPane(": " + right, isColored), 1, row);
 		} else {
-			gridPane.add(getStyledPane(right, isDisable, isColored), 1, row);
+			gridPane.add(getEditableStyledPane(right, isColored), 1, row);
 		}
 	}
 
@@ -125,26 +135,28 @@ public class PersonComponentPopup {
 			boolean isDisable, boolean isColored) {
 
 		// add left label
-		gridPane.add(getStyledPane(attribute.getAttributeName(), isDisable, isColored), 0, row);
+		gridPane.add(getStyledPane(attribute.getAttributeName(), isColored), 0, row);
 
 		// add right component
 		VBox vBox = new VBox();
 		if (isColored)
 			vBox.setStyle(COLORED_STYLE);
-		
+
 		ToggleGroup group = new ToggleGroup();
 
 		String choice = PeopleStringReader.getDataOneToMultiple(attribute);
 		for (String possibleChoice : PeopleStringReader.getPossibleOneToMultiple(attribute)) {
 			RadioButton button = new RadioButton(possibleChoice);
 			button.setToggleGroup(group);
-			
+
 			if (choice.equals(possibleChoice)) {
 				button.setSelected(true);
 			}
-			
+
 			button.setDisable(isDisable);
-			button.setStyle("-fx-opacity: 1;"); // force the disabled radio button to be the same as normal one.
+			button.setStyle("-fx-opacity: 1;"); // force the disabled radio
+												// button to be the same as
+												// normal one.
 
 			// edit vBox
 			vBox.getChildren().add(button);
@@ -154,10 +166,11 @@ public class PersonComponentPopup {
 
 	}
 
-	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable, boolean isColored) {
-		
+	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable,
+			boolean isColored) {
+
 		// add left label
-		gridPane.add(getStyledPane(attribute.getAttributeName(), isDisable, isColored), 0, row);
+		gridPane.add(getStyledPane(attribute.getAttributeName(), isColored), 0, row);
 
 		// add right component
 		VBox vBox = new VBox();
