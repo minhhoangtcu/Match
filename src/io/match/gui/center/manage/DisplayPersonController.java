@@ -92,15 +92,16 @@ public class DisplayPersonController {
 			switch (attribute.getAttributeType()) {
 			case GENERAL:
 				PersonComponentPopup.popupString(attribute.getAttributeName(), PeopleStringReader.getDataGeneral(attribute), gridPane, row++, isDisable, isColored);
-				isColored = !isColored;
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row++, isDisable);
+				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row++, isDisable, isColored);
 				break;
 			case WEIGHTED_SCALE:
-				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row++, isDisable);
+				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row++, isDisable, isColored);
 				break;
 			}
+			
+			isColored = !isColored;
 		}
 	}
 	
