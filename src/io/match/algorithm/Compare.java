@@ -1,7 +1,7 @@
 package io.match.algorithm;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
@@ -11,7 +11,12 @@ import io.match.datastructure.attributes.ScaleAttribute;
 
 public class Compare {
 	
-	
+	public static ArrayList<Similarity> getTopSimilarities(Person first, Person second, int topN) {
+		
+		
+		
+		return null;
+	}
 
 	/**
 	 * Get the percentage matching from 2 people. This algorithm does not care about whether the person is a student or faculty.
@@ -23,8 +28,7 @@ public class Compare {
 	 */
 	public static double getMatch(Person first, Person second) {
 		
-		if (first.getAttributes().size() != second.getAttributes().size())
-			throw new IllegalArgumentException("Numbers of attributes from 2 arguments do not match!");
+		isSameSize(first, second);
 		
 		Iterator<Attribute> firstIterator = first.getAttributes().iterator();
 		Iterator<Attribute> secondIterator = second.getAttributes().iterator();
@@ -136,7 +140,7 @@ public class Compare {
 		return matchingProbability;
 	}
 	
-	private static boolean isMatchAttribute(OneToMultipleAttribute firstAttr, OneToMultipleAttribute secondAttr) {
+	static boolean isMatchAttribute(OneToMultipleAttribute firstAttr, OneToMultipleAttribute secondAttr) {
 		for (String expecting: firstAttr.getExpectingChoice()) {
 			if (expecting.equals(secondAttr.getChoice()))
 				return true;
@@ -144,10 +148,15 @@ public class Compare {
 		return false;
 	}
 	
-	private static boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
+	static boolean isSameAttribute(Attribute firstAttr, Attribute secondAttr) {
 		return firstAttr.getAttributeName().equals(secondAttr.getAttributeName());
 	}
 	
-	
+	private static boolean isSameSize(Person first, Person second) {
+		if (first.getAttributes().size() == second.getAttributes().size())
+			return true;
+		else
+			throw new IllegalArgumentException("Numbers of attributes from 2 arguments do not match!");
+	}
 
 }
