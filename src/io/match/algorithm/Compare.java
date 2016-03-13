@@ -13,6 +13,7 @@ public class Compare {
 	
 	public static ArrayList<Similarity> getTopSimilarities(Person first, Person second, int topN) {
 		
+		ArrayList<Similarity> temp = new ArrayList<>();
 		
 		
 		return null;
@@ -29,115 +30,130 @@ public class Compare {
 	public static double getMatch(Person first, Person second) {
 		
 		isSameSize(first, second);
+		int size = first.getAttributes().size();
 		
 		Iterator<Attribute> firstIterator = first.getAttributes().iterator();
 		Iterator<Attribute> secondIterator = second.getAttributes().iterator();
 		 
-		int posiblePointFirst = 0;
-		int posiblePointSecond = 0;
-		int gainedPointFirst = 0;
-		int gainedPointSecond = 0;
+		int pointPossibleGainedByFirst = 0;
+		int pointPossibleGainedBySecond = 0;
+		int pointGainedByFirst = 0;
+		int pointGainedBySecond = 0;
 		
 		/**
 		 * Look through all the attributes the 2 people have and calculate the points
 		 */
-		for (int i = 0; i < first.getAttributes().size(); i++) {
+		for (int i = 0; i < size; i++) {
 			
 			Attribute firstAttr = firstIterator.next();
 			Attribute secondAttr = secondIterator.next();
+			Similarity temp = getSimilarity(firstAttr, secondAttr);
+			pointGainedByFirst += temp.pointGainedByFirst;
+			pointPossibleGainedByFirst += temp.pointPossibleGainedByFirst;
+			pointGainedBySecond += temp.pointGainedBySecond;
+			pointPossibleGainedBySecond += temp.pointPossibleGainedBySecond;
 			
-			if (!isSameAttribute(firstAttr, secondAttr))
-				throw new IllegalArgumentException("The names of attributes of 2 people do not match!");
-			
-			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute) {
-				continue; // We do not have to deal with general attribute, for now
-			}
-			else if (firstAttr instanceof OneToMultipleAttribute && secondAttr instanceof OneToMultipleAttribute) {
-				
-				// TODO: Clean up duplicate codes
-				
-				OneToMultipleAttribute firstAttrConverted = (OneToMultipleAttribute) firstAttr;
-				OneToMultipleAttribute secondAttrConverted = (OneToMultipleAttribute) secondAttr;
-				
-				// Points (likelihood that A will like B)
-				Interest firstInterest = firstAttrConverted.getInterst();
-				int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
-				boolean isMatchExpectationFirst = isMatchAttribute(firstAttrConverted, secondAttrConverted);
-				
-				switch(firstInterest) {
-				case NOT_IMPORTANT:
-					posiblePointFirst += firstPointGained;
-					gainedPointFirst += firstPointGained;
-					break;
-				case SOMEWHAT_IMPORTANT:
-				case VERY_IMPORTANT:
-					posiblePointFirst += firstPointGained;
-					if (isMatchExpectationFirst)
-						gainedPointFirst += firstPointGained;
-					break;
-				}
-				
-				// Points (likelihood that B will like A)
-				Interest secondInterest = secondAttrConverted.getInterst();
-				int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
-				boolean isMatchExpectationSecond = isMatchAttribute(secondAttrConverted, firstAttrConverted);
-				
-				switch(secondInterest) {
-				case NOT_IMPORTANT:
-					posiblePointSecond += secondPointGained;
-					gainedPointSecond += secondPointGained;
-					break;
-				case SOMEWHAT_IMPORTANT:
-				case VERY_IMPORTANT:
-					posiblePointSecond += secondPointGained;
-					if (isMatchExpectationSecond)
-						gainedPointSecond += secondPointGained;
-					break;
-				}
-				
-				
-			}
-			else if (firstAttr instanceof ScaleAttribute && secondAttr instanceof ScaleAttribute) {
-				
-				// TODO: Clean up duplicate codes
-				
-				ScaleAttribute firstAttrConverted = (ScaleAttribute) firstAttr;
-				ScaleAttribute secondAttrConverted = (ScaleAttribute) secondAttr;
-				float pointGainedPercentage = ScalePointCompute.getPointPercentage(firstAttrConverted, secondAttrConverted);
-				
-				// Points (likelihood that A will like B)
-				Interest firstInterest = firstAttrConverted.getInterst();
-				int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
-				
-				posiblePointFirst += firstPointGained;
-				if (firstInterest == Interest.NOT_IMPORTANT)
-					gainedPointFirst += firstPointGained;
-				else
-					gainedPointFirst += pointGainedPercentage*firstPointGained;
-
-				
-				// Points (likelihood that A will like B)
-				Interest secondInterest = secondAttrConverted.getInterst();
-				int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
-				
-				posiblePointSecond += secondPointGained;
-				if (secondInterest == Interest.NOT_IMPORTANT)
-					gainedPointSecond += secondPointGained;
-				else
-					gainedPointSecond += pointGainedPercentage*secondPointGained;
-			}
-			else
-				throw new IllegalArgumentException("The type of attributes of 2 people do not match!");
 		}
 		
 		/**
 		 * After looking through all the point, we need to compute the matching percentage
 		 */
-		float likeProbabilityFirst = (float) gainedPointFirst/(float)posiblePointFirst*100f;
-		float likeProbabilitySecond = (float) gainedPointSecond/(float)posiblePointSecond*100f;
+		float likeProbabilityFirst = (float) pointGainedByFirst/(float)pointPossibleGainedByFirst*100f;
+		float likeProbabilitySecond = (float) pointGainedBySecond/(float)pointPossibleGainedBySecond*100f;
 		double matchingProbability = Math.sqrt(likeProbabilityFirst*likeProbabilitySecond);
 		
 		return matchingProbability;
+	}
+	
+	public static Similarity getSimilarity(Attribute firstAttr, Attribute secondAttr) {
+		
+		Similarity temp = new Similarity();
+
+		if (!Compare.isSameAttribute(firstAttr, secondAttr))
+			throw new IllegalArgumentException("The names of attributes of 2 people do not match!");
+		
+		switch (firstAttr.getAttributeType()) {
+		case GENERAL:
+			temp.pointGainedByFirst = 0;
+			temp.pointGainedBySecond = 0;
+			temp.pointPossibleGainedByFirst = 0;
+			temp.pointPossibleGainedBySecond = 0;
+			break;
+			
+		case WEIGHTED_ONE_TO_MULTIPLE:
+			OneToMultipleAttribute firstAttrConverted = (OneToMultipleAttribute) firstAttr;
+			OneToMultipleAttribute secondAttrConverted = (OneToMultipleAttribute) secondAttr;
+			
+			// Points (likelihood that A will like B)
+			Interest firstInterest = firstAttrConverted.getInterst();
+			int firstPointGained = MultiplePointCompute.getPoint(firstInterest);
+			boolean isMatchExpectationFirst = Compare.isMatchAttribute(firstAttrConverted, secondAttrConverted);
+			
+			switch(firstInterest) {
+			case NOT_IMPORTANT:
+				temp.pointPossibleGainedByFirst = firstPointGained;
+				temp.pointGainedByFirst = firstPointGained;
+				break;
+			case SOMEWHAT_IMPORTANT:
+			case VERY_IMPORTANT:
+				temp.pointPossibleGainedByFirst = firstPointGained;
+				if (isMatchExpectationFirst)
+					temp.pointGainedByFirst = firstPointGained;
+				break;
+			}
+			
+			// Points (likelihood that B will like A)
+			Interest secondInterest = secondAttrConverted.getInterst();
+			int secondPointGained = MultiplePointCompute.getPoint(secondInterest);
+			boolean isMatchExpectationSecond = Compare.isMatchAttribute(secondAttrConverted, firstAttrConverted);
+			
+			switch(secondInterest) {
+			case NOT_IMPORTANT:
+				temp.pointPossibleGainedBySecond = secondPointGained;
+				temp.pointGainedBySecond = secondPointGained;
+				break;
+			case SOMEWHAT_IMPORTANT:
+			case VERY_IMPORTANT:
+				temp.pointPossibleGainedBySecond = secondPointGained;
+				if (isMatchExpectationSecond)
+					temp.pointGainedBySecond = secondPointGained;
+				break;
+			}
+			break;
+			
+		case WEIGHTED_SCALE:
+			ScaleAttribute firstAttrConverted2 = (ScaleAttribute) firstAttr;
+			ScaleAttribute secondAttrConverted2 = (ScaleAttribute) secondAttr;
+			float pointGainedPercentage = ScalePointCompute.getPointPercentage(firstAttrConverted2, secondAttrConverted2);
+			
+			// Points (likelihood that A will like B)
+			Interest firstInterest2 = firstAttrConverted2.getInterst();
+			int firstPointGained2 = MultiplePointCompute.getPoint(firstInterest2);
+			
+			temp.pointPossibleGainedByFirst = firstPointGained2;
+			if (firstInterest2 == Interest.NOT_IMPORTANT)
+				temp.pointGainedByFirst = firstPointGained2;
+			else
+				temp.pointGainedByFirst = pointGainedPercentage*firstPointGained2;
+
+			
+			// Points (likelihood that A will like B)
+			Interest secondInterest2 = secondAttrConverted2.getInterst();
+			int secondPointGained2 = MultiplePointCompute.getPoint(secondInterest2);
+			
+			temp.pointPossibleGainedBySecond += secondPointGained2;
+			if (secondInterest2 == Interest.NOT_IMPORTANT)
+				temp.pointGainedBySecond += secondPointGained2;
+			else
+				temp.pointGainedBySecond += pointGainedPercentage*secondPointGained2;
+			break;
+		}
+		
+		float likeProbabilityFirst = (float) temp.pointGainedByFirst/(float) temp.pointPossibleGainedByFirst*100f;
+		float likeProbabilitySecond = (float) temp.pointGainedBySecond/(float)temp.pointPossibleGainedBySecond*100f;
+		temp.pointAverage = Math.sqrt(likeProbabilityFirst*likeProbabilitySecond);
+		
+		return temp;
 	}
 	
 	static boolean isMatchAttribute(OneToMultipleAttribute firstAttr, OneToMultipleAttribute secondAttr) {
