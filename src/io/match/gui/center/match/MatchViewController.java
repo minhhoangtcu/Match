@@ -4,14 +4,21 @@ import io.match.Model;
 import io.match.algorithm.Compare;
 import io.match.datastructure.Person;
 import io.match.gui.MainController;
+import io.match.gui.left.TableRow;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 public class MatchViewController {
 	private Model model;
@@ -45,6 +52,21 @@ public class MatchViewController {
 	public void setMainController(MainController controller) {
 		mController = controller;
 		populateMatchTable("", "");
+		
+
+		tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent click) {
+				if (click.getClickCount() == 2) {
+					TablePosition position = tableView.getSelectionModel().getSelectedCells().get(0);
+					int row = position.getRow();
+					TableColumn column = position.getTableColumn();
+					
+					String data = "" + column.getCellObservableValue(row).getValue();
+					System.out.println(data);
+				}
+			}
+		});
 	}
 	
 	@FXML
