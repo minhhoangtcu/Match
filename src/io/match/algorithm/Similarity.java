@@ -18,6 +18,31 @@ public class Similarity implements Comparable<Similarity> {
 	 * package.
 	 */
 	Similarity() {}
+	
+	public String getAttributeName() {
+		return firstAttr.getAttributeName();
+	}
+	
+	/**
+	 * @return the firstAttr
+	 */
+	public Attribute getFirstAttr() {
+		return firstAttr;
+	}
+
+	/**
+	 * @return the secondAttr
+	 */
+	public Attribute getSecondAttr() {
+		return secondAttr;
+	}
+
+	/**
+	 * @return the pointAverage
+	 */
+	public double getPointAverage() {
+		return pointAverage;
+	}
 
 	@Override
 	public int compareTo(Similarity other) {

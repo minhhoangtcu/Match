@@ -3,9 +3,13 @@ package io.match.reader;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.AttributeUtil;
+import io.match.datastructure.attributes.Expectable;
 import io.match.datastructure.attributes.GeneralAttribute;
+import io.match.datastructure.attributes.Interest;
+import io.match.datastructure.attributes.Interestable;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
+import io.match.datastructure.attributes.Weightable;
 
 /**
  * Provide easy way to read attribute of any person.
@@ -48,6 +52,18 @@ public class PeopleStringReader {
 		}
 		System.out.println();
 		System.out.println();
+	}
+	
+	public static <T extends Weightable<E>, E> E getChoice(T attr) {
+		return attr.getChoice();
+	}
+	
+	public static <T extends Attribute & Expectable<E>, E> E getExpecting(T attr) {
+		return attr.getExpectingChoice();
+	}
+	
+	public static <T extends Attribute & Interestable> Interest getInterest(T attr) {
+		return attr.getInterst();
 	}
 
 	public static String getDataGeneral(Attribute input) {

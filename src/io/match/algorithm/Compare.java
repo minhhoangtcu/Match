@@ -1,7 +1,9 @@
 package io.match.algorithm;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import io.match.datastructure.Person;
 import io.match.datastructure.attributes.Attribute;
 import io.match.datastructure.attributes.GeneralAttribute;
@@ -11,12 +13,30 @@ import io.match.datastructure.attributes.ScaleAttribute;
 
 public class Compare {
 	
-	public static ArrayList<Similarity> getTopSimilarities(Person first, Person second, int topN) {
+	public static List<Similarity> getTopSimilarities(Person first, Person second, int topN) {
 		
-		ArrayList<Similarity> temp = new ArrayList<>();
+		isSameSize(first, second);
+		int size = first.getAttributes().size();
 		
+		ArrayList<Similarity> tempList = new ArrayList<>();
+		Iterator<Attribute> firstIterator = first.getAttributes().iterator();
+		Iterator<Attribute> secondIterator = second.getAttributes().iterator();
 		
-		return null;
+		/**
+		 * Look through all the attributes the 2 people have and calculate the points
+		 */
+		for (int i = 0; i < size; i++) {
+			Attribute firstAttr = firstIterator.next();
+			Attribute secondAttr = secondIterator.next();
+			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute)
+				continue;
+			Similarity temp = getSimilarity(firstAttr, secondAttr);
+			tempList.add(temp);
+		}
+
+		Collections.sort(tempList);
+		
+		return tempList.subList(0, topN);
 	}
 
 	/**
@@ -71,6 +91,9 @@ public class Compare {
 
 		if (!Compare.isSameAttribute(firstAttr, secondAttr))
 			throw new IllegalArgumentException("The names of attributes of 2 people do not match!");
+		
+		temp.firstAttr = firstAttr;
+		temp.secondAttr = secondAttr;
 		
 		switch (firstAttr.getAttributeType()) {
 		case GENERAL:
