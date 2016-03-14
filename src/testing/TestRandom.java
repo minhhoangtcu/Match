@@ -21,13 +21,13 @@ public class TestRandom {
 		String attrURL = "data/attributes.match";
 		
 		PeopleGenerator random = new PeopleGenerator(attrURL);
-		System.out.printf(">> GENERATE 10 PEOPLE \n");
+		System.out.printf(">> GENERATE PEOPLE \n");
 		for (Person person: random.generatePeople(10)) {
 			PeopleStringReader.print(person);
 		}
-		System.out.printf(">> GENERATE 10 PEOPLE TESTING ENDED\n\n");
+		System.out.printf(">> GENERATE PEOPLE TESTING ENDED\n\n");
 		
-		int num = 100;
+		int num = 10;
 	
 		System.out.printf(">> GENERATE PEOPLE INTO A FILE \n");
 		String data = "data/testData.csv";
