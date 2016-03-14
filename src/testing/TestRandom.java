@@ -27,7 +27,7 @@ public class TestRandom {
 		}
 		System.out.printf(">> GENERATE 10 PEOPLE TESTING ENDED\n\n");
 		
-		int num = 10000;
+		int num = 100;
 	
 		System.out.printf(">> GENERATE PEOPLE INTO A FILE \n");
 		String data = "data/testData.csv";

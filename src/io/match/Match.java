@@ -15,7 +15,6 @@ public class Match extends Application {
 	
 	private Stage primaryStage;
 	
-	
 	public static void main(String args[]) {
 		launch(args);
 	}

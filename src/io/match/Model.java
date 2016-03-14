@@ -20,10 +20,10 @@ public class Model {
 	
 	// Used for debugging purposes
 	private boolean isDebug = true;
-	private String studentsDir = "data/data.csv";
-	private String falcutyDir = "data/data2.csv";
-	private String studentsFADir = "data/studentsFA.csv";
-	private String falcutyFADir = "data/falcutiesFA.csv";
+	private String studentsDir = "data/testStudents200Data.csv";
+	private String falcutyDir = "data/testFalcuties100Data.csv";
+	private String studentsFADir = "data/testStudents200FA.csv";
+	private String falcutyFADir = "data/testFalcuties100FA.csv";
 	
 	// Init IO
 	private AttributesIO attributeIO;
