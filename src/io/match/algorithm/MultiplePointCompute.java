@@ -4,7 +4,7 @@ import io.match.datastructure.attributes.Interest;
 
 public class MultiplePointCompute {
 	
-	private static final int NOT_IMPORTANT = 70;
+	private static final int NOT_IMPORTANT = 20;
 	private static final int SOMEWHAT_IMPORTANT = 50;
 	private static final int VERY_IMPORTANT = 100;
 	

@@ -28,13 +28,15 @@ public class Compare {
 		for (int i = 0; i < size; i++) {
 			Attribute firstAttr = firstIterator.next();
 			Attribute secondAttr = secondIterator.next();
+			
 			if (firstAttr instanceof GeneralAttribute && secondAttr instanceof GeneralAttribute)
 				continue;
+			
 			Similarity temp = getSimilarity(firstAttr, secondAttr);
 			tempList.add(temp);
 		}
 
-		Collections.sort(tempList);
+		Collections.sort(tempList, Collections.reverseOrder());
 		
 		return tempList.subList(0, topN);
 	}
@@ -166,15 +168,11 @@ public class Compare {
 			
 			temp.pointPossibleGainedBySecond += secondPointGained2;
 			if (secondInterest2 == Interest.NOT_IMPORTANT)
-				temp.pointGainedBySecond += secondPointGained2;
+				temp.pointGainedBySecond = secondPointGained2;
 			else
-				temp.pointGainedBySecond += pointGainedPercentage*secondPointGained2;
+				temp.pointGainedBySecond = pointGainedPercentage*secondPointGained2;
 			break;
 		}
-		
-		float likeProbabilityFirst = (float) temp.pointGainedByFirst/(float) temp.pointPossibleGainedByFirst*100f;
-		float likeProbabilitySecond = (float) temp.pointGainedBySecond/(float)temp.pointPossibleGainedBySecond*100f;
-		temp.pointAverage = Math.sqrt(likeProbabilityFirst*likeProbabilitySecond);
 		
 		return temp;
 	}

@@ -10,19 +10,19 @@ public class Similarity implements Comparable<Similarity> {
 	Attribute firstAttr, secondAttr;
 	double pointGainedByFirst, pointGainedBySecond;
 	double pointPossibleGainedByFirst, pointPossibleGainedBySecond;
-	double pointAverage;
 
 	/**
 	 * Create the class with no data. This constructor should only be
 	 * initialized by the method getSimilarity in class Compare Compare in this
 	 * package.
 	 */
-	Similarity() {}
-	
+	Similarity() {
+	}
+
 	public String getAttributeName() {
 		return firstAttr.getAttributeName();
 	}
-	
+
 	/**
 	 * @return the firstAttr
 	 */
@@ -38,17 +38,21 @@ public class Similarity implements Comparable<Similarity> {
 	}
 
 	/**
-	 * @return the pointAverage
+	 * Return the total point gained by both people by this similarity. The
+	 * larger this number is, the heavier this similarity is going to affect the
+	 * match probability.
+	 * 
+	 * @return the total point gained by both people by this similarity
 	 */
-	public double getPointAverage() {
-		return pointAverage;
+	public double getTotalPointGained() {
+		return pointGainedByFirst + pointGainedBySecond;
 	}
 
 	@Override
 	public int compareTo(Similarity other) {
-		if (pointAverage < other.pointAverage)
+		if (getTotalPointGained() < other.getTotalPointGained())
 			return -1;
-		else if (pointAverage > other.pointAverage)
+		else if (getTotalPointGained() > other.getTotalPointGained())
 			return 1;
 		else
 			return 0;

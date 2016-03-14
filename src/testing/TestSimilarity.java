@@ -11,7 +11,7 @@ import io.match.reader.PeopleStringReader;
 
 public class TestSimilarity {
 	
-	private static final int TOP = 3;
+	private static final int TOP = 2;
 	
 	public static void main(String[] args) {
 		new TestSimilarity();
@@ -27,7 +27,7 @@ public class TestSimilarity {
 				for (Person second: m.getFaculties()) {
 					System.out.printf("%s and %s\n", first.getName(), second.getName());
 					for (Similarity sim: Compare.getTopSimilarities(first, second, TOP)) {
-						System.out.printf("%s %f\n", sim.getAttributeName(), sim.getPointAverage());
+						System.out.printf("%s %f\n", sim.getAttributeName(), sim.getTotalPointGained());
 					}
 					System.out.println();
 				}
