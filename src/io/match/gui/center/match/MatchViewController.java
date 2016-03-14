@@ -2,6 +2,7 @@ package io.match.gui.center.match;
 
 import io.match.Model;
 import io.match.algorithm.Compare;
+import io.match.algorithm.Similarity;
 import io.match.datastructure.Person;
 import io.match.gui.MainController;
 import io.match.gui.left.TableRow;
@@ -21,9 +22,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class MatchViewController {
+	
 	private Model model;
 	private MainController mController;
+	private static final int STUDENT_COL = 0;
+	private static final int FALCUTY_COL = 1;
+	private static final int PROBABILITY_COL = 2;
 
+	/*
+	 * GUI's
+	 */
 	@FXML
 	private TableView<MatchRow> tableView;
 
@@ -57,16 +65,42 @@ public class MatchViewController {
 		tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent click) {
+				
 				if (click.getClickCount() == 2) {
 					TablePosition position = tableView.getSelectionModel().getSelectedCells().get(0);
 					int row = position.getRow();
-					TableColumn column = position.getTableColumn();
+					int col = position.getColumn();
 					
-					String data = "" + column.getCellObservableValue(row).getValue();
-					System.out.println(data);
+					if (col == PROBABILITY_COL) {
+						Person student = model.getStudent(getStudentName(row));
+						Person falcuty = model.getFaculty(getFalcutyName(row));
+						
+						System.out.printf("%s and %s\n", student.getName(), falcuty.getName());
+						for (Similarity sim: Compare.getTopSimilarities(student, falcuty, 2)) {
+							System.out.printf("%s %f\n", sim.getAttributeName(), sim.getTotalPointGained());
+						}
+						System.out.println();
+					}
+					else {
+						
+						//TODO: Pop up person
+						
+					}
 				}
 			}
 		});
+	}
+	
+	private String getStudentName(int row) {
+		return (String) tableView.getColumns().get(STUDENT_COL).getCellObservableValue(row).getValue();
+	}
+	
+	private String getFalcutyName(int row) {
+		return (String) tableView.getColumns().get(FALCUTY_COL).getCellObservableValue(row).getValue();
+	}
+	
+	private double getProbability(int row) {
+		return (double) tableView.getColumns().get(PROBABILITY_COL).getCellObservableValue(row).getValue();
 	}
 	
 	@FXML
