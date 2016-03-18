@@ -22,7 +22,7 @@ public class Match extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		primaryStage.setTitle("Match - Basic Layout");
+		primaryStage.setTitle("Match - Basic Functionality");
 		
 		setUpModel();
 		setUpPrimaryStage();

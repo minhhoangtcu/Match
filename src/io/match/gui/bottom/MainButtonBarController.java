@@ -1,6 +1,7 @@
 package io.match.gui.bottom;
 
 import java.io.IOException;
+
 import io.match.Match;
 import io.match.Model;
 import io.match.gui.MainController;
@@ -10,7 +11,8 @@ import io.match.gui.center.match.MatchViewController;
 import io.match.gui.left.TablePopulator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 public class MainButtonBarController {
@@ -18,16 +20,21 @@ public class MainButtonBarController {
 	//TODO: Fade out or change the style of the button for the current tab.
 	
 	@FXML
-	private Button btnLoad;
+	private ToggleButton btnLoad;
 
 	@FXML
-	private Button btnMatch;
+	private ToggleButton btnMatch;
 
 	@FXML
-	private Button btnManage;
+	private ToggleButton btnManage;
 	
 	@FXML
-	private Button btnExport;
+	private ToggleButton btnExport;
+	
+	
+	
+	// When clicking a button, its height will increase
+	private static final double buttonOffset = 10.0; 
 	
 	// Required 
 	private Model model;
@@ -38,7 +45,16 @@ public class MainButtonBarController {
 	private AnchorPane matchCenterView;
 	private AnchorPane manageLeftView;
 	private AnchorPane manageCenterView;
-
+	
+	@FXML
+	private void initialize() {
+		ToggleGroup btnToggleGroup = new ToggleGroup();
+		btnLoad.setToggleGroup(btnToggleGroup);
+		btnMatch.setToggleGroup(btnToggleGroup);
+		btnManage.setToggleGroup(btnToggleGroup);
+		btnExport.setToggleGroup(btnToggleGroup);
+	}
+	
 	public void setModel(Model model) {
 		this.model = model;
 	}
@@ -121,7 +137,7 @@ public class MainButtonBarController {
 		}
 		mController.getCenterLayout().setCenter(manageCenterView);
 	}
-
+	
 	private void initManageCenterLayout() {
 
 		try {
