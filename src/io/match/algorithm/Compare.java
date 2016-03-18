@@ -13,7 +13,7 @@ import io.match.datastructure.attributes.ScaleAttribute;
 
 public class Compare {
 	
-	public static List<Similarity> getTopSimilarities(Person first, Person second, int topN) {
+	public static Similarity[] getTopSimilarities(Person first, Person second, int topN) {
 		
 		isSameSize(first, second);
 		int size = first.getAttributes().size();
@@ -38,7 +38,7 @@ public class Compare {
 
 		Collections.sort(tempList, Collections.reverseOrder());
 		
-		return tempList.subList(0, topN);
+		return tempList.subList(0, topN).toArray(new Similarity[topN]);
 	}
 
 	/**

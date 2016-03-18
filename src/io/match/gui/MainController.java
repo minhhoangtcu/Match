@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class MainController {
 	
@@ -21,13 +22,26 @@ public class MainController {
 	
 	@FXML
 	private BorderPane rootLayout;
+	
+	@FXML
 	private BorderPane centerLayout;
+	
+	@FXML
 	private AnchorPane leftLayout;
+	
+	@FXML
 	private TableView<TableRow> leftTableView;
+	
+	@FXML
+	private Stage primaryStage;
 	
 	public void setModel(Model model) {
 		this.model = model;
 		initialize();
+	}
+	
+	public void setPrimaryStage(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 	}
 	
 	private void initialize() {
@@ -110,5 +124,9 @@ public class MainController {
 
 	public void setLeftLayout(AnchorPane leftLayout) {
 		this.leftLayout = leftLayout;
+	}
+
+	public Stage getPrimaryStage() {
+		return primaryStage;
 	}
 }

@@ -13,7 +13,7 @@ import javafx.scene.control.TableView;
  */
 
 
-
+@Deprecated
 public class AssignListener {
 	
 	public static void assignListener(TableView tableView) {

@@ -52,7 +52,7 @@ public class Match extends Application {
 			
 			MainController controller = loader.getController();
 			controller.setModel(model);
-			
+			controller.setPrimaryStage(primaryStage);
 			
 		} catch (IOException e) {
 			System.out.println("Fail to load setUpPrimaryStage: Match");

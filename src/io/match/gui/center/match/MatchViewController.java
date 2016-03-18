@@ -2,21 +2,17 @@ package io.match.gui.center.match;
 
 import io.match.Model;
 import io.match.algorithm.Compare;
-import io.match.algorithm.Similarity;
 import io.match.datastructure.Person;
 import io.match.gui.MainController;
-import io.match.gui.left.TableRow;
-import javafx.beans.Observable;
+import io.match.gui.popup.match.PopupMatch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +24,7 @@ public class MatchViewController {
 	private static final int STUDENT_COL = 0;
 	private static final int FALCUTY_COL = 1;
 	private static final int PROBABILITY_COL = 2;
+	private static final int SIMILARITIES_NUM = 2;
 
 	/*
 	 * GUI's
@@ -52,7 +49,9 @@ public class MatchViewController {
 
 	@FXML
 	private TextField tfFaculty;
-
+	
+	private PopupMatch popupMatch;
+	
 	public void setModel(Model model) {
 		this.model = model;
 	}
@@ -60,7 +59,7 @@ public class MatchViewController {
 	public void setMainController(MainController controller) {
 		mController = controller;
 		populateMatchTable("", "");
-		
+		popupMatch = new PopupMatch(controller.getPrimaryStage());
 
 		tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -74,11 +73,8 @@ public class MatchViewController {
 					if (col == PROBABILITY_COL) {
 						Person student = model.getStudent(getStudentName(row));
 						Person falcuty = model.getFaculty(getFalcutyName(row));
-						
+						popupMatch.showPopup(student.getName(), falcuty.getName(), Compare.getTopSimilarities(student, falcuty, SIMILARITIES_NUM));
 						System.out.printf("%s and %s\n", student.getName(), falcuty.getName());
-						for (Similarity sim: Compare.getTopSimilarities(student, falcuty, 2)) {
-							System.out.printf("%s %f\n", sim.getAttributeName(), sim.getTotalPointGained());
-						}
 						System.out.println();
 					}
 					else {
