@@ -1,5 +1,7 @@
 package io.match.gui.center.manage;
 
+import java.util.HashMap;
+
 import io.match.datastructure.attributes.Attribute;
 import io.match.reader.PeopleStringReader;
 import javafx.geometry.Insets;
@@ -12,15 +14,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-/*
- * TODO: 
- * - Widen the text fields
- */
+
 
 public class PersonComponentPopup {
+	
+	private static HashMap<String, Object> tableContent = new HashMap<String, Object>();
 
 	private static final int rowHeight = 30;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
@@ -38,16 +40,21 @@ public class PersonComponentPopup {
 		return back;
 	}
 	
-	private static Pane getEditableStyledPane(String text, boolean isColored) {
-		Pane back = new Pane();
-
+	private static HBox getEditableStyledPane(String attributeName, String text, boolean isColored) {
+		HBox back = new HBox();
+		
 		TextField tf = new TextField(text);
+		back.setHgrow(tf, Priority.ALWAYS);
+		back.setMargin(tf, new Insets(0, 10, 0, 0));
+
+		
 		back.getChildren().add(tf);
-		// TODO: Set to the middle of the cell
-		tf.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
+		back.setAlignment(Pos.CENTER_LEFT);
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
+		
+		tableContent.put(attributeName, tf);
 		
 		return back;
 	}
@@ -126,7 +133,7 @@ public class PersonComponentPopup {
 		if (isDisable) {
 			gridPane.add(getStyledPane(": " + right, isColored), 1, row);
 		} else {
-			gridPane.add(getEditableStyledPane(right, isColored), 1, row);
+			gridPane.add(getEditableStyledPane(left, right, isColored), 1, row);
 		}
 	}
 
@@ -162,7 +169,9 @@ public class PersonComponentPopup {
 			vBox.setMargin(button, new Insets(5, 0, 5, 0));
 		}
 		gridPane.add(vBox, 1, row);
-
+		
+		//add to Table content
+		tableContent.put(attribute.getAttributeName(), group);
 	}
 
 	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable,
@@ -191,5 +200,16 @@ public class PersonComponentPopup {
 		vBox.getChildren().add(slider);
 
 		gridPane.add(vBox, 1, row);
+		
+		//add to Table content
+		tableContent.put(attribute.getAttributeName(), slider);
+	}
+	
+	public static HashMap<String, Object> getTableContent() {
+		return tableContent;
+	}
+	
+	public static void emptyTableContent() {
+		tableContent = new HashMap<String, Object>();
 	}
 }

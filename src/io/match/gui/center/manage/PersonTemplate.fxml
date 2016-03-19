@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="433.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.match.gui.center.manage.DisplayPersonController">
+<AnchorPane prefHeight="433.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.match.gui.center.manage.DisplayPersonController">
    <children>
       <BorderPane layoutX="-13.0" layoutY="-22.0" prefHeight="433.0" prefWidth="474.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -25,7 +30,7 @@
             </Label>
          </top>
          <bottom>
-            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="474.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="bottomHBox" alignment="CENTER" prefHeight="21.0" prefWidth="474.0" BorderPane.alignment="CENTER">
                <children>
                   <Button fx:id="btnAddNew" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" text="Add New" HBox.hgrow="ALWAYS">
                      <HBox.margin>
