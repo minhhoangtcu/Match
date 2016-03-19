@@ -7,6 +7,7 @@ import io.match.datastructure.attributes.GeneralAttribute;
 import io.match.datastructure.attributes.Interest;
 import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.datastructure.attributes.ScaleAttribute;
+import io.match.reader.PeopleStringReader;
 
 public class Person {
 
@@ -87,7 +88,7 @@ public class Person {
 		attributes.add(temp);
 	}
 	
-	private String getAttribute(AttributeType type, String name) {
+	private String getAttributeData(AttributeType type, String name) {
 		name = name.toLowerCase();
 		for (Attribute attribute : attributes) {
 			if (attribute.getAttributeName().toLowerCase().equals(name)) {
@@ -121,6 +122,49 @@ public class Person {
 	
 	/**
 	 * <p>
+	 * Modify the attribute of this person with the same name of the provided attribute.
+	 * </p>
+	 * 
+	 * @param attr attribute to modify
+	 */
+	public void modifyAttribute(Attribute pAttr) {
+		Attribute personAttr = getAttribute(pAttr.getAttributeName());
+		
+		switch (pAttr.getAttributeType()) {
+		case GENERAL:
+			((GeneralAttribute) personAttr).setData(PeopleStringReader.getDataGeneral(pAttr));
+			break;
+		case WEIGHTED_ONE_TO_MULTIPLE:
+			OneToMultipleAttribute temp = (OneToMultipleAttribute) personAttr;
+			OneToMultipleAttribute pTemp = (OneToMultipleAttribute) pAttr;
+			
+			temp.setChoice(pTemp.getChoice());
+			temp.setExpectingChoice(pTemp.getExpectingChoice());
+			temp.setInterst(pTemp.getInterst());
+			
+			break;
+		case WEIGHTED_SCALE:
+			ScaleAttribute temp2 = (ScaleAttribute) personAttr;
+			ScaleAttribute pTemp2 = (ScaleAttribute) pAttr;
+			
+			temp2.setChoice(pTemp2.getChoice());
+			temp2.setExpectingChoice(pTemp2.getExpectingChoice());
+			temp2.setInterst(pTemp2.getInterst());
+			
+			break;
+		}
+	}
+	
+	private Attribute getAttribute(String attrName) {
+		for (Attribute attribute : attributes) {
+			if (attribute.getAttributeName().equals(attrName))
+				return attribute;
+		}
+		throw new IllegalArgumentException("No attribute with such name: " + attrName);
+	}
+	
+	/**
+	 * <p>
 	 * Get the data from provided attribute name. Please only enter the name
 	 * similarly to what declared on the attributes file. Also, avoid using this
 	 * method because it has to search linearly for the attribute.
@@ -131,7 +175,7 @@ public class Person {
 	 * @return the data the attribute contains
 	 */
 	public String getGeneralAttribute(String name) {
-		return getAttribute(AttributeType.GENERAL, name);
+		return getAttributeData(AttributeType.GENERAL, name);
 	}
 	
 	public LinkedList<String> getMatches() {
@@ -159,7 +203,7 @@ public class Person {
 	 * @return the choice this person made
 	 */
 	public String getOneToMultipleAttribute(String name) {
-		return getAttribute(AttributeType.WEIGHTED_ONE_TO_MULTIPLE, name);
+		return getAttributeData(AttributeType.WEIGHTED_ONE_TO_MULTIPLE, name);
 	}
 	/**
 	 * <p>
@@ -173,7 +217,7 @@ public class Person {
 	 * @return the level this person picked
 	 */
 	public int getScaleAttribute(String name) {
-		return Integer.parseInt(getAttribute(AttributeType.WEIGHTED_SCALE, name));
+		return Integer.parseInt(getAttributeData(AttributeType.WEIGHTED_SCALE, name));
 	}
 	public boolean isMatched() {
 		return getNumMatched() == numMatchesAvaiable;
