@@ -78,7 +78,7 @@ public class DisplayPersonController {
 		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
 		 */
 		int row = 0;
-		boolean isDisable = true;
+		boolean isDisable = false;
 
 		PersonComponentPopup.popupString(NAME, person.getName(), gridPane, row++, isDisable, isColored);
 		isColored = !isColored;
