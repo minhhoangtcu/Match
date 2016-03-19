@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
 
 public class PersonComponentPopup {
 	
-	HashMap<String, Object> tableContent = new HashMap<String, Object>();
+	private static HashMap<String, Object> tableContent = new HashMap<String, Object>();
 
 	private static final int rowHeight = 30;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
@@ -40,7 +40,7 @@ public class PersonComponentPopup {
 		return back;
 	}
 	
-	private static HBox getEditableStyledPane(String text, boolean isColored) {
+	private static HBox getEditableStyledPane(String attributeName, String text, boolean isColored) {
 		HBox back = new HBox();
 		
 		TextField tf = new TextField(text);
@@ -53,6 +53,8 @@ public class PersonComponentPopup {
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
+		
+		tableContent.put(attributeName, tf);
 		
 		return back;
 	}
@@ -131,7 +133,7 @@ public class PersonComponentPopup {
 		if (isDisable) {
 			gridPane.add(getStyledPane(": " + right, isColored), 1, row);
 		} else {
-			gridPane.add(getEditableStyledPane(right, isColored), 1, row);
+			gridPane.add(getEditableStyledPane(left, right, isColored), 1, row);
 		}
 	}
 
@@ -167,7 +169,9 @@ public class PersonComponentPopup {
 			vBox.setMargin(button, new Insets(5, 0, 5, 0));
 		}
 		gridPane.add(vBox, 1, row);
-
+		
+		//add to Table content
+		tableContent.put(attribute.getAttributeName(), group);
 	}
 
 	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable,
@@ -196,5 +200,16 @@ public class PersonComponentPopup {
 		vBox.getChildren().add(slider);
 
 		gridPane.add(vBox, 1, row);
+		
+		//add to Table content
+		tableContent.put(attribute.getAttributeName(), slider);
+	}
+	
+	public static HashMap<String, Object> getTableContent() {
+		return tableContent;
+	}
+	
+	public static void emptyTableContent() {
+		tableContent = new HashMap<String, Object>();
 	}
 }

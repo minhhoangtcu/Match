@@ -17,7 +17,12 @@ import javafx.scene.layout.AnchorPane;
 
 public class MainButtonBarController {
 
-	//TODO: Fade out or change the style of the button for the current tab.
+/*
+ * TODO: 
+ * 	-Fade out or change the style of the button for the current tab.
+ * 	-Load manage view after return from Match view
+ */
+	
 	
 	@FXML
 	private ToggleButton btnLoad;
