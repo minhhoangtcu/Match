@@ -10,28 +10,27 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 /*
  * TODO: 
- * - Center the content
  * - Widen the text fields
  */
 
 public class PersonComponentPopup {
 
-	private static final int rowHeight = 24;
+	private static final int rowHeight = 30;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
 
-	private static Pane getStyledPane(String text, boolean isColored) {
-		Pane back = new Pane();
+	private static HBox getStyledPane(String text, boolean isColored) {
+		HBox back = new HBox();
 
 		Label lbl = new Label(text);
 		back.getChildren().add(lbl);
-		// TODO: Set to the middle of the cell
-		lbl.setAlignment(Pos.CENTER_RIGHT); // NOT WORKING
+		back.setAlignment(Pos.CENTER_LEFT);
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
