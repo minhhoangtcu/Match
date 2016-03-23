@@ -110,11 +110,13 @@ public class DisplayPersonController {
 						PeopleStringReader.getDataGeneral(attribute), gridPane, row++, isDisable, isColored);
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row++, isDisable,
+				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row, isDisable,
 						isColored);
+				row = row + 3;
 				break;
 			case WEIGHTED_SCALE:
-				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row++, isDisable, isColored);
+				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row, isDisable, isColored);
+				row = row + 3;
 				break;
 			}
 

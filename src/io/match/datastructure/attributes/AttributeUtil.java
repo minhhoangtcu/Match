@@ -34,6 +34,11 @@ public class AttributeUtil {
 		throw new IllegalArgumentException("Invalid interest");
 	}
 	
+	public static String[] getAllString() {
+		String[] out = {NOT_IMPORTANT, SOMEWHAT_IMPORTANT, VERY_IMPORTANT};
+		return out;
+	}
+	
 	public static String getStringFromType(AttributeType input) {
 		switch (input) {
 		case GENERAL:

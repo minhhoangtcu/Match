@@ -3,6 +3,7 @@ package io.match.gui.center.manage;
 import java.util.HashMap;
 
 import io.match.datastructure.attributes.Attribute;
+import io.match.datastructure.attributes.AttributeUtil;
 import io.match.reader.PeopleStringReader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,10 +19,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-
-
 public class PersonComponentPopup {
-	
+
 	private static HashMap<String, Object> tableContent = new HashMap<String, Object>();
 
 	private static final int rowHeight = 30;
@@ -36,26 +35,25 @@ public class PersonComponentPopup {
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
-		
+
 		return back;
 	}
-	
+
 	private static HBox getEditableStyledPane(String attributeName, String text, boolean isColored) {
 		HBox back = new HBox();
-		
+
 		TextField tf = new TextField(text);
 		back.setHgrow(tf, Priority.ALWAYS);
 		back.setMargin(tf, new Insets(0, 10, 0, 0));
 
-		
 		back.getChildren().add(tf);
 		back.setAlignment(Pos.CENTER_LEFT);
 
 		if (isColored)
 			back.setStyle(COLORED_STYLE);
-		
+
 		tableContent.put(attributeName, tf);
-		
+
 		return back;
 	}
 
@@ -139,9 +137,26 @@ public class PersonComponentPopup {
 
 	public static void popupWeightedOneToMultipleAttribute(Attribute attribute, GridPane gridPane, int row,
 			boolean isDisable, boolean isColored) {
+		
+		// popup possible choices
+		popupMultipleChoices(attribute.getAttributeName(), 
+				PeopleStringReader.getDataOneToMultiple(attribute), 
+				PeopleStringReader.getPossibleOneToMultiple(attribute), 
+				gridPane, row, isDisable, isColored);
+		
+		// TODO popup expecting choices
+		
+		// popup Importance...
+		popupMultipleChoices("Expecting Choice: ", 
+				PeopleStringReader.getImportanceOneToMultiple(attribute),
+				AttributeUtil.getAllString(),
+				gridPane, row + 1, isDisable, isColored);
+	}
 
+	private static void popupMultipleChoices(String left, String choice, String[] choices, GridPane gridPane, int row, boolean isDisable,
+			boolean isColored) {
 		// add left label
-		gridPane.add(getStyledPane(attribute.getAttributeName(), isColored), 0, row);
+		gridPane.add(getStyledPane(left, isColored), 0, row);
 
 		// add right component
 		VBox vBox = new VBox();
@@ -150,8 +165,7 @@ public class PersonComponentPopup {
 
 		ToggleGroup group = new ToggleGroup();
 
-		String choice = PeopleStringReader.getDataOneToMultiple(attribute);
-		for (String possibleChoice : PeopleStringReader.getPossibleOneToMultiple(attribute)) {
+		for (String possibleChoice : choices) {
 			RadioButton button = new RadioButton(possibleChoice);
 			button.setToggleGroup(group);
 
@@ -169,9 +183,9 @@ public class PersonComponentPopup {
 			vBox.setMargin(button, new Insets(5, 0, 5, 0));
 		}
 		gridPane.add(vBox, 1, row);
-		
-		//add to Table content
-		tableContent.put(attribute.getAttributeName(), group);
+
+		// add to Table content
+		tableContent.put(left, group);
 	}
 
 	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable,
@@ -200,15 +214,15 @@ public class PersonComponentPopup {
 		vBox.getChildren().add(slider);
 
 		gridPane.add(vBox, 1, row);
-		
-		//add to Table content
+
+		// add to Table content
 		tableContent.put(attribute.getAttributeName(), slider);
 	}
-	
+
 	public static HashMap<String, Object> getTableContent() {
 		return tableContent;
 	}
-	
+
 	public static void emptyTableContent() {
 		tableContent = new HashMap<String, Object>();
 	}
