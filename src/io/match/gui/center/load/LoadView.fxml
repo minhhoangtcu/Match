@@ -67,10 +67,10 @@
                   <Button fx:id="btnLoadFixedStudents" mnemonicParsing="false" onAction="#loadFixedStudents" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button fx:id="btnLoadFaculties" mnemonicParsing="false" onAction="#loadFaculties" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="btnLoadFixedFaculties" mnemonicParsing="false" onAction="#loadFixedFaculties" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="infoLoadStudentData" GridPane.columnIndex="2" />
-                  <Label text="infoLoadStudentFA" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="infoLoadFalcutyData" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="infoLoadFalcutyFA" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="infoLoadStudentData" GridPane.columnIndex="2" />
+                  <Label fx:id="infoLoadStudentFA" text=" " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="infoLoadFalcutyData" text=" " GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="infoLoadFalcutyFA" text=" " GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
                <padding>
                   <Insets left="50.0" right="50.0" />
