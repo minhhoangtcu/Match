@@ -2,8 +2,11 @@ package io.match.gui.center.load;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import io.match.Model;
 import io.match.helper.LoadFile;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class LoadViewController {
 	
@@ -12,6 +15,18 @@ public class LoadViewController {
 			fixedStudentsURL = "",
 			facultiesURL = "", 
 			fixedFacultiesURL = "";
+	
+	@FXML
+	Label infoLoadStudentData;
+	
+	@FXML
+	Label infoLoadStudentFA;
+	
+	@FXML
+	Label infoLoadFalcutyData;
+	
+	@FXML
+	Label infoLoadFalcutyFA;
 	
 	public void setModel(Model model) {
 		this.model = model;

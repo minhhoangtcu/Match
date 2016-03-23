@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="444.0" prefWidth="469.0" stylesheets="@../../MatchTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.match.gui.center.load.LoadViewController">
+<AnchorPane prefHeight="800.0" prefWidth="800.0" stylesheets="@../../MatchTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.match.gui.center.load.LoadViewController">
    <children>
       <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -24,14 +24,17 @@
                   <String fx:value="background-header" />
                   <String fx:value="label-header-small" />
                </styleClass>
+               <padding>
+                  <Insets bottom="10.0" top="20.0" />
+               </padding>
             </Label>
          </top>
          <center>
-            <GridPane alignment="CENTER" maxWidth="600.0" BorderPane.alignment="CENTER">
+            <GridPane alignment="CENTER" maxHeight="200.0" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="350.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="30.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" prefWidth="0.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="250.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="55.0" minWidth="0.0" prefWidth="55.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="40.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -64,11 +67,18 @@
                   <Button fx:id="btnLoadFixedStudents" mnemonicParsing="false" onAction="#loadFixedStudents" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Button fx:id="btnLoadFaculties" mnemonicParsing="false" onAction="#loadFaculties" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Button fx:id="btnLoadFixedFaculties" mnemonicParsing="false" onAction="#loadFixedFaculties" text="Load" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="infoLoadStudentData" GridPane.columnIndex="2" />
+                  <Label text="infoLoadStudentFA" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label text="infoLoadFalcutyData" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label text="infoLoadFalcutyFA" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" />
+               </padding>
             </GridPane>
          </center>
          <bottom>
-            <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>
