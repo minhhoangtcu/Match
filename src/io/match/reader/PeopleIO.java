@@ -155,6 +155,9 @@ public class PeopleIO {
 		if (isDebug)
 			System.out.printf("Adding header\n");
 		
+		if (people.size() == 0)
+			aIO.addHeaderToFile();
+		
 		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
 		StringBuilder sb = new StringBuilder();
 		
