@@ -5,13 +5,11 @@ import java.io.IOException;
 import io.match.Match;
 import io.match.algorithm.Similarity;
 import io.match.datastructure.attributes.Attribute;
-import io.match.datastructure.attributes.OneToMultipleAttribute;
 import io.match.reader.PeopleStringReader;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MatchDetailController {
@@ -37,6 +35,8 @@ public class MatchDetailController {
 	private void displaySimilarities() {
 		for (Similarity similarity: allSimilarities) {
 			infoPane.add(getAttributeInfoGrid(similarity.getFirstAttr()), 0, row);
+			String point = String.format("%.1f", 100.0 * (similarity.getTotalPointGained() / 200.0)) + "%";
+			infoPane.add(new Label(point), 1, row);
 			infoPane.add(getAttributeInfoGrid(similarity.getSecondAttr()), 2, row);
 			row++;
 		}
