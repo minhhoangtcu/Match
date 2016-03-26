@@ -25,7 +25,7 @@ public class PersonComponentPopup {
 
 	private static HashMap<String, Object> tableContent = new HashMap<String, Object>();
 
-	private static final int rowHeight = 30;
+	private static final int rowHeight = 50;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
 	public static final String EXPECTING_CHOICE_LABEL = "Expecting Choices: ";
 	public static final String IMPORTANCE_LABEL = "Expecting Choices: ";
