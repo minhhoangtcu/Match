@@ -11,13 +11,20 @@
    <children>
       <BorderPane layoutX="-13.0" layoutY="-22.0" prefHeight="433.0" prefWidth="474.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <Label alignment="CENTER" text="Information" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Information" textAlignment="CENTER" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
                <BorderPane.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </BorderPane.margin>
+               <styleClass>
+                  <String fx:value="background-header" />
+                  <String fx:value="label-header-small" />
+               </styleClass>
+               <padding>
+                  <Insets bottom="10.0" top="20.0" />
+               </padding>
             </Label>
          </top>
          <bottom>
@@ -34,8 +41,11 @@
          <center>
             <ScrollPane fx:id="scrollPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </BorderPane.margin>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
             </ScrollPane>
          </center>
       </BorderPane>

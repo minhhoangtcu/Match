@@ -37,9 +37,9 @@
          <center>
             <GridPane alignment="CENTER" maxHeight="200.0" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="250.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="84.0" minWidth="0.0" prefWidth="84.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="277.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="250.0" percentWidth="60.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" percentWidth="30.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -78,12 +78,12 @@
                   <Label fx:id="infoLoadFalcutyFA" text=" " GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
                <padding>
-                  <Insets left="50.0" right="50.0" />
+                  <Insets bottom="20.0" left="50.0" right="50.0" top="20.0" />
                </padding>
             </GridPane>
          </center>
          <bottom>
-            <TextArea fx:id="txtStats" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="txtStats" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="509.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
          </bottom>
       </BorderPane>
    </children>
