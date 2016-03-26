@@ -11,6 +11,7 @@ import io.match.gui.center.match.MatchViewController;
 import io.match.gui.left.TablePopulator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -25,16 +26,16 @@ public class MainButtonBarController {
 	
 	
 	@FXML
-	private ToggleButton btnLoad;
+	private Button btnLoad;
 
 	@FXML
-	private ToggleButton btnMatch;
+	private Button btnMatch;
 
 	@FXML
-	private ToggleButton btnManage;
+	private Button btnManage;
 	
 	@FXML
-	private ToggleButton btnExport;
+	private Button btnExport;
 	
 	
 	
@@ -53,11 +54,11 @@ public class MainButtonBarController {
 	
 	@FXML
 	private void initialize() {
-		ToggleGroup btnToggleGroup = new ToggleGroup();
-		btnLoad.setToggleGroup(btnToggleGroup);
-		btnMatch.setToggleGroup(btnToggleGroup);
-		btnManage.setToggleGroup(btnToggleGroup);
-		btnExport.setToggleGroup(btnToggleGroup);
+//		ToggleGroup btnToggleGroup = new ToggleGroup();
+//		btnLoad.setToggleGroup(btnToggleGroup);
+//		btnMatch.setToggleGroup(btnToggleGroup);
+//		btnManage.setToggleGroup(btnToggleGroup);
+//		btnExport.setToggleGroup(btnToggleGroup);
 	}
 	
 	public void setModel(Model model) {
