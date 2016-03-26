@@ -145,25 +145,33 @@ public class DisplayPersonController {
 			public void handle(ActionEvent event) {
 
 				// TODO: modify
-				TextField tfName = (TextField) tableContent.get(NAME);
-				String name = tfName.getText();
-				TextField tfNumMatched = (TextField) tableContent.get(MATCHED);
-				String numMatched = tfNumMatched.getText();
-				TextField tfNumMatchesAvaiable = (TextField) tableContent.get(MATCHES_AVAILABLE);
-				String numMatchesAvaiable = tfNumMatchesAvaiable.getText();
+				String name = ReadPersonComponentPopup
+						.readTextField(tableContent, NAME);
+				String numMatched = ReadPersonComponentPopup
+						.readTextField(tableContent, MATCHED);
+				String numMatchesAvaiable = ReadPersonComponentPopup
+						.readTextField(tableContent, MATCHES_AVAILABLE);
 
 				for (Attribute attribute : person.getAttributes()) {
 					switch (attribute.getAttributeType()) {
 					case GENERAL:
-						TextField tf = (TextField) tableContent.get(attribute.getAttributeName());
-						String newValue = tf.getText();
+						String newValue = ReadPersonComponentPopup
+											.readTextField(tableContent, attribute.getAttributeName());
 						// TODO: modify
 						break;
 					case WEIGHTED_ONE_TO_MULTIPLE:
-						ToggleGroup group = (ToggleGroup) tableContent.get(attribute.getAttributeName());
-						RadioButton radioButton = (RadioButton) group.getSelectedToggle();
-						String newOption = radioButton.getText();
-						System.out.println(newOption);
+						String newChoice = ReadPersonComponentPopup
+											.readMultipleChoices(tableContent, attribute.getAttributeName());
+						System.out.println(newChoice);
+						// TODO: read new expecting choices
+						
+						// TODO: read new level of importance
+						System.out.println(PersonComponentPopup.IMPORTANCE_LABEL + attribute.getAttributeName());
+						String newLevelOfImportance = ReadPersonComponentPopup
+											.readMultipleChoices(
+													tableContent,
+													PersonComponentPopup.IMPORTANCE_LABEL + attribute.getAttributeName());
+						System.out.println(newLevelOfImportance);
 						// TODO: modify
 						break;
 					case WEIGHTED_SCALE:
@@ -223,30 +231,45 @@ public class DisplayPersonController {
 			public void handle(ActionEvent event) {
 
 				// TODO: modify
-				TextField tfName = (TextField) tableContent.get(NAME);
-				String name = tfName.getText();
-				TextField tfNumMatched = (TextField) tableContent.get(MATCHED);
-				String numMatched = tfNumMatched.getText();
-				TextField tfNumMatchesAvaiable = (TextField) tableContent.get(MATCHES_AVAILABLE);
-				String numMatchesAvaiable = tfNumMatchesAvaiable.getText();
+				String name = ReadPersonComponentPopup.readTextField(tableContent, NAME);
+				String numMatched = ReadPersonComponentPopup.readTextField(tableContent, MATCHED);
+				String numMatchesAvaiable = ReadPersonComponentPopup.readTextField(tableContent, MATCHES_AVAILABLE);
 
 				for (Attribute attribute : person.getAttributes()) {
 					switch (attribute.getAttributeType()) {
 					case GENERAL:
-						TextField tf = (TextField) tableContent.get(attribute.getAttributeName());
-						String newValue = tf.getText();
+						String newValue = 
+							ReadPersonComponentPopup.readTextField(
+								tableContent, attribute.getAttributeName());
 						// TODO: modify
 						break;
 					case WEIGHTED_ONE_TO_MULTIPLE:
-						ToggleGroup group = (ToggleGroup) tableContent.get(attribute.getAttributeName());
-						RadioButton radioButton = (RadioButton) group.getSelectedToggle();
-						String newOption = radioButton.getText();
-						System.out.println(newOption);
+						String newChoice = 
+							ReadPersonComponentPopup.readMultipleChoices(
+								tableContent, attribute.getAttributeName());
+						// TODO: fix this bug
+//						String[] newExpectingChoices = 
+//							ReadPersonComponentPopup.readMultipleOptions(
+//								tableContent, PersonComponentPopup.EXPECTING_CHOICE_LABEL + attribute.getAttributeName());
+						
+						String newLevelOfImportance = 
+							ReadPersonComponentPopup.readMultipleChoices(
+								tableContent,PersonComponentPopup.IMPORTANCE_LABEL + attribute.getAttributeName());
 						// TODO: modify
 						break;
 					case WEIGHTED_SCALE:
-						Slider slider = (Slider) tableContent.get(attribute.getAttributeName());
-						double newInput = slider.getValue();
+						double newInput = 
+							ReadPersonComponentPopup.readSlider(
+								tableContent, attribute.getAttributeName());
+						double newLevelOfInterst = 
+							ReadPersonComponentPopup.readSlider(
+								tableContent, 
+								PersonComponentPopup.LEVEL_INTEREST + attribute.getAttributeName());
+						String newLevelofImportance = 
+							ReadPersonComponentPopup.readMultipleChoices(
+								tableContent,
+								PersonComponentPopup.IMPORTANCE_LABEL + attribute.getAttributeName());
+						// TODO: check if these gettings work
 						// TODO: modify
 						break;
 					}

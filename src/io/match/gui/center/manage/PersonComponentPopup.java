@@ -27,8 +27,9 @@ public class PersonComponentPopup {
 
 	private static final int rowHeight = 30;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
-	private static final String EXPECTING_CHOICE_LABEL = "Expecting Choices: ";
-	private static final String IMPORTANCE_LABEL = "Expecting Choices: ";
+	public static final String EXPECTING_CHOICE_LABEL = "Expecting Choices: ";
+	public static final String IMPORTANCE_LABEL = "Expecting Choices: ";
+	public static final String LEVEL_INTEREST = "Level of Interest: ";
 
 	private static HBox getStyledPane(String text, boolean isColored) {
 		HBox back = new HBox();
@@ -193,33 +194,55 @@ public class PersonComponentPopup {
 
 		// add to Table content
 		tableContent.put(left + additional, group);
+//		for (String key: tableContent.keySet()) {
+//			System.out.println(key);
+//		}
 	}
 
 	public static void popupScaleAttribute(
 			Attribute attribute, GridPane gridPane, int row, boolean isDisable) {
 		// popup choice
-		popupScale(attribute, gridPane, row, isDisable, row % 2 == 0);
+		popupScale(
+				attribute.getAttributeName(),
+				"",
+				PeopleStringReader.getMinScale(attribute),
+				PeopleStringReader.getMaxScale(attribute),
+				PeopleStringReader.getDataScale(attribute),
+				gridPane, row, isDisable, row % 2 == 0);
 		
 		// popup level of interest
 		row = row + 1;
+		popupScale(
+				LEVEL_INTEREST,
+				attribute.getAttributeName(),
+				PeopleStringReader.getMinScale(attribute),
+				PeopleStringReader.getMaxScale(attribute),
+				PeopleStringReader.getExpectingScale(attribute),
+				gridPane, row, isDisable, row % 2 == 0);
+		
+		// popup level of importance
+		row = row + 1;
+		popupMultipleChoices(
+				IMPORTANCE_LABEL, 
+				attribute.getAttributeName(),
+				PeopleStringReader.getImportanceScale(attribute),
+				AttributeUtil.getAllString(),
+				gridPane, row, isDisable, row % 2 == 0);
 		
 	}
 	
 	private static void popupScale(
-			Attribute attribute, GridPane gridPane, int row, boolean isDisable,
+			String left, String additional, double min, double max,
+			double choice, GridPane gridPane, int row, boolean isDisable,
 			boolean isColored) {
 
 		// add left label
-		gridPane.add(getStyledPane(attribute.getAttributeName(), isColored), 0, row);
+		gridPane.add(getStyledPane(left, isColored), 0, row);
 
 		// add right component
 		VBox vBox = new VBox();
 		if (isColored)
 			vBox.setStyle(COLORED_STYLE);
-
-		double min = PeopleStringReader.getMinScale(attribute);
-		double max = PeopleStringReader.getMaxScale(attribute);
-		double choice = PeopleStringReader.getDataScale(attribute);
 		Slider slider = new Slider(min, max, choice);
 		slider.setShowTickMarks(true);
 		slider.setShowTickLabels(true);
@@ -234,7 +257,7 @@ public class PersonComponentPopup {
 		gridPane.add(vBox, 1, row);
 
 		// add to Table content
-		tableContent.put(attribute.getAttributeName(), slider);
+		tableContent.put(left + additional, slider);
 	}
 
 	public static HashMap<String, Object> getTableContent() {
