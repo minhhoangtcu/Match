@@ -90,6 +90,7 @@ public class PeopleGenerator {
 		
 		PeopleIO io = new PeopleIO(dirPeople, dirAttr, attributes);
 		
+		io.addHeaderToFile();
 		for (Person person: generatePeople(numOfPeople)) {
 			io.addPerson(person);
 		}

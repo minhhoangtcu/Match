@@ -149,6 +149,29 @@ public class PeopleIO {
 		aIO.readAttributes();
 		this.fixedAttributes = aIO.getAttributes();
 	}
+	
+	public void addHeaderToFile() throws IOException {
+		
+		if (isDebug)
+			System.out.printf("Adding header\n");
+		
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirPeople, true));
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("name,");
+		
+		for (Attribute attr: attributes) {
+			sb.append(attr.getAttributeName());
+			if (attr != attributes.getLast())
+				sb.append(",");
+			else
+				sb.append("\n");
+		}
+		
+		bf.write(sb.toString());
+		bf.close();
+		
+	}
 
 	public void addPerson(Person person) throws IOException {
 

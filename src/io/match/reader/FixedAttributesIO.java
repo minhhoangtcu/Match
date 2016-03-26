@@ -14,6 +14,7 @@ public class FixedAttributesIO {
 	private String dirAttr;
 	private HashMap<String, FixedAttribute> attributes;
 	private boolean isDebug;
+	private static final String HEADER = "Name,Matched with,Number of avaiable Matches\n";
 
 	public FixedAttributesIO(String dir) {
 		this.dirAttr = dir;
@@ -55,6 +56,17 @@ public class FixedAttributesIO {
 		} finally {
 			bf.close();
 		}
+	}
+	
+	public void addHeaderToFile() throws IOException {
+		
+		if (isDebug)
+			System.out.printf("Adding header\n");
+		
+		BufferedWriter bf = new BufferedWriter(new FileWriter(dirAttr, true));
+		bf.write(HEADER);
+		bf.close();
+		
 	}
 	
 	public void addAttribute(Person person) throws IOException {
