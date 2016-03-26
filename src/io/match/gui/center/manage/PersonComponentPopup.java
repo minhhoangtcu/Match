@@ -1,5 +1,6 @@
 package io.match.gui.center.manage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.match.datastructure.attributes.Attribute;
@@ -7,6 +8,7 @@ import io.match.datastructure.attributes.AttributeUtil;
 import io.match.reader.PeopleStringReader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
@@ -25,6 +27,8 @@ public class PersonComponentPopup {
 
 	private static final int rowHeight = 30;
 	private static final String COLORED_STYLE = "-fx-background-color: #e6e6e6;";
+	private static final String EXPECTING_CHOICE_LABEL = "Expecting Choices: ";
+	private static final String IMPORTANCE_LABEL = "Expecting Choices: ";
 
 	private static HBox getStyledPane(String text, boolean isColored) {
 		HBox back = new HBox();
@@ -56,60 +60,7 @@ public class PersonComponentPopup {
 
 		return back;
 	}
-
-	@Deprecated
-	public static void popupAvailableMatches(int available, GridPane gridPane, int row, boolean disable) {
-		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
-		gridPane.add(new Label("Matches Available"), 0, row);
-		if (disable) {
-			gridPane.add(new Label(": " + available), 1, row);
-		} else {
-			gridPane.add(new TextField("" + available), 1, row);
-		}
-	}
-
-	@Deprecated
-	public static void popupGeneralAttribute(Attribute attribute, GridPane gridPane, int row, boolean disable) {
-		// add row constraints
-		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
-
-		// add left label
-		Pane back = new Pane();
-		Label name = new Label();
-		back.getChildren().add(name);
-		back.setStyle("-fx-background-color: #C0C0C0;");
-		gridPane.add(back, 0, row);
-
-		// add right component
-		if (disable) {
-			gridPane.add(new Label(": " + PeopleStringReader.getDataGeneral(attribute)), 1, row);
-		} else {
-			gridPane.add(new TextField(PeopleStringReader.getDataGeneral(attribute)), 1, row);
-		}
-	}
-
-	@Deprecated
-	public static void popupMatched(int matched, GridPane gridPane, int row, boolean disable) {
-		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
-		gridPane.add(new Label("Matched"), 0, row);
-		if (disable) {
-			gridPane.add(new Label(": " + matched), 1, row);
-		} else {
-			gridPane.add(new TextField("" + matched), 1, row);
-		}
-	}
-
-	@Deprecated
-	public static void popupName(String name, GridPane gridPane, int row, boolean disable) {
-		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
-		gridPane.add(new Label("Name"), 0, row);
-		if (disable) {
-			gridPane.add(new Label(": " + name), 1, row);
-		} else {
-			gridPane.add(new TextField(name), 1, row);
-		}
-	}
-
+	
 	/**
 	 * Fill in the specified row of the grid pane with two input Strings. The
 	 * method may make the whole row colored or the second collumn editable
@@ -122,8 +73,15 @@ public class PersonComponentPopup {
 	 * @param isDisable
 	 * @param isColored
 	 */
-	public static void popupString(String left, String right, GridPane gridPane, int row, boolean isDisable,
-			boolean isColored) {
+	public static void popupString(
+			String left, String right, GridPane gridPane, 
+			int row, boolean isDisable) {
+		popupString(left, right, gridPane, row, isDisable, row % 2 == 0);
+	}
+	
+	private static void popupString(
+			String left, String right, GridPane gridPane, int row, 
+			boolean isDisable, boolean isColored) {
 
 		gridPane.getRowConstraints().add(new RowConstraints(rowHeight));
 		gridPane.add(getStyledPane(left, isColored), 0, row);
@@ -135,26 +93,36 @@ public class PersonComponentPopup {
 		}
 	}
 
-	public static void popupWeightedOneToMultipleAttribute(Attribute attribute, GridPane gridPane, int row,
-			boolean isDisable, boolean isColored) {
+	public static void popupWeightedOneToMultipleAttribute(
+			Attribute attribute, GridPane gridPane, int row, boolean isDisable) {
 		
-		// popup possible choices
-		popupMultipleChoices(attribute.getAttributeName(), 
+		popupMultipleChoices(
+				attribute.getAttributeName(), 
+				"",
 				PeopleStringReader.getDataOneToMultiple(attribute), 
 				PeopleStringReader.getPossibleOneToMultiple(attribute), 
-				gridPane, row, isDisable, isColored);
+				gridPane, row, isDisable, row % 2 == 0);
 		
-		// TODO popup expecting choices
+		row = row + 1;
+		popupMultipleOptions(
+				EXPECTING_CHOICE_LABEL, 
+				attribute.getAttributeName(),
+				PeopleStringReader.getExpectingOneToMultiple(attribute),
+				PeopleStringReader.getPossibleOneToMultiple(attribute),
+				gridPane, row, isDisable, row % 2 == 0);
 		
-		// popup Importance...
-		popupMultipleChoices("Expecting Choice: ", 
+		row = row + 1;
+		popupMultipleChoices(
+				IMPORTANCE_LABEL, 
+				attribute.getAttributeName(),
 				PeopleStringReader.getImportanceOneToMultiple(attribute),
 				AttributeUtil.getAllString(),
-				gridPane, row + 1, isDisable, isColored);
+				gridPane, row, isDisable, row % 2 == 0);
 	}
 
-	private static void popupMultipleChoices(String left, String choice, String[] choices, GridPane gridPane, int row, boolean isDisable,
-			boolean isColored) {
+	private static void popupMultipleChoices(
+			String left, String additional, String choice, String[] choices, 
+			GridPane gridPane, int row, boolean isDisable, boolean isColored) {
 		// add left label
 		gridPane.add(getStyledPane(left, isColored), 0, row);
 
@@ -185,10 +153,60 @@ public class PersonComponentPopup {
 		gridPane.add(vBox, 1, row);
 
 		// add to Table content
-		tableContent.put(left, group);
+		tableContent.put(left + additional, group);
+	}
+	
+	private static void popupMultipleOptions(
+			String left, String additional, String[] checkedChoice, String[] allChoices, 
+			GridPane gridPane, int row, boolean isDisable, boolean isColored) {
+		// add left label
+		gridPane.add(getStyledPane(left, isColored), 0, row);
+
+		// add right component
+		VBox vBox = new VBox();
+		if (isColored)
+			vBox.setStyle(COLORED_STYLE);
+
+		ArrayList<CheckBox> group = new ArrayList<CheckBox>();
+
+		for (String possibleChoice : allChoices) {
+			CheckBox box = new CheckBox(possibleChoice);
+			group.add(box);
+			
+			for (String checked: checkedChoice) {
+				if (checked.equals(possibleChoice)) {
+					box.setSelected(true);
+				}
+			}
+			
+
+			box.setDisable(isDisable);
+			box.setStyle("-fx-opacity: 1;"); // force the disabled radio
+												// button to be the same as
+												// normal one.
+
+			// edit vBox
+			vBox.getChildren().add(box);
+			vBox.setMargin(box, new Insets(5, 0, 5, 0));
+		}
+		gridPane.add(vBox, 1, row);
+
+		// add to Table content
+		tableContent.put(left + additional, group);
 	}
 
-	public static void popupWithedScaleAttribute(Attribute attribute, GridPane gridPane, int row, boolean isDisable,
+	public static void popupScaleAttribute(
+			Attribute attribute, GridPane gridPane, int row, boolean isDisable) {
+		// popup choice
+		popupScale(attribute, gridPane, row, isDisable, row % 2 == 0);
+		
+		// popup level of interest
+		row = row + 1;
+		
+	}
+	
+	private static void popupScale(
+			Attribute attribute, GridPane gridPane, int row, boolean isDisable,
 			boolean isColored) {
 
 		// add left label

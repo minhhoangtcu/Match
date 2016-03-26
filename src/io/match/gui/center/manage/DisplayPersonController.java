@@ -60,7 +60,6 @@ public class DisplayPersonController {
 	/*
 	 * Helper Variables
 	 */
-	private boolean isColored;
 	private static HashMap<String, Object> tableContent;
 
 	public void setModel(Model model) {
@@ -75,7 +74,6 @@ public class DisplayPersonController {
 	private void initialize() {
 		gridPane.getRowConstraints().removeAll();
 		gridPane.setVgap(0);
-		isColored = false;
 	}
 
 	public void setPerson(Person person) {
@@ -92,35 +90,33 @@ public class DisplayPersonController {
 		/*
 		 * THIS IS HOW TO ADD ELEMENTS DYNAMICALLY TO THE DISPLAY
 		 */
-		int row = 0;
+		Integer row = 0;
 
-		PersonComponentPopup.popupString(NAME, person.getName(), gridPane, row++, isDisable, isColored);
-		isColored = !isColored;
-		PersonComponentPopup.popupString(MATCHED, person.getNumMatched() + "", gridPane, row++, isDisable, isColored);
-		isColored = !isColored;
-		PersonComponentPopup.popupString(MATCHES_AVAILABLE, person.getNumMatchesAvaiable() + "", gridPane, row++,
-				isDisable, isColored);
-		isColored = !isColored;
+		PersonComponentPopup.popupString(
+				NAME, person.getName(), gridPane, row++, isDisable);
+		PersonComponentPopup.popupString(
+				MATCHED, person.getNumMatched() + "", gridPane, row++, isDisable);
+		PersonComponentPopup.popupString(
+				MATCHES_AVAILABLE, person.getNumMatchesAvaiable() + "", gridPane, row++, isDisable);
 
 		for (Attribute attribute : person.getAttributes()) {
 
 			switch (attribute.getAttributeType()) {
 			case GENERAL:
-				PersonComponentPopup.popupString(attribute.getAttributeName(),
-						PeopleStringReader.getDataGeneral(attribute), gridPane, row++, isDisable, isColored);
+				PersonComponentPopup.popupString(
+						attribute.getAttributeName(),PeopleStringReader.getDataGeneral(attribute),
+						gridPane, row++, isDisable);
 				break;
 			case WEIGHTED_ONE_TO_MULTIPLE:
-				PersonComponentPopup.popupWeightedOneToMultipleAttribute(attribute, gridPane, row, isDisable,
-						isColored);
+				PersonComponentPopup.popupWeightedOneToMultipleAttribute(
+						attribute, gridPane, row, isDisable);
 				row = row + 3;
 				break;
 			case WEIGHTED_SCALE:
-				PersonComponentPopup.popupWithedScaleAttribute(attribute, gridPane, row, isDisable, isColored);
+				PersonComponentPopup.popupScaleAttribute(attribute, gridPane, row, isDisable);
 				row = row + 3;
 				break;
 			}
-
-			isColored = !isColored;
 		}
 	}
 
@@ -176,8 +172,6 @@ public class DisplayPersonController {
 						// TODO: modify
 						break;
 					}
-
-					isColored = !isColored;
 				}
 
 				// display original buttons
@@ -256,8 +250,6 @@ public class DisplayPersonController {
 						// TODO: modify
 						break;
 					}
-
-					isColored = !isColored;
 				}
 
 				// display original buttons
