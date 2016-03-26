@@ -35,6 +35,7 @@ public class PersonComponentPopup {
 		HBox back = new HBox();
 
 		Label lbl = new Label(text);
+		back.setMargin(lbl, new Insets(0, 0, 0, 10));
 		back.getChildren().add(lbl);
 		back.setAlignment(Pos.CENTER_LEFT);
 

@@ -5,23 +5,6 @@
  * 4th level color (not used often): #9575cd  
  */
 
-
-.background-header {
-	-fx-background-color: #673ab7 ;
-}
-
-.label {
-	-fx-font-size: 16pt;
-	-fx-font-family: "Segoe UI Semibold";
-	-fx-text-fill: #311b92;
-}
-
-.label-header-small {
-	-fx-font-size: 20pt;
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
-}
-
 /* 
     Document   : JMetroLightTheme
     Created on : Oct 16, 2012, 6:28:59 PM
@@ -547,10 +530,7 @@
  ******************************************************************************/
 
 .table-view {
-    -fx-base: black;
-    -fx-control-inner-background: #b39ddb;
     -fx-background-color: #7e57c2;
-    -fx-padding: 5;
 }
 
 .table-view .column-header-background {
@@ -566,7 +546,6 @@
         transparent
         derive(-fx-base, 80%) 
         transparent;
-    -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
@@ -575,6 +554,10 @@
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
+}
+
+.table-row-cell {
+	-fx-font-size: 12pt;
 }
 
 .table-row-cell:even{
@@ -586,7 +569,7 @@
 }
 
 .table-row-cell:odd{
-	-fx-background-color: #b39ddb;
+	-fx-background-color: #7e57c2;
 }
 
 .table-row-cell:odd .text{
@@ -594,15 +577,35 @@
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: #7e57c2;
+    -fx-background-color: #b39ddb;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected .text{
 	-fx-fill: white;
 }
 
+/*******************************************************************************
+ *                                                                             *
+ * Customize				                                                   *
+ *                                                                             *
+ ******************************************************************************/
 
 
 
+.background-header {
+	-fx-background-color: #673ab7 ;
+}
+
+.label {
+	-fx-font-size: 12pt;
+	-fx-font-family: "Segoe UI Semibold";
+	-fx-text-fill: #311b92;
+}
+
+.label-header-small {
+	-fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+}
 
 

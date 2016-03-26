@@ -63,7 +63,7 @@
                   <Insets />
                </BorderPane.margin>
                <content>
-                  <GridPane fx:id="gridPane">
+                  <GridPane fx:id="gridPane" styleClass="label-right">
                      <columnConstraints>
                         <ColumnConstraints minWidth="10.0" percentWidth="30.0" />
                         <ColumnConstraints minWidth="10.0" percentWidth="70.0" />
@@ -71,7 +71,7 @@
                   </GridPane>
                </content>
                <padding>
-                  <Insets top="20.0" />
+                  <Insets bottom="20.0" />
                </padding>
             </ScrollPane>
          </center>
