@@ -59,7 +59,6 @@ public class MatchViewController {
 	public void setMainController(MainController controller) {
 		mController = controller;
 		populateMatchTable("", "");
-		popupMatch = new PopupMatch(controller.getPrimaryStage());
 
 		tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -71,6 +70,8 @@ public class MatchViewController {
 					int col = position.getColumn();
 					
 					if (col == PROBABILITY_COL) {
+						popupMatch = new PopupMatch(controller.getPrimaryStage());
+						
 						Person student = model.getStudent(getStudentName(row));
 						Person falcuty = model.getFaculty(getFalcutyName(row));
 						popupMatch.showPopup(student.getName(), falcuty.getName(), Compare.getTopSimilarities(student, falcuty, SIMILARITIES_NUM));

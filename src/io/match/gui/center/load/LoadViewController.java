@@ -3,10 +3,13 @@ package io.match.gui.center.load;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import io.match.Model;
 import io.match.helper.LoadFile;
+import io.match.reader.StatsReader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 public class LoadViewController {
 
@@ -24,6 +27,9 @@ public class LoadViewController {
 
 	@FXML
 	Label infoLoadFalcutyFA;
+	
+	@FXML
+	TextArea txtStats;
 
 	public void setModel(Model model) {
 		this.model = model;
@@ -37,6 +43,7 @@ public class LoadViewController {
 		else {
 			studentsURL = data.getAbsolutePath();
 			infoLoadStudentData.setText(data.getName());
+			addStats(StatsReader.readPeople(studentsURL));
 			tryPopulatePersons();
 		}
 	}
@@ -61,6 +68,7 @@ public class LoadViewController {
 		else {
 			facultiesURL = data.getAbsolutePath();
 			infoLoadFalcutyData.setText(data.getName());
+			addStats(StatsReader.readPeople(facultiesURL));
 			tryPopulatePersons();
 		}
 	}
@@ -79,6 +87,12 @@ public class LoadViewController {
 
 	private void alertFileNotFound() {
 		// SHOW POPUP WINDOW ALERTING USER
+	}
+	
+	private void addStats(String stats) {
+		
+		txtStats.appendText(stats);
+		
 	}
 	
 	private void tryPopulatePersons() {
