@@ -553,11 +553,13 @@
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 20pt;
+    -fx-font-size: 18pt;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-alignment: center-left;
     -fx-opacity: 1;
+    -fx-alignment: center;
+    -fx-padding: 10 0 5 0;
 }
 
 .table-row-cell {
@@ -607,7 +609,7 @@
 }
 
 .label-header-small {
-	-fx-font-size: 20pt;
+	-fx-font-size: 25pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
 }
