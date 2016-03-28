@@ -569,11 +569,11 @@
 }
 
 .table-row-cell:odd{
-	-fx-background-color: #7e57c2;
+	-fx-background-color: #f1edf8;
 }
 
 .table-row-cell:odd .text{
-	-fx-fill: white;
+	-fx-fill: #7e57c2;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
