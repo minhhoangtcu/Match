@@ -10,11 +10,11 @@
    <children>
       <BorderPane layoutX="-100.0" layoutY="-134.0" prefHeight="66.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <bottom>
-            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="268.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="268.0" styleClass="button-fade" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnLoadStudent" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadStudents" text="Student" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="btnLoadFaculties" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadFaculties" text="Faculty" HBox.hgrow="ALWAYS" />
-                  <Button fx:id="btnLoadField" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadFields" text="Field" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadStudent" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadStudents" styleClass="button-fade" text="Student" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadFaculties" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadFaculties" styleClass="button-fade" text="Faculty" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnLoadField" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadFields" styleClass="button-fade" text="Field" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </bottom>

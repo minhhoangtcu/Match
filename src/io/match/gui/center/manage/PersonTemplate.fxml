@@ -37,19 +37,19 @@
             </Label>
          </top>
          <bottom>
-            <HBox fx:id="bottomHBox" alignment="CENTER" prefHeight="21.0" prefWidth="474.0" BorderPane.alignment="CENTER">
+            <HBox fx:id="bottomHBox" alignment="CENTER" prefHeight="21.0" prefWidth="474.0" styleClass="button-fade" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnAddNew" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" text="Add New" HBox.hgrow="ALWAYS">
+                  <Button fx:id="btnAddNew" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" styleClass="button-fade" text="Add New" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnModify" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modify" text="Modify" HBox.hgrow="ALWAYS">
+                  <Button fx:id="btnModify" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#modify" styleClass="button-fade" text="Modify" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="btnDelete" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#delete" text="Delete" HBox.hgrow="ALWAYS">
+                  <Button fx:id="btnDelete" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#delete" styleClass="button-fade" text="Delete" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>

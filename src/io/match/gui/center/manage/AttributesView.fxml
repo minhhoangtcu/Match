@@ -28,9 +28,9 @@
             </Label>
          </top>
          <bottom>
-            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="474.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="21.0" prefWidth="474.0" styleClass="button-fade" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnAddNew" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" text="Add New" HBox.hgrow="ALWAYS">
+                  <Button fx:id="btnAddNew" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#add" styleClass="button-fade" text="Add New" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
